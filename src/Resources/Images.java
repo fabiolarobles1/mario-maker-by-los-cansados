@@ -60,10 +60,12 @@ public class Images {
 
 
     public static BufferedImage[] goomba;
+    public static BufferedImage deathBlock;
 
 
     public static BufferedImage title;
     public static BufferedImage Pause;
+    public static BufferedImage[] Over;
     public static BufferedImage Cursor;
 
     public static BufferedImage testMap;
@@ -71,18 +73,23 @@ public class Images {
 
     public static BufferedImage breakBlock;
     public static BufferedImage misteryBlock;
+    public static BufferedImage[] rotatingmisteryBlock;
     public static BufferedImage surfaceBlock;
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
+    public static BufferedImage cloud;
+    public static BufferedImage[] coin;
     public static BufferedImage goombaDies;
 
     private SpriteSheet mainmenuSpriteSheet;
+    private SpriteSheet gameoverSpriteSheet;
     private SpriteSheet backgroundSpriteSheet;
     private SpriteSheet interactableSpriteSheet;
     private SpriteSheet player1SpriteSheet;
     private SpriteSheet player2SpriteSheet;
     private SpriteSheet blockSpriteSheet;
     private SpriteSheet goombaSpriteSheet;
+    private SpriteSheet enemySheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
 
@@ -90,6 +97,8 @@ public class Images {
 
         butstart = new BufferedImage[3];
 
+        Over = new BufferedImage[2];
+        
         backgrounds = new BufferedImage[9];
         backgrounds2 = new BufferedImage[6];
 
@@ -128,6 +137,9 @@ public class Images {
         
         goomba = new BufferedImage[2];
 
+        rotatingmisteryBlock = new BufferedImage[4];
+        
+        coin = new BufferedImage[4];
 
 
         try {
@@ -135,6 +147,7 @@ public class Images {
 
             //spriteSheets
             mainmenuSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/mainmenuSheet.png")));
+            gameoverSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameoverSheet.png")));
             backgroundSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/backgroundSheet.png")));
             interactableSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/interactablesSheet.png")));
             player1SpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/marioSNESSheet.png")));
@@ -143,7 +156,7 @@ public class Images {
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
-
+            enemySheet= new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
 
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
@@ -152,6 +165,9 @@ public class Images {
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
+            
+            Over[0] = gameoverSpriteSheet.crop(5, 7, 256, 224);
+            Over[1] = gameoverSpriteSheet.crop(528, 7, 256, 224);
 
             backgrounds[0] = backgroundSpriteSheet.crop(2,2,512,432);
             backgrounds[1] = backgroundSpriteSheet.crop(516,2,512,432);
@@ -374,16 +390,31 @@ public class Images {
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
             misteryBlock = interactableSpriteSheet.crop(32,93,16,16);
             surfaceBlock = interactableSpriteSheet.crop(112,93,16,16);
+            
+            cloud = interactableSpriteSheet.crop(112,132,16,16);
+            
+            rotatingmisteryBlock[0] = interactableSpriteSheet.crop(13, 172, 16, 16);
+            rotatingmisteryBlock[1] = interactableSpriteSheet.crop(32, 172, 16, 16);
+            rotatingmisteryBlock[2] = interactableSpriteSheet.crop(53, 172, 16, 16);
+            rotatingmisteryBlock[3] = interactableSpriteSheet.crop(73, 172, 16, 16);
+            
+            
             //breakBlock = blockSpriteSheet.crop(272,112,16,16);
             breakBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/brick.png"));
 
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);
 
+            coin[0] = interactableSpriteSheet.crop(14,14,12,16);
+            coin[1] = interactableSpriteSheet.crop(29,14,12,16);
+            coin[2] = interactableSpriteSheet.crop(39,14,12,16);
+            coin[3] = interactableSpriteSheet.crop(49,14,12,16);
             //enemy
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);
             goomba[1]= goombaSpriteSheet.crop(329,40,162,162);
             goombaDies=goombaSpriteSheet.crop(539,100,162,81);
+            
+            deathBlock = enemySheet.crop(428, 253, 32, 32);
 
 
         }catch (IOException e) {

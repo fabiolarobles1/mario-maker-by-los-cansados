@@ -248,10 +248,32 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8) && multiplayer){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L) && multiplayer){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.502f, 1, 0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.luigi;
+		}
+
+
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.717647f,09.88235f,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.rotatingmisteryBlock;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_9)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0.60392156f,0.9568627f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.coin;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.80392156f,1,0.968626f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.cloud;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_B)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.454901f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.deathBlock;
 		}
 
 		if(mouseManager.isLeftPressed() && !clicked){
@@ -287,7 +309,11 @@ public class MenuState extends State {
 					"4 -> Surface Block (Orange)\n" +
 					"5 -> Bounds Block (Black)\n" +
 					"6 -> Mushroom (Purple)\n" +
-					"7 -> Goomba (Brown)");
+					"7 -> Goomba (Brown)\n"+ 
+					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
+					"9 -> Coin (Fusha)\n"+ 
+					"c -> Cloud (Sky Blue)\n"+ 
+					"b -> Death Block (Gray)");
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && multiplayer){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
@@ -298,8 +324,12 @@ public class MenuState extends State {
 					"4 -> Surface Block (Orange)\n" +
 					"5 -> Bounds Block (Black)\n" +
 					"6 -> Mushroom (Purple)\n" +
-					"7 -> Goomba (Brown)\n" +
-					"8 -> Luigi (Green)");
+					"7 -> Goomba (Brown)\n"+ 
+					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
+					"9 -> Coin (Fusha)\n"+ 
+					"c -> Cloud (Sky Blue)\n"+ 
+					"b -> Death Block (Gray)\n"+
+					"L -> Luigi(Green)");
 		}
 	}
 	public UIAnimationButton getBut() {
@@ -350,6 +380,7 @@ public class MenuState extends State {
 		BufferedImage img = null;
 		MapBuilder.mapDone=false;
 		if(name.equals(str2)) MapBuilder.mapDone = true;
+		
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		// file object
