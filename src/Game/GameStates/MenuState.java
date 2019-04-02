@@ -235,6 +235,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.cloud;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_B)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.454901f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.deathBlock;
+		}
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
 			int posY =mouseManager.getMouseY()/GridPixelsize;
@@ -271,7 +276,8 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+ 
 					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
 					"9 -> Coin (Fusha)\n"+ 
-					"c -> Cloud (Sky Blue)");
+					"c -> Cloud (Sky Blue)\n"+ 
+					"b -> Death Block (Gray)");
 		}
 	}
 	public UIAnimationButton getBut() {

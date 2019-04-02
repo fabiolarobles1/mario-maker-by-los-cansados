@@ -48,6 +48,7 @@ public class Images {
 
 
     public static BufferedImage[] goomba;
+    public static BufferedImage deathBlock;
 
 
     public static BufferedImage title;
@@ -75,6 +76,7 @@ public class Images {
     private SpriteSheet playerSpriteSheet;
     private SpriteSheet blockSpriteSheet;
     private SpriteSheet goombaSpriteSheet;
+    private SpriteSheet enemySheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
 
@@ -126,7 +128,7 @@ public class Images {
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
-
+            enemySheet= new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
 
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
@@ -334,6 +336,8 @@ public class Images {
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);
             goomba[1]= goombaSpriteSheet.crop(329,40,162,162);
             goombaDies=goombaSpriteSheet.crop(539,100,162,81);
+            
+            deathBlock = enemySheet.crop(428, 253, 32, 32);
 
 
         }catch (IOException e) {

@@ -5,6 +5,7 @@ import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
 import Game.Entities.DynamicEntities.Coin;
+import Game.Entities.DynamicEntities.DeathBlock;
 import Game.Entities.StaticEntities.*;
 import Main.Handler;
 import Resources.Images;
@@ -25,6 +26,7 @@ public class MapBuilder {
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
 	public static int cloud = new Color(205, 255, 247).getRGB();
+	public static int deathBlock = new Color(116, 141, 172).getRGB();
 	public static boolean mapDone = false;
 //205, 255, 247
 	public static Map createMap(BufferedImage mapImage, Handler handler){
@@ -49,6 +51,9 @@ public class MapBuilder {
 				}else if(currentPixel == coin){
 					BaseDynamicEntity Coin = new Coin(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Coin);
+				}else if(currentPixel == deathBlock){
+					BaseDynamicEntity DeathBlock = new DeathBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(DeathBlock);
 				}else if(currentPixel == misteryBlock){
 					BaseStaticEntity MisteryBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(MisteryBlock);
