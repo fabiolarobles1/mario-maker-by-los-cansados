@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class Player extends BaseDynamicEntity {
 
     protected double velX,velY;
+    private boolean hit = false;
+    public boolean grabbed =false;
 
     public String facing = "Left";
     public boolean moving = false;
@@ -175,6 +177,13 @@ public class Player extends BaseDynamicEntity {
     public double getVelY() {
         return velY;
     }
+    
+    public boolean getHit() {
+		return this.hit;
+	}
+	public void setHit(Boolean hit) {
+		this.hit = hit;
+	}
 
 
 }

@@ -2,6 +2,7 @@ package Game.World;
 
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
 import Game.Entities.StaticEntities.*;
@@ -21,6 +22,7 @@ public class MapBuilder {
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
+	public static int luigi = new Color(128,255,0).getRGB();
 	public static boolean mapDone = false;
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
@@ -51,6 +53,9 @@ public class MapBuilder {
 				}else if(currentPixel == goomba){
 					BaseDynamicEntity Goomba = new Goomba(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Goomba);
+				}else if(currentPixel == luigi){
+					BaseDynamicEntity Luigi = new Luigi(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(Luigi);
 				}
 			}
 

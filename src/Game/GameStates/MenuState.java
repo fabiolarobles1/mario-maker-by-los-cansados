@@ -31,6 +31,7 @@ public class MenuState extends State {
 	public UIManager uiManager;
 	private int background;
 	private String mode= "Menu";
+	private boolean multiplayer = false;
 
 	private DisplayScreen display;
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
@@ -83,6 +84,33 @@ public class MenuState extends State {
 			handler.getMouseManager().setUimanager(uiManager);
 			uiManager.tick();
 			if (mode.equals("Select")) {
+				mode = "Selecting";
+				uiManager = new UIManager(handler);
+				handler.getMouseManager().setUimanager(uiManager);
+
+				
+
+				//1Player
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "1 Player", () -> {
+					if(!handler.isInMap()) {
+						mode = "SelectingMode";
+						//handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						//State.setState(handler.getGame().gameState);
+					}
+				}, handler,Color.BLACK));
+
+				//2Players
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "2 Players", () -> {
+					if(!handler.isInMap()) {
+						mode = "SelectingMode";
+						multiplayer = true;
+					}
+				}, handler,Color.BLACK));
+
+		
+				uiManager.addObjects(this.but);
+			}
+			if (mode.equals("SelectingMode")) {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
@@ -220,6 +248,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8) && multiplayer){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.502f, 1, 0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.luigi;
+		}
 
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
@@ -245,7 +278,7 @@ public class MenuState extends State {
 			}
 			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a floor right under him. (1 for Mario)");
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && !multiplayer){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
 					"1 -> Mario (Red)\n" +
@@ -255,6 +288,18 @@ public class MenuState extends State {
 					"5 -> Bounds Block (Black)\n" +
 					"6 -> Mushroom (Purple)\n" +
 					"7 -> Goomba (Brown)");
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && multiplayer){
+			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
+					"0 -> Erase \n" +
+					"1 -> Mario (Red)\n" +
+					"2 -> Break Block (Blue)\n" +
+					"3 -> Mystery Block (Yellow)\n" +
+					"4 -> Surface Block (Orange)\n" +
+					"5 -> Bounds Block (Black)\n" +
+					"6 -> Mushroom (Purple)\n" +
+					"7 -> Goomba (Brown)\n" +
+					"8 -> Luigi (Green)");
 		}
 	}
 	public UIAnimationButton getBut() {

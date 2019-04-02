@@ -172,6 +172,27 @@ public class GameSetUp implements Runnable {
         }
         handler.getCamera().moveCam(shiftAmount,shiftAmountY);
     }
+    private void updateCamera2() {
+        Player luigi = handler.getLuigi();
+        double luigiVelocityX = luigi.getVelX();
+        double luigiVelocityY = luigi.getVelY();
+        double shiftAmount = 0;
+        double shiftAmountY = 0;
+
+        if (luigiVelocityX > 0 && luigi.getX() - 2*(handler.getWidth()/3) > handler.getCamera().getX()) {
+            shiftAmount = luigiVelocityX;
+        }
+        if (luigiVelocityX < 0 && luigi.getX() +  2*(handler.getWidth()/3) < handler.getCamera().getX()+handler.width) {
+            shiftAmount = luigiVelocityX;
+        }
+        if (luigiVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCamera().getY()) {
+            shiftAmountY = luigiVelocityY;
+        }
+        if (luigiVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera().getY()+handler.height) {
+            shiftAmountY = -luigiVelocityY;
+        }
+        handler.getCamera().moveCam(shiftAmount,shiftAmountY);
+    }
 
     private void render(){
         bs = display.getCanvas().getBufferStrategy();

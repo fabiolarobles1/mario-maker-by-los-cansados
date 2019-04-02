@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 
 public class Mario extends Player{
 
-	private boolean hit = false;
-	public boolean grabbed =false;
+	
+	
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.marioSmallWalkRight[0]
@@ -31,7 +31,7 @@ public class Mario extends Player{
 	public void tick(){
 	    if(!grabbed) {
             super.tick();
-            if (!this.hit) {
+            if (!this.getHit()) {
                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     this.jump();
                 }
@@ -187,10 +187,5 @@ public class Mario extends Player{
 			}
 		}
 	}
-	public boolean getHit() {
-		return this.hit;
-	}
-	public void setHit(Boolean hit) {
-		this.hit = hit;
-	}
+	
 }
