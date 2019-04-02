@@ -11,4 +11,7 @@ public class BaseStaticEntity extends EntityBase {
         super(x, y, width, height,handler,sprite);
     }
 
+    public void tick(){
+
+    }
 }

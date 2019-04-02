@@ -2,12 +2,17 @@ package Game.Entities.DynamicEntities;
 
 import Game.Entities.EntityBase;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BoundBlock;
+import Game.Entities.StaticEntities.BreakBlock;
 import Main.Handler;
 import Resources.Animation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import Game.GameStates.GameOverState;
+import Game.GameStates.State;;
 
 public class Player extends BaseDynamicEntity {
 
@@ -67,11 +72,16 @@ public class Player extends BaseDynamicEntity {
     private void checkItemCollision() {
 
         for (BaseDynamicEntity entity : handler.getMap().getEnemiesOnMap()) {
-            if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item && !isBig) {
+            if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Mushroom && !isBig) {
                 isBig = true;
                 this.y -= 8;
                 this.height += 8;
                 setDimension(new Dimension(width, this.height));
+                ((Item) entity).used = true;
+                entity.y = -100000;
+            }
+            else if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item) {
+            	setDimension(new Dimension(width, this.height));
                 ((Item) entity).used = true;
                 entity.y = -100000;
             }
@@ -92,10 +102,16 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseStaticEntity brick : bricks) {
             Rectangle brickTopBounds = brick.getTopBounds();
-            if (marioBottomBounds.intersects(brickTopBounds)) {
+            if (marioBottomBounds.intersects(brickTopBounds)
+            		&& !(brick instanceof BoundBlock)) {
                 mario.setY(brick.getY() - mario.getDimension().height + 1);
                 falling = false;
                 velY=0;
+            }
+            else if (marioBottomBounds.intersects(brickTopBounds)
+            		&& (brick instanceof BoundBlock)) {
+            	State.setState(handler.getGame().gameoverState);
+            	handler.getMap().reset();
             }
         }
 
@@ -120,9 +136,15 @@ public class Player extends BaseDynamicEntity {
         Rectangle marioTopBounds = mario.getTopBounds();
         for (BaseStaticEntity brick : bricks) {
             Rectangle brickBottomBounds = brick.getBottomBounds();
-            if (marioTopBounds.intersects(brickBottomBounds)) {
+            if (marioTopBounds.intersects(brickBottomBounds)
+            		&& !(brick instanceof BoundBlock)) {
                 velY=0;
                 mario.setY(brick.getY() + brick.height);
+            }
+            else if (marioTopBounds.intersects(brickBottomBounds)
+            		&& !(brick instanceof BoundBlock)) {
+            	State.setState(handler.getGame().gameoverState);
+            	handler.getMap().reset();
             }
         }
     }
@@ -139,24 +161,37 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseStaticEntity brick : bricks) {
             Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
-            if (marioBounds.intersects(brickBounds)) {
+            if (marioBounds.intersects(brickBounds)
+            		&& !(brick instanceof BoundBlock)) {
                 velX=0;
                 if(toRight)
                     mario.setX(brick.getX() - mario.getDimension().width);
                 else
                     mario.setX(brick.getX() + brick.getDimension().width);
+                
+            }
+            else if (marioBounds.intersects(brickBounds) && 
+            		brick instanceof BoundBlock) {
+            	State.setState(handler.getGame().gameoverState);
+            	handler.getMap().reset();
             }
         }
 
         for(BaseDynamicEntity enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
-            if (marioBounds.intersects(enemyBounds)) {
+            if (marioBounds.intersects(enemyBounds) && !(enemy instanceof Item)
+            		) {
                 marioDies = true;
                 break;
+            }
+            else if(marioBounds.intersects(enemyBounds) && (enemy instanceof Goomba)) {
+            	State.setState(handler.getGame().gameoverState);
+                handler.getMap().reset();
             }
         }
 
         if(marioDies) {
+        	State.setState(handler.getGame().gameoverState);
             handler.getMap().reset();
         }
     }
