@@ -31,7 +31,7 @@ public class MenuState extends State {
 	public UIManager uiManager;
 	private int background;
 	private String mode= "Menu";
-	private boolean multiplayer = false;
+	public boolean multiplayer = false;
 
 	private DisplayScreen display;
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
@@ -67,12 +67,12 @@ public class MenuState extends State {
 		mouseManager = new MouseManager();
 		for (int i:str) { str2+=(char)i;}
 		this.but = new UIAnimationButton(handler.getWidth() - (handler.getWidth()/ 8),(handler.getHeight()/0b1100),32, 32 , Images.item, () -> {
-			if(but.getdraw() && !handler.isInMap()) {handler.setMap(handler.getGame().getMap());
+			if(but.getdraw() && !handler.isMarioInMap()) {handler.setMap(handler.getGame().getMap());
 				handler.getGame().getMusicHandler().pauseBackground();
 				handler.getGame().getMusicHandler().play("Megalovania");
 				State.setState(handler.getGame().gameState);}}, this.handler);
 		uiManager.addObjects(new UIImageButton(handler.getWidth()/2-64, handler.getHeight()/2+(handler.getHeight()/8), 128, 64, Images.butstart, () -> {
-			if(!handler.isInMap()) {
+			if(!handler.isMarioInMap()) {
 				mode = "Select";
 			}
 		}));
@@ -92,7 +92,7 @@ public class MenuState extends State {
 
 				//1Player
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "1 Player", () -> {
-					if(!handler.isInMap()) {
+					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
 						//handler.setMap(MapBuilder.createMap(Images.testMap, handler));
 						//State.setState(handler.getGame().gameState);
@@ -101,7 +101,7 @@ public class MenuState extends State {
 
 				//2Players
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "2 Players", () -> {
-					if(!handler.isInMap()) {
+					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
 						multiplayer = true;
 					}
@@ -117,7 +117,7 @@ public class MenuState extends State {
 
 				//New Map
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
-					if(!handler.isInMap()) {
+					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						initNew("New Map Creator", handler);
 					}
@@ -126,7 +126,7 @@ public class MenuState extends State {
 
 				//testMap1
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
-					if(!handler.isInMap()) {
+					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
 						State.setState(handler.getGame().gameState);
@@ -135,7 +135,7 @@ public class MenuState extends State {
 
 				//testmap2
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "Map 2", () -> {
-					if(!handler.isInMap()) {
+					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
 						State.setState(handler.getGame().gameState);
@@ -144,7 +144,7 @@ public class MenuState extends State {
 
 				//other
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (128), 128, 64, "Other", () -> {
-					if(!handler.isInMap()){
+					if(!handler.isMarioInMap()){
 						mode = "Menu";
 						JFileChooser chooser = new JFileChooser("/maps");
 						FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -164,7 +164,7 @@ public class MenuState extends State {
 				}, handler,Color.BLACK));
 				uiManager.addObjects(this.but);
 			}
-			if (mode.equals("Selecting") && handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) && (!handler.isInMap())) {
+			if (mode.equals("Selecting") && handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) && (!handler.isMarioInMap())) {
 				mode = "Menu";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
@@ -383,6 +383,22 @@ public class MenuState extends State {
 			System.out.println("Error: " + e);
 		}
 		return img;
+	}
+
+	public boolean isMultiplayer() {
+		return multiplayer;
+	}
+
+	public void setMultiplayer(boolean multiplayer) {
+		this.multiplayer = multiplayer;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 }

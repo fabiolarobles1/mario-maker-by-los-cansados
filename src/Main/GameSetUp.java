@@ -145,7 +145,7 @@ public class GameSetUp implements Runnable {
         //game states are the menus
         if(State.getState() != null)
             State.getState().tick();
-        if (handler.isInMap()) {
+        if (handler.isMarioInMap()) {
             updateCamera();
         }
 

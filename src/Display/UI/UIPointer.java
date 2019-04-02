@@ -154,7 +154,7 @@ public class UIPointer extends BaseDynamicEntity {
                         y = startY;
                         health = 3;
                         this.handler.getGame().getMusicHandler().play("finished");
-                        handler.setIsInMap(false);
+                        handler.setMarioInMap(false);
                         State.setState(handler.getGame().menuState);
                     }
 
@@ -239,7 +239,7 @@ public class UIPointer extends BaseDynamicEntity {
             y = startY;
             health = 3;
             this.handler.getGame().getMusicHandler().play("finished");
-            handler.setIsInMap(false);
+            handler.setMarioInMap(false);
             JOptionPane.showMessageDialog(handler.getGame().display.getCanvas(),GD);
             State.setState(handler.getGame().menuState);
         }

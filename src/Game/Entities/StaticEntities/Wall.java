@@ -87,7 +87,7 @@ public class Wall {
 		}
 		if(this.handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && this.opacity == 255) {
 			MapBuilder.mapDone = false;
-			handler.setIsInMap(false);
+			handler.setMarioInMap(false);
 			State.setState(handler.getGame().menuState);
 		}
 	}
