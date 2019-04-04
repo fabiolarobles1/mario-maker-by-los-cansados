@@ -240,6 +240,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.deathBlock;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.22745f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.finishBlock;
+		}
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
 			int posY =mouseManager.getMouseY()/GridPixelsize;
@@ -277,7 +282,9 @@ public class MenuState extends State {
 					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
 					"9 -> Coin (Fusha)\n"+ 
 					"c -> Cloud (Sky Blue)\n"+ 
-					"b -> Death Block (Gray)");
+					"b -> Death Block (Gray)\n"+ 
+					"f -> Finish Race Block (Blue Gray)*\n"+ 
+					"*MULTIPLAYER ONLY");
 		}
 	}
 	public UIAnimationButton getBut() {

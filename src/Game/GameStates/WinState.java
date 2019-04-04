@@ -11,11 +11,11 @@ import java.awt.event.KeyEvent;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class GameOverState extends State {
+public class WinState extends State {
 
     private UIManager uiManager;
 
-    public GameOverState(Handler handler) {
+    public WinState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
 

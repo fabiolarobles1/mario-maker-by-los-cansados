@@ -118,13 +118,20 @@ public class Player extends BaseDynamicEntity {
         for (BaseDynamicEntity enemy : enemies) {
             Rectangle enemyTopBounds = enemy.getTopBounds();
             if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof Item)) {
+            	if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof DeathBlock)) {
+            		
+            	
                 if(!enemy.ded) {
                     handler.getGame().getMusicHandler().playStomp();
                 }
                 enemy.kill();
                 falling=false;
                 velY=0;
-
+            	}
+            	else if (marioBottomBounds.intersects(enemyTopBounds) && (enemy instanceof DeathBlock)) {
+            		State.setState(handler.getGame().gameoverState);
+                    handler.getMap().reset();
+            	}
             }
         }
     }
@@ -132,6 +139,7 @@ public class Player extends BaseDynamicEntity {
     public void checkTopCollisions() {
         Player mario = this;
         ArrayList<BaseStaticEntity> bricks = handler.getMap().getBlocksOnMap();
+        ArrayList<BaseDynamicEntity> enemies =  handler.getMap().getEnemiesOnMap();
 
         Rectangle marioTopBounds = mario.getTopBounds();
         for (BaseStaticEntity brick : bricks) {
@@ -146,6 +154,14 @@ public class Player extends BaseDynamicEntity {
             	State.setState(handler.getGame().gameoverState);
             	handler.getMap().reset();
             }
+        }
+        
+        for (BaseDynamicEntity enemy : enemies) {
+        	Rectangle enemyBottomBounds = enemy.getBottomBounds();
+        	if (marioTopBounds.intersects(enemyBottomBounds) && !(enemy instanceof Item) ) {
+        		State.setState(handler.getGame().gameoverState);
+            	handler.getMap().reset();
+        	}
         }
     }
 
@@ -184,7 +200,8 @@ public class Player extends BaseDynamicEntity {
                 marioDies = true;
                 break;
             }
-            else if(marioBounds.intersects(enemyBounds) && (enemy instanceof Goomba)) {
+            else if(marioBounds.intersects(enemyBounds) 
+            		&& ((enemy instanceof Goomba) || (enemy instanceof DeathBlock))) {
             	State.setState(handler.getGame().gameoverState);
                 handler.getMap().reset();
             }

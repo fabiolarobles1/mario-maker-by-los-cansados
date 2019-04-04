@@ -64,6 +64,7 @@ public class Images {
     public static BufferedImage[] rotatingmisteryBlock;
     public static BufferedImage surfaceBlock;
     public static BufferedImage boundBlock;
+    public static BufferedImage finishBlock;
     public static BufferedImage mushroom;
     public static BufferedImage cloud;
     public static BufferedImage[] coin;
@@ -315,6 +316,8 @@ public class Images {
             surfaceBlock = interactableSpriteSheet.crop(112,93,16,16);
             
             cloud = interactableSpriteSheet.crop(112,132,16,16);
+            
+            finishBlock = interactableSpriteSheet.crop(72,73,16,16);
             
             rotatingmisteryBlock[0] = interactableSpriteSheet.crop(13, 172, 16, 16);
             rotatingmisteryBlock[1] = interactableSpriteSheet.crop(32, 172, 16, 16);
