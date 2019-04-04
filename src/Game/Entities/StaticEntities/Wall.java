@@ -52,43 +52,85 @@ public class Wall {
 	}
 
 	public void tick() {
-		if(this.handler.getMario().getHit() && this.getRect().intersects(this.handler.getMario().getBounds())) {
-			this.getRect().setBounds(0, 0, 0, 0);
-			this.handler.getGame().getMusicHandler().play("finished");
-			this.setPlay(true);
-		}
-		if(this.anim.getIndex() == Images.hitWall.length - 1) {
-			this.setPlay(false);
-			if(this.d == 0) this.handler.getGame().getMusicHandler().play("defeated");
-			else this.handler.getGame().getMusicHandler().play("failure");
-			this.anim.end();
-			this.draw = true;
-		}
-		if(this.play) this.anim.tick();
-		this.setX((int) this.handler.getCamera().getX());
-		this.setY((int) this.handler.getCamera().getY());
-		this.setSY((int) (this.handler.getCamera().getY() + this.handler.getHeight() / 2 + 50));
-		if(this.handler.getMario().getHit()){
-			str="";
-			for (int i:alf5) { str+=(char)i;}str+="!";
-		}
-		else if(!this.handler.getMario().getHit()&& handler.getMario().getVelY()==0){
-			str="";
-			for (int i:alf) { str+=(char)i;}str+="! ";
-			for (int i:alf2) { str2+=(char)i;}str2+=" ";
-			for (int i:alf3) { str2+=(char)i;}str2+=" ";
-			for (int i:alf4) { str2+=(char)i;}str2+=" ";
+		if (!State.isMultiplayer()) {
+			if(this.handler.getMario().getHit() && this.getRect().intersects(this.handler.getMario().getBounds())) {
+				this.getRect().setBounds(0, 0, 0, 0);
+				this.handler.getGame().getMusicHandler().play("finished");
+				this.setPlay(true);
+			}
+			if(this.anim.getIndex() == Images.hitWall.length - 1) {
+				this.setPlay(false);
+				if(this.d == 0) this.handler.getGame().getMusicHandler().play("defeated");
+				else this.handler.getGame().getMusicHandler().play("failure");
+				this.anim.end();
+				this.draw = true;
+			}
+			if(this.play) this.anim.tick();
+			this.setX((int) this.handler.getCamera().getX());
+			this.setY((int) this.handler.getCamera().getY());
+			this.setSY((int) (this.handler.getCamera().getY() + this.handler.getHeight() / 2 + 50));
+			if(this.handler.getMario().getHit()){
+				str="";
+				for (int i:alf5) { str+=(char)i;}str+="!";
+			}
+			else if(!this.handler.getMario().getHit()&& handler.getMario().getVelY()==0){
+				str="";
+				for (int i:alf) { str+=(char)i;}str+="! ";
+				for (int i:alf2) { str2+=(char)i;}str2+=" ";
+				for (int i:alf3) { str2+=(char)i;}str2+=" ";
+				for (int i:alf4) { str2+=(char)i;}str2+=" ";
 
+			}
+			if(this.opacity >= 254) this.opacity = 255;
+			if(this.opacity == 255) {
+				this.alpha +=2;
+				if(this.alpha >= 254) this.alpha = 255;
+			}
+			if(this.handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && this.opacity == 255) {
+				MapBuilder.mapDone = false;
+				handler.setMarioInMap(false);
+				State.setState(handler.getGame().menuState);
+			}
 		}
-		if(this.opacity >= 254) this.opacity = 255;
-		if(this.opacity == 255) {
-			this.alpha +=2;
-			if(this.alpha >= 254) this.alpha = 255;
-		}
-		if(this.handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && this.opacity == 255) {
-			MapBuilder.mapDone = false;
-			handler.setMarioInMap(false);
-			State.setState(handler.getGame().menuState);
+		else if (State.isMultiplayer()) {
+			if(this.handler.getMario().getHit() && this.getRect().intersects(this.handler.getMario().getBounds()) || (this.handler.getLuigi().getHit() && this.getRect().intersects(this.handler.getLuigi().getBounds()))) {
+				this.getRect().setBounds(0, 0, 0, 0);
+				this.handler.getGame().getMusicHandler().play("finished");
+				this.setPlay(true);
+			}
+			if(this.anim.getIndex() == Images.hitWall.length - 1) {
+				this.setPlay(false);
+				if(this.d == 0) this.handler.getGame().getMusicHandler().play("defeated");
+				else this.handler.getGame().getMusicHandler().play("failure");
+				this.anim.end();
+				this.draw = true;
+			}
+			if(this.play) this.anim.tick();
+			this.setX((int) this.handler.getCamera().getX());
+			this.setY((int) this.handler.getCamera().getY());
+			this.setSY((int) (this.handler.getCamera().getY() + this.handler.getHeight() / 2 + 50));
+			if(this.handler.getMario().getHit() || (this.handler.getLuigi().getHit())){
+				str="";
+				for (int i:alf5) { str+=(char)i;}str+="!";
+			}
+			else if(!this.handler.getMario().getHit()&& handler.getMario().getVelY()==0 || !this.handler.getLuigi().getHit()&& handler.getLuigi().getVelY()==0){
+				str="";
+				for (int i:alf) { str+=(char)i;}str+="! ";
+				for (int i:alf2) { str2+=(char)i;}str2+=" ";
+				for (int i:alf3) { str2+=(char)i;}str2+=" ";
+				for (int i:alf4) { str2+=(char)i;}str2+=" ";
+
+			}
+			if(this.opacity >= 254) this.opacity = 255;
+			if(this.opacity == 255) {
+				this.alpha +=2;
+				if(this.alpha >= 254) this.alpha = 255;
+			}
+			if(this.handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && this.opacity == 255) {
+				MapBuilder.mapDone = false;
+				handler.setMarioInMap(false);
+				State.setState(handler.getGame().menuState);
+			}
 		}
 	}
 
