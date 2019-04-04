@@ -1,18 +1,18 @@
 package Display;
 
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
-
-public class DisplayScreen {
-
+public class DisplayMultiplayerScreen {
 	private JFrame frame;
 	private Canvas canvas;
 
@@ -21,13 +21,13 @@ public class DisplayScreen {
 	private String title;
 	private int width, height;
 
-	public DisplayScreen(String title, int width, int height){
+	public DisplayMultiplayerScreen(String title, int width, int height){
 		this.title = title;
 		this.width = width;
 		this.height = height;
 
-		
-			createDisplay();
+
+		createDisplay();
 
 	}
 
@@ -36,7 +36,7 @@ public class DisplayScreen {
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+		frame.setLocation(new Point(50,100));
 		frame.setVisible(true);
 		frame.setBackground(Color.black);
 
@@ -56,7 +56,7 @@ public class DisplayScreen {
 		frame.add(canvas);
 		frame.pack();
 	}
-	
+
 
 	public Canvas getCanvas(){
 		return canvas;

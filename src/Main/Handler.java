@@ -30,6 +30,7 @@ public class Handler {
     private boolean luigiInMap = false;
 
     private Camera camera;
+    private Camera camera2;
 
 
     public Handler(){
@@ -111,5 +112,12 @@ public class Handler {
 
     public void setCamera(Camera camera) {
         this.camera = camera;
+    }
+    public Camera getCamera2() {
+        return camera2;
+    }
+
+    public void setCamera2(Camera camera) {
+        this.camera2 = camera;
     }
 }

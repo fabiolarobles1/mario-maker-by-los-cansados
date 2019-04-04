@@ -1,6 +1,7 @@
 package Game.GameStates;
 
 
+import Display.DisplayMultiplayerScreen;
 import Display.DisplayScreen;
 import Display.UI.UIStringButton;
 import Game.World.MapBuilder;
@@ -31,9 +32,10 @@ public class MenuState extends State {
 	public UIManager uiManager;
 	private int background;
 	private String mode= "Menu";
-	public boolean multiplayer = false;
+	
 
 	private DisplayScreen display;
+	private DisplayMultiplayerScreen display2;
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
 	private String str2="";
 
@@ -103,7 +105,8 @@ public class MenuState extends State {
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "2 Players", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
-						multiplayer = true;
+						State.setMultiplayer(true);
+						display2=new DisplayMultiplayerScreen("Luigi", handler.getHeight()/2, handler.getHeight()/2);
 					}
 				}, handler,Color.BLACK));
 
@@ -248,8 +251,8 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L) && multiplayer){
-			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.502f, 1, 0), new Point(0, 0), "cursor1");
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L) && State.isMultiplayer()){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0, 1, 0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.luigi;
 		}
@@ -300,7 +303,7 @@ public class MenuState extends State {
 			}
 			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a floor right under him. (1 for Mario)");
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && !multiplayer){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==false){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
 					"1 -> Mario (Red)\n" +
@@ -315,7 +318,7 @@ public class MenuState extends State {
 					"c -> Cloud (Sky Blue)\n"+ 
 					"b -> Death Block (Gray)");
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && multiplayer){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==true){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
 					"1 -> Mario (Red)\n" +
@@ -416,13 +419,6 @@ public class MenuState extends State {
 		return img;
 	}
 
-	public boolean isMultiplayer() {
-		return multiplayer;
-	}
-
-	public void setMultiplayer(boolean multiplayer) {
-		this.multiplayer = multiplayer;
-	}
 
 	public String getMode() {
 		return mode;

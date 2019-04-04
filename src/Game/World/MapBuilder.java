@@ -26,7 +26,7 @@ public class MapBuilder {
 	public static int rotatingmisteryBlock = new Color(183,252,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
-	public static int luigi = new Color(128,255,0).getRGB();
+	public static int luigi = new Color(0,255,0).getRGB();
 	public static int cloud = new Color(205, 255, 247).getRGB();
 	public static int deathBlock = new Color(116, 141, 172).getRGB();
 	public static boolean mapDone = false;

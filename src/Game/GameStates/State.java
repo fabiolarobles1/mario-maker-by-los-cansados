@@ -10,6 +10,7 @@ import java.awt.*;
 public abstract class State {
 
     private static State currentState = null;
+    private static boolean multiplayer = false;
 
     public static void setState(State state){
         currentState = state;
@@ -19,9 +20,17 @@ public abstract class State {
         return currentState;
     }
 
-    //CLASS
+    public static boolean isMultiplayer() {
+		return multiplayer;
+	}
 
-    protected Handler handler;
+	public static void setMultiplayer(boolean multiplayer) {
+		State.multiplayer = multiplayer;
+	}
+	
+	 //CLASS
+
+	protected Handler handler;
 
     public State(Handler handler){
         this.handler = handler;
