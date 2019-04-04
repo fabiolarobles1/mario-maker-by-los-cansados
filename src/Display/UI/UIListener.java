@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import Game.GameStates.State;
 import Game.World.MapBuilder;
 import Main.Handler;
 import Resources.Animation;
@@ -33,11 +34,22 @@ public class UIListener{
 
 	public void tick() {
 		this.smash.tick();		
-		if(this.handler.getMario().getBounds().intersects(this.getBounds())) {
-			this.bounds.setBounds(0, 0, 0, 0);
-			this.handler.getGame().getMusicHandler().play("item");	
-			this.Adquire();
-			this.appear = true;
+		if(!State.isMultiplayer()) {
+			if(this.handler.getMario().getBounds().intersects(this.getBounds())) {
+				this.bounds.setBounds(0, 0, 0, 0);
+				this.handler.getGame().getMusicHandler().play("item");	
+				this.Adquire();
+				this.appear = true;
+			}
+		}else if (State.isMultiplayer()) {
+			if(!State.isMultiplayer()) {
+				if(this.handler.getMario().getBounds().intersects(this.getBounds()) || this.handler.getLuigi().getBounds().intersects(this.getBounds())) {
+					this.bounds.setBounds(0, 0, 0, 0);
+					this.handler.getGame().getMusicHandler().play("item");	
+					this.Adquire();
+					this.appear = true;
+				}
+			}
 		}
 		this.Adquired();
 	}
@@ -46,29 +58,29 @@ public class UIListener{
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(this.smash.getCurrentFrame(), this.xPos, this.yPos, this.size, this.size, null);
 	}		
-	
+
 	private void Adquired() {
 		if(this.up) {
-            velY = velY - 0.6;
-            this.yPos = (int)(this.yPos - velY);
-        }
+			velY = velY - 0.6;
+			this.yPos = (int)(this.yPos - velY);
+		}
 		else if(this.up && velY <= 0){
-            this.up = false;
-            this.down = true;
-        }	
+			this.up = false;
+			this.down = true;
+		}	
 		if(this.down){
-            this.yPos = (int)(this.yPos + velY);
-            velY = velY + 0.6;
-        }
+			this.yPos = (int)(this.yPos + velY);
+			velY = velY + 0.6;
+		}
 	}
-	
+
 	private void Adquire() {
 		if(!this.up && !this.down){
-            this.up=true;
-            velY=10;
-        }
+			this.up=true;
+			velY=10;
+		}
 	}
-	
+
 	public int getYPos() {
 		return this.yPos;
 	}
