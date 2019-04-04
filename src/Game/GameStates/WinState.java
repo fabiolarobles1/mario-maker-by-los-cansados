@@ -11,19 +11,18 @@ import java.awt.event.KeyEvent;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class GameOverState extends State {
+public class WinState extends State {
 
     private UIManager uiManager;
 
-    public GameOverState(Handler handler) {
+    public WinState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
 
 
         uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 32, (223+(64+16) +(64+16) + (64+16)), 128, 64, "Back to Title", () -> {
             handler.getMouseManager().setUimanager(null);
-            handler.setMarioInMap(false);
-           // handler.setIsInMap(false);
+            handler.setIsInMap(false);
             State.setState(handler.getGame().menuState);
         },handler,Color.GREEN));
 
