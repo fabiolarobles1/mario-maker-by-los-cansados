@@ -89,13 +89,13 @@ public class Luigi extends Player{
 	public void drawLuigi(Graphics2D g2) {
 		if(!grabbed) {
 			if (!isBig) {
-				if (handler.getKeyManager().up) {
+				if (handler.getKeyManager().up2) {
 					if (facing.equals("Left")) {
 						g2.drawImage(Images.luigiSmallJumpLeft[2], x, y, width, height, null);
 					} else {
 						g2.drawImage(Images.luigiSmallJumpRight[2], x, y, width, height, null);
 					}
-				} else if (handler.getKeyManager().down) {
+				} else if (handler.getKeyManager().down2) {
 					if (facing.equals("Left")) {
 						g2.drawImage(Images.luigiSmallJumpLeft[3], x, y, width, height, null);
 					} else {
@@ -130,13 +130,13 @@ public class Luigi extends Player{
 				}
 			} else {
 				if (!changeDirrection) {
-					if (handler.getKeyManager().up) {
+					if (handler.getKeyManager().up2) {
 						if (facing.equals("Left")) {
 							g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
 						} else {
 							g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
 						}
-					} else if (handler.getKeyManager().down) {
+					} else if (handler.getKeyManager().down2) {
 						if (facing.equals("Left")) {
 							g2.drawImage(Images.luigiBigJumpLeft[3], x, y, width, height, null);
 						} else {
