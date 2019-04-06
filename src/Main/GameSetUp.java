@@ -3,6 +3,7 @@ package Main;
 import Display.DisplayMultiplayerScreen;
 import Display.DisplayScreen;
 import Display.UI.UIPointer;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
@@ -11,6 +12,7 @@ import Game.GameStates.GameState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
+import Game.GameStates.WinState;
 import Game.World.Map;
 import Game.World.MapBuilder;
 import Input.Camera;
@@ -29,7 +31,11 @@ import java.awt.image.BufferStrategy;
 
 public class GameSetUp implements Runnable {
     public DisplayScreen display;
+
     public DisplayMultiplayerScreen display2;
+
+ 
+
     public String title;
 
     private boolean running = false;
@@ -53,6 +59,7 @@ public class GameSetUp implements Runnable {
     public State menuState;
     public State pauseState;
     public State gameoverState;
+    public State winState;
 
     //Res.music
     private MusicHandler musicHandler;
@@ -67,6 +74,7 @@ public class GameSetUp implements Runnable {
         initialmouseManager = mouseManager;
         musicHandler = new MusicHandler(handler);
         handler.setCamera(new Camera());
+        handler.setCamera2(new Camera());
     }
 
     private void init(){
@@ -92,6 +100,7 @@ public class GameSetUp implements Runnable {
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
         gameoverState= new GameOverState(handler);
+        winState = new WinState(handler);
 
         State.setState(menuState);
     }
@@ -159,6 +168,8 @@ public class GameSetUp implements Runnable {
             State.getState().tick();
         if (handler.isMarioInMap()) {
             updateCamera();
+        } if (handler.isLuigiInMap()) {
+            updateCamera2();
         }
 
     }
@@ -191,19 +202,19 @@ public class GameSetUp implements Runnable {
         double shiftAmount = 0;
         double shiftAmountY = 0;
 
-        if (luigiVelocityX > 0 && luigi.getX() - 2*(handler.getWidth()/3) > handler.getCamera().getX()) {
+        if (luigiVelocityX > 0 && luigi.getX() - 2*(handler.getWidth()/3) > handler.getCamera2().getX()) {
             shiftAmount = luigiVelocityX;
         }
-        if (luigiVelocityX < 0 && luigi.getX() +  2*(handler.getWidth()/3) < handler.getCamera().getX()+handler.width) {
+        if (luigiVelocityX < 0 && luigi.getX() +  2*(handler.getWidth()/3) < handler.getCamera2().getX()+handler.width) {
             shiftAmount = luigiVelocityX;
         }
-        if (luigiVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCamera().getY()) {
+        if (luigiVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCamera2().getY()) {
             shiftAmountY = luigiVelocityY;
         }
-        if (luigiVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera().getY()+handler.height) {
+        if (luigiVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera2().getY()+handler.height) {
             shiftAmountY = -luigiVelocityY;
         }
-        handler.getCamera().moveCam(shiftAmount,shiftAmountY);
+        handler.getCamera2().moveCam(shiftAmount,shiftAmountY);
     }
 
     private void render(){
@@ -236,6 +247,10 @@ public class GameSetUp implements Runnable {
     	}
     	Mario mario = new Mario(24 * MapBuilder.pixelMultiplier, 196 * MapBuilder.pixelMultiplier, 48,48, this.handler);
     	map.addEnemy(mario);
+    	if (State.isMultiplayer()) {
+    		Luigi luigi = new Luigi(24 * MapBuilder.pixelMultiplier, 196 * MapBuilder.pixelMultiplier, 48,48, this.handler);
+    		map.addEnemy(luigi);
+    	}
         map.addEnemy(pointer);
         threadB=true;
     	return map;

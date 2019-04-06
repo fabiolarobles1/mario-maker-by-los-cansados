@@ -19,11 +19,7 @@ public class Coin extends Item {
 	public void tick(){                       
 		super.tick();
 		anim.tick(); 
-		if (falling) {
-			y = (int) (y + velY);
-			velY = velY + gravityAcc;
-			checkFalling();
-		}
+		
 		checkHorizontal();
 
 

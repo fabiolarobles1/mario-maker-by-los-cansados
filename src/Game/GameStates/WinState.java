@@ -12,11 +12,11 @@ import java.awt.event.KeyEvent;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class GameOverState extends State {
+public class WinState extends State {
 
     private UIManager uiManager;
 
-    public GameOverState(Handler handler) {
+    public WinState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
 
@@ -25,11 +25,11 @@ public class GameOverState extends State {
             handler.getMouseManager().setUimanager(null);
             handler.setMarioInMap(false);
            // handler.setIsInMap(false);
-            State.setState(handler.getGame().menuState);
             Player.mariocoins = 0;
         	Player.luigicoins = 0;
         	Player.mariowins =false;
         	Player.luigiwins =false;
+            State.setState(handler.getGame().menuState);
         },handler,Color.GREEN));
 
     }
@@ -44,7 +44,33 @@ public class GameOverState extends State {
     @Override
     public void render(Graphics g) {
         g.drawImage(Images.Over[0],0,0,handler.getWidth(),handler.getHeight(),null);
-        g.setFont(new Font("AR ESSENCE", Font.PLAIN, 20));
+        g.setFont(new Font("Segoe UI", Font.BOLD, 40));
+        if (State.isMultiplayer()) {
+        	if((Player.mariowins && Player.luigiwins) || (!Player.mariowins && !Player.luigiwins)) {
+        		if (Player.mariocoins > Player.luigicoins) {
+        			Player.mariowins = true;
+        			Player.luigiwins = false;
+        		}
+        		else if (Player.mariocoins < Player.luigicoins) {
+        			Player.mariowins = false;
+        			Player.luigiwins = true;
+        		}
+        		else if (Player.mariocoins == Player.luigicoins) {
+        			Player.mariowins = false;
+        			Player.luigiwins = false;
+        			g.setColor(Color.ORANGE);
+            		g.drawString("TIE", 320, 250);
+        		}
+        	}
+        	if(Player.mariowins) {
+        		g.setColor(Color.RED);
+        		g.drawString("Mario WINS", 320, 250);
+        	}
+        	else if(Player.luigiwins) {
+        		g.setColor(Color.GREEN);
+        		g.drawString("Luigi WINS", 320, 250);
+        	}
+        }
         uiManager.Render(g);
     }
 }
