@@ -192,8 +192,8 @@ public class Player extends BaseDynamicEntity {
             else if (marioTopBounds.intersects(brickBottomBounds)
             		&& (brick instanceof BoundBlock)) {
             	if(!State.isMultiplayer()) {
-            	State.setState(handler.getGame().gameoverState);
-            	handler.getMap().reset();
+            		State.setState(handler.getGame().gameoverState);
+            		handler.getMap().reset();
             	}
             	else {
             		if (this instanceof Mario) {luigiwins = true;}
