@@ -292,7 +292,7 @@ public class MenuState extends State {
 			colorSelected = MapBuilder.deathBlock;
 		}
 		//FinishBlock
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) && State.isMultiplayer()){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.22745f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.finishBlock;
@@ -335,9 +335,7 @@ public class MenuState extends State {
 					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
 					"9 -> Coin (Fusha)\n"+ 
 					"c -> Cloud (Sky Blue)\n"+ 
-					"b -> Death Block (Gray)\n"+ 
-					"f -> Finish Race Block (Blue Gray)*\n"+ 
-					"*MULTIPLAYER ONLY");
+					"b -> Death Block (Gray)\n");
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==true){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
@@ -354,8 +352,7 @@ public class MenuState extends State {
 					"c -> Cloud (Sky Blue)\n"+ 
 					"b -> Death Block (Gray)\n"+
 					"L -> Luigi(Green)*\n"+
-					"f -> Finish Race Block (Blue Gray)*\n"+ 
-					"*MULTIPLAYER ONLY");
+					"f -> Finish Race Block (Blue Gray)\n");
 		}
 	}
 	public UIAnimationButton getBut() {
