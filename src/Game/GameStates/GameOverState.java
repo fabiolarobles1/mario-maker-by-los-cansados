@@ -1,6 +1,7 @@
 package Game.GameStates;
 
 import Display.UI.UIStringButton;
+import Game.Entities.DynamicEntities.Player;
 import Main.Handler;
 import Resources.Images;
 import Display.UI.UIManager;
@@ -25,6 +26,10 @@ public class GameOverState extends State {
             handler.setMarioInMap(false);
            // handler.setIsInMap(false);
             State.setState(handler.getGame().menuState);
+            Player.mariocoins = 0;
+        	Player.luigicoins = 0;
+        	Player.mariowins =false;
+        	Player.luigiwins =false;
         },handler,Color.GREEN));
 
     }

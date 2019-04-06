@@ -96,4 +96,8 @@ public class MusicHandler {
 		Clip clip = getClip(loadAudio("stomp"));
 		clip.start();
 	}
+	public void playCoin() {
+		Clip clip = getClip(loadAudio("coin"));
+		clip.start();
+	}
 }

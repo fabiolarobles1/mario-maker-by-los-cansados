@@ -106,7 +106,7 @@ public class MenuState extends State {
 					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
 						State.setMultiplayer(true);
-						display2=new DisplayMultiplayerScreen("Luigi", handler.getHeight()/2, handler.getHeight()/2);
+						display2= new DisplayMultiplayerScreen("Luigi", handler.getHeight(), handler.getHeight());
 					}
 				}, handler,Color.BLACK));
 
@@ -211,74 +211,85 @@ public class MenuState extends State {
 	private void tickNewScreen(){
 		//for the tin take each value and divide by 255.
 		//Ex for a red tint you wan the RGB : 255,0,0 so the tint is 1,0,0
+		//Erase
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_0)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,1,1), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = Color.WHITE.getRGB();
 		}
+		//Mario
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.mario;
 		}
+		//BreakBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_2)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0,1), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.breakBlock;
 		}
+		//MisteryBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_3)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,1,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.misteryBlock;
 		}
+		//SurfaceBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_4)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0.5f,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.surfaceBlock;
 		}
+		//BoundBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_5)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.boundBlock;
 		}
+		//Mushroom
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_6)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,069f,0,1), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.mushroom;
 		}
+		//Goomba
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_7)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,06549f,0.05882f,0.003921f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
+		//Luigi
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L) && State.isMultiplayer()){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0, 1, 0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.luigi;
 		}
-
-
+		//RotatingMysteryBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.717647f,09.88235f,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.rotatingmisteryBlock;
 		}
+		//Coin
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_9)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0.60392156f,0.9568627f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.coin;
 		}
+		//Cloud
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.80392156f,1,0.968626f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.cloud;
 		}
+		//DeathBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_B)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.454901f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.deathBlock;
 		}
-
+		//FinishBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.22745f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
@@ -340,7 +351,9 @@ public class MenuState extends State {
 					"9 -> Coin (Fusha)\n"+ 
 					"c -> Cloud (Sky Blue)\n"+ 
 					"b -> Death Block (Gray)\n"+
-					"L -> Luigi(Green)");
+					"L -> Luigi(Green)*\n"+
+					"f -> Finish Race Block (Blue Gray)*\n"+ 
+					"*MULTIPLAYER ONLY");
 		}
 	}
 	public UIAnimationButton getBut() {

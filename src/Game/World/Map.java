@@ -3,6 +3,7 @@ package Game.World;
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.*;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.RotatingMisteryBlock;
 import Game.Entities.StaticEntities.Wall;
 import Game.GameStates.State;
 import Main.Handler;
@@ -61,14 +62,24 @@ public class Map {
 	public void drawMap(Graphics2D g2) {
 		handler.setMarioInMap(true);
 		Point camLocation = new Point((int)handler.getCamera().getX(), (int)handler.getCamera().getY());
+		Point camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
 		g2.translate(-camLocation.x, -camLocation.y);
 		g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
 		for (BaseStaticEntity block:blocksOnMap) {
-			g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+			if(block instanceof RotatingMisteryBlock) {
+				g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);
+			}
+			else {
+				g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+			}
+			
 		}
 		for (BaseDynamicEntity entity:enemiesOnMap) {
 			if(entity instanceof Item){
-				if(!((Item)entity).used){
+				if (entity instanceof Coin) {
+					g2.drawImage(((Coin)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else if(!((Item)entity).used){
 					g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
 				}
 			}else if(entity instanceof Goomba && !entity.ded){
@@ -92,6 +103,7 @@ public class Map {
 			this.walls.render(g2);
 		}
 		g2.translate(camLocation.x, camLocation.y);
+		
 	}
 
 	public ArrayList<BaseStaticEntity> getBlocksOnMap() {
