@@ -106,7 +106,7 @@ public class MenuState extends State {
 					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
 						State.setMultiplayer(true);
-						display2=new DisplayMultiplayerScreen("Luigi", handler.getHeight()/2, handler.getHeight()/2);
+						handler.getGame().display2.getFrame().setVisible(true);
 					}
 				}, handler,Color.BLACK));
 

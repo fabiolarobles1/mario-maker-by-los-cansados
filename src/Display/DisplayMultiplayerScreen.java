@@ -37,7 +37,7 @@ public class DisplayMultiplayerScreen {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocation(new Point(50,100));
-		frame.setVisible(true);
+		frame.setVisible(false);
 		frame.setBackground(Color.black);
 
 		try {

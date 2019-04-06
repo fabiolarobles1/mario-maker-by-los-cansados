@@ -1,5 +1,6 @@
 package Main;
 
+import Display.DisplayMultiplayerScreen;
 import Display.DisplayScreen;
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.Mario;
@@ -28,6 +29,7 @@ import java.awt.image.BufferStrategy;
 
 public class GameSetUp implements Runnable {
     public DisplayScreen display;
+    public DisplayMultiplayerScreen display2;
     public String title;
 
     private boolean running = false;
@@ -74,6 +76,13 @@ public class GameSetUp implements Runnable {
         display.getFrame().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
+        
+        display2 = new DisplayMultiplayerScreen("Luigi", handler.width, handler.height);
+        display2.getFrame().addKeyListener(keyManager);
+        display2.getFrame().addMouseListener(mouseManager);
+        display2.getFrame().addMouseMotionListener(mouseManager);
+        display2.getCanvas().addMouseListener(mouseManager);
+        display2.getCanvas().addMouseMotionListener(mouseManager);
 
         Images img = new Images();
 
