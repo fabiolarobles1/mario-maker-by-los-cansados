@@ -265,12 +265,12 @@ public class Images {
             luigiBigJumpLeft[0] = player2SpriteSheet.crop(198,156,16,29);
             luigiBigJumpLeft[1] = player2SpriteSheet.crop(168,157,16,28);
             luigiBigJumpLeft[2] = player2SpriteSheet.crop(85,156,15,29);//up
-            luigiBigJumpLeft[3] = player2SpriteSheet.crop(11,163,16,15);//down
+            luigiBigJumpLeft[3] = player2SpriteSheet.crop(111,163,16,15);//down
             luigiBigJumpLeft[4] = player2SpriteSheet.crop(54,155,16,31);//change
 
             luigiBigJumpRight[0] = player2SpriteSheet.crop(234,156,16,29);
             luigiBigJumpRight[1] = player2SpriteSheet.crop(264,157,16,28);
-            luigiBigJumpRight[2] = player2SpriteSheet.crop(348,156,15,29);//up
+            luigiBigJumpRight[2] = player2SpriteSheet.crop(348,155,15,30);//up
             luigiBigJumpRight[3] = player2SpriteSheet.crop(321,163,16,15);//down
             luigiBigJumpRight[4] = player2SpriteSheet.crop(378,155,16,31);//Change
             
