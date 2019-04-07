@@ -2,6 +2,7 @@ package Game.GameStates;
 
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
+import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.World.MapBuilder;
 import Main.Handler;
@@ -51,6 +52,17 @@ public class GameState extends State {
 	public void render(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g.create();
 		handler.getMap().drawMap(g2);
+		
+		//Coin Display
+		g.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		g.setColor(Color.RED);
+		String mariocoins = String.valueOf(Player.mariocoins);
+		g.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
+		if (State.isMultiplayer()) {
+			g.setColor(Color.GREEN);
+			String luigicoins = String.valueOf(Player.luigicoins);
+			g.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+		}
 	}
 
 }

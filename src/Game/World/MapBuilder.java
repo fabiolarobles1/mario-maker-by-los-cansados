@@ -1,18 +1,26 @@
 package Game.World;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
+import Game.Entities.DynamicEntities.Coin;
+import Game.Entities.DynamicEntities.DeathBlock;
+import Game.Entities.DynamicEntities.FloatingBlock;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
-import Game.Entities.DynamicEntities.Coin;
-import Game.Entities.DynamicEntities.DeathBlock;
-import Game.Entities.StaticEntities.*;
+import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BoundBlock;
+import Game.Entities.StaticEntities.BreakBlock;
+import Game.Entities.StaticEntities.Cloud;
+import Game.Entities.StaticEntities.FinishBlock;
+import Game.Entities.StaticEntities.MisteryBlock;
+import Game.Entities.StaticEntities.RotatingMisteryBlock;
+import Game.Entities.StaticEntities.SurfaceBlock;
 import Main.Handler;
 import Resources.Images;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class MapBuilder {
 
@@ -30,6 +38,7 @@ public class MapBuilder {
 	public static int cloud = new Color(205, 255, 247).getRGB();
 	public static int deathBlock = new Color(116, 141, 172).getRGB();
 	public static int finishBlock = new Color(58, 141, 172).getRGB();
+	public static int floatingBlock = new Color(215, 237, 218).getRGB();
 	public static boolean mapDone = false;
 //205, 255, 247
 	public static Map createMap(BufferedImage mapImage, Handler handler){
@@ -63,6 +72,9 @@ public class MapBuilder {
 				}else if(currentPixel == finishBlock){
 					BaseStaticEntity FinishBlock = new FinishBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(FinishBlock);
+				}else if(currentPixel == finishBlock){
+					BaseDynamicEntity FloatingBlock = new FloatingBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(FloatingBlock);
 				}else if(currentPixel == rotatingmisteryBlock){
 					BaseStaticEntity RotatingMisteryBlock = new RotatingMisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(RotatingMisteryBlock);

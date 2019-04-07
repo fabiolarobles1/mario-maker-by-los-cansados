@@ -3,6 +3,7 @@ package Game.World;
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.*;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.MisteryBlock;
 import Game.Entities.StaticEntities.RotatingMisteryBlock;
 import Game.Entities.StaticEntities.Wall;
 import Game.GameStates.State;
@@ -68,6 +69,15 @@ public class Map {
 		for (BaseStaticEntity block:blocksOnMap) {
 			if(block instanceof RotatingMisteryBlock) {
 				g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);
+			}
+			else if(block instanceof MisteryBlock){
+				if (((MisteryBlock)block).hit) {
+					g2.drawImage(Images.surfaceBlock,block.x,block.y,block.width,block.height,null);
+				}
+				else {
+					g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+				}
+				
 			}
 			else {
 				g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);

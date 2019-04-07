@@ -70,6 +70,8 @@ public class Images {
 
     public static BufferedImage testMap;
     public static BufferedImage testMaptwo;
+    public static BufferedImage helloworldMap;
+    public static BufferedImage helloworld_mult_Map;
 
     public static BufferedImage breakBlock;
     public static BufferedImage misteryBlock;
@@ -78,6 +80,7 @@ public class Images {
     public static BufferedImage boundBlock;
     public static BufferedImage finishBlock;
     public static BufferedImage mushroom;
+    public static BufferedImage[] floatingBlock;
     public static BufferedImage cloud;
     public static BufferedImage[] coin;
     public static BufferedImage goombaDies;
@@ -93,6 +96,7 @@ public class Images {
     private SpriteSheet enemySheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
+    private SpriteSheet floatingblockSheet;
 
     public Images() {
 
@@ -137,6 +141,8 @@ public class Images {
         luigiBigJumpRight = new BufferedImage[5];
         
         goomba = new BufferedImage[2];
+        
+        floatingBlock = new BufferedImage[2];
 
         rotatingmisteryBlock = new BufferedImage[4];
         
@@ -158,6 +164,7 @@ public class Images {
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
             enemySheet= new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
+            floatingblockSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/floatingblock.png")));
 
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
@@ -386,6 +393,8 @@ public class Images {
             //maps
             testMap = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1.png"));
             testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
+            helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
+            helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer).png"));
 
             //blocks
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
@@ -395,6 +404,9 @@ public class Images {
             cloud = interactableSpriteSheet.crop(112,132,16,16);
             
             finishBlock = interactableSpriteSheet.crop(72,73,16,16);
+            
+            floatingBlock[0] = floatingblockSheet.crop(0, 34, 54, 26);
+            floatingBlock[1] = floatingblockSheet.crop(0, 4, 54, 26);
             
             rotatingmisteryBlock[0] = interactableSpriteSheet.crop(13, 172, 16, 16);
             rotatingmisteryBlock[1] = interactableSpriteSheet.crop(32, 172, 16, 16);

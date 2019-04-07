@@ -5,8 +5,10 @@ import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BoundBlock;
 import Game.Entities.StaticEntities.BreakBlock;
 import Game.Entities.StaticEntities.FinishBlock;
+import Game.Entities.StaticEntities.MisteryBlock;
 import Main.Handler;
 import Resources.Animation;
+import Resources.Images;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -132,6 +134,8 @@ public class Player extends BaseDynamicEntity {
             		&& (brick instanceof BoundBlock)) {
             		if(!State.isMultiplayer()) {
             			State.setState(handler.getGame().gameoverState);
+            			handler.getGame().getMusicHandler().pauseBackground();
+            			handler.getGame().getMusicHandler().playmarioDies();
             			handler.getMap().reset();
                 	}
                 	else {
@@ -169,8 +173,19 @@ public class Player extends BaseDynamicEntity {
                 velY=0;
             	}
             	else if (marioBottomBounds.intersects(enemyTopBounds) && (enemy instanceof DeathBlock)) {
-            		State.setState(handler.getGame().gameoverState);
-                    handler.getMap().reset();
+            		if(!State.isMultiplayer()) {
+            			State.setState(handler.getGame().gameoverState);
+            			handler.getGame().getMusicHandler().pauseBackground();
+            			handler.getGame().getMusicHandler().playmarioDies();
+            			handler.getMap().reset();
+                	}
+                	else {
+                		if (this instanceof Mario) {luigiwins = true;}
+                    	else {mariowins = true;}
+                    	
+                    	State.setState(handler.getGame().winState);
+                    	handler.getMap().reset();
+                	}
             	}
             }
         }
@@ -188,11 +203,29 @@ public class Player extends BaseDynamicEntity {
             		&& !(brick instanceof BoundBlock)) {
                 velY=0;
                 mario.setY(brick.getY() + brick.height);
+                if(brick instanceof MisteryBlock) {
+                	((MisteryBlock)brick).sprite = Images.surfaceBlock;
+                	
+                	
+            		if (this instanceof Mario && !((MisteryBlock)brick).hit) {
+            			mariocoins++;
+            			handler.getGame().getMusicHandler().playCoin();
+            			System.out.println(mariocoins + " coin for Mario");
+            		}
+            		else if(this instanceof Luigi && !((MisteryBlock)brick).hit) {
+            			luigicoins++;
+            			handler.getGame().getMusicHandler().playCoin();
+            			System.out.println(luigicoins + " coin for Luigi");
+            		}
+            		((MisteryBlock)brick).hit = true;
+                }
             }
             else if (marioTopBounds.intersects(brickBottomBounds)
             		&& (brick instanceof BoundBlock)) {
             	if(!State.isMultiplayer()) {
             		State.setState(handler.getGame().gameoverState);
+            		handler.getGame().getMusicHandler().pauseBackground();
+            		handler.getGame().getMusicHandler().playmarioDies();
             		handler.getMap().reset();
             	}
             	else {
@@ -219,8 +252,19 @@ public class Player extends BaseDynamicEntity {
         for (BaseDynamicEntity enemy : enemies) {
         	Rectangle enemyBottomBounds = enemy.getBottomBounds();
         	if (marioTopBounds.intersects(enemyBottomBounds) && !(enemy instanceof Item) ) {
-        		State.setState(handler.getGame().gameoverState);
-            	handler.getMap().reset();
+        		if(!State.isMultiplayer()) {
+        			State.setState(handler.getGame().gameoverState);
+        			handler.getGame().getMusicHandler().pauseBackground();
+        			handler.getGame().getMusicHandler().playmarioDies();
+        			handler.getMap().reset();
+            	}
+            	else {
+            		if (this instanceof Mario) {luigiwins = true;}
+                	else {mariowins = true;}
+                	
+                	State.setState(handler.getGame().winState);
+                	handler.getMap().reset();
+            	}
         	}
         }
     }
@@ -244,12 +288,13 @@ public class Player extends BaseDynamicEntity {
                     mario.setX(brick.getX() - mario.getDimension().width);
                 else
                     mario.setX(brick.getX() + brick.getDimension().width);
-                
+               
             }
             else if (marioBounds.intersects(brickBounds) && 
             		brick instanceof BoundBlock) {
             	if(!State.isMultiplayer()) {
         			State.setState(handler.getGame().gameoverState);
+        			handler.getGame().getMusicHandler().playmarioDies();
         			handler.getMap().reset();
             	}
             	else {
@@ -280,10 +325,19 @@ public class Player extends BaseDynamicEntity {
                 marioDies = true;
                 break;
             }
-            else if(marioBounds.intersects(enemyBounds) 
+             if(marioBounds.intersects(enemyBounds) 
             		&& ((enemy instanceof Goomba) || (enemy instanceof DeathBlock))) {
-            	State.setState(handler.getGame().gameoverState);
-                handler.getMap().reset();
+            	if(!State.isMultiplayer()) {
+            		State.setState(handler.getGame().gameoverState);
+                    handler.getMap().reset();
+            	}
+            	else {
+            		if (this instanceof Mario) {luigiwins = true;}
+                	else {mariowins = true;}
+                	
+                	State.setState(handler.getGame().winState);
+                	handler.getMap().reset();
+            	}
             }
         }
 

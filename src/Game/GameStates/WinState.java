@@ -2,6 +2,7 @@ package Game.GameStates;
 
 import Display.UI.UIStringButton;
 import Game.Entities.DynamicEntities.Player;
+import Game.World.MapBuilder;
 import Main.Handler;
 import Resources.Images;
 import Display.UI.UIManager;
@@ -30,7 +31,24 @@ public class WinState extends State {
         	Player.mariowins =false;
         	Player.luigiwins =false;
             State.setState(handler.getGame().menuState);
-        },handler,Color.GREEN));
+        },handler,Color.BLUE));
+
+//        uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 35, (223+(64+16) +(64+16) + (64+16) + (32)), 128, 64, "Restart?", () -> {
+//           // handler.setIsInMap(false);
+//            Player.mariocoins = 0;
+//        	Player.luigicoins = 0;
+//        	Player.mariowins =false;
+//        	Player.luigiwins =false;
+//        	
+//        	if (State.isMultiplayer()) {
+//        		//handler.setMap(handler.getMap());
+//				handler.setMap(MapBuilder.createMap(Images.helloworld_mult_Map, handler));
+//			}
+//			else {
+//				handler.setMap(MapBuilder.createMap(Images.helloworldMap, handler));	
+//			}
+//			State.setState(handler.getGame().gameState);
+//        },handler,Color.CYAN));
 
     }
 
@@ -59,16 +77,16 @@ public class WinState extends State {
         			Player.mariowins = false;
         			Player.luigiwins = false;
         			g.setColor(Color.ORANGE);
-            		g.drawString("TIE", 320, 250);
+            		g.drawString("TIE", 56 + 100 + 100, 250);
         		}
         	}
         	if(Player.mariowins) {
         		g.setColor(Color.RED);
-        		g.drawString("Mario WINS", 320, 250);
+        		g.drawString("Mario WINS", 56 + 100 + 100, 250);
         	}
         	else if(Player.luigiwins) {
         		g.setColor(Color.GREEN);
-        		g.drawString("Luigi WINS", 320, 250);
+        		g.drawString("Luigi WINS", 56 + 100 + 100, 250);
         	}
         }
         uiManager.Render(g);

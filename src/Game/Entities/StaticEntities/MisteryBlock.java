@@ -5,6 +5,8 @@ import Resources.Images;
 
 public class MisteryBlock extends BaseStaticEntity {
 
+	public boolean hit = false;
+	
     public MisteryBlock(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height,handler, Images.misteryBlock);
     }

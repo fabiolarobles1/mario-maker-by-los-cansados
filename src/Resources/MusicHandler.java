@@ -100,4 +100,8 @@ public class MusicHandler {
 		Clip clip = getClip(loadAudio("coin"));
 		clip.start();
 	}
+	public void playmarioDies() {
+		Clip clip = getClip(loadAudio("marioDies"));
+		clip.start();
+	}
 }

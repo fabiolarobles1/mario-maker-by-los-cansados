@@ -20,12 +20,13 @@ public class GameOverState extends State {
         super(handler);
         uiManager = new UIManager(handler);
 
-
+        handler.getGame().getMusicHandler().pauseBackground();
         uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 32, (223+(64+16) +(64+16) + (64+16)), 128, 64, "Back to Title", () -> {
             handler.getMouseManager().setUimanager(null);
             handler.setMarioInMap(false);
            // handler.setIsInMap(false);
             State.setState(handler.getGame().menuState);
+            handler.getGame().getMusicHandler().resumeBackground();
             Player.mariocoins = 0;
         	Player.luigicoins = 0;
         	Player.mariowins =false;
@@ -36,6 +37,7 @@ public class GameOverState extends State {
 
     @Override
     public void tick() {
+    	handler.getGame().getMusicHandler().pauseBackground();
         handler.getMouseManager().setUimanager(uiManager);
         uiManager.tick();
         
