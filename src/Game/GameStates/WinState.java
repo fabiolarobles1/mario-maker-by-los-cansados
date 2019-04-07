@@ -33,6 +33,7 @@ public class WinState extends State {
             State.setState(handler.getGame().menuState);
         },handler,Color.BLUE));
 
+        
 //        uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 35, (223+(64+16) +(64+16) + (64+16) + (32)), 128, 64, "Restart?", () -> {
 //           // handler.setIsInMap(false);
 //            Player.mariocoins = 0;
