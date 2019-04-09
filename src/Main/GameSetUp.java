@@ -44,6 +44,8 @@ public class GameSetUp implements Runnable {
 
     private BufferStrategy bs;
     private Graphics g;
+    private BufferStrategy bs2;
+    private Graphics g3;
     public UIPointer pointer;
 
     //Input
@@ -79,6 +81,7 @@ public class GameSetUp implements Runnable {
 
     private void init(){
         display = new DisplayScreen(title, handler.width, handler.height);
+        display.getFrame().setLocation(display.getFrame().getX()- display.getFrame().getWidth()/2, display.getFrame().getY());
         display.getFrame().addKeyListener(keyManager);
         display.getFrame().addMouseListener(mouseManager);
         display.getFrame().addMouseMotionListener(mouseManager);
@@ -86,11 +89,8 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
         
         display2 = new DisplayMultiplayerScreen("Luigi", handler.width, handler.height);
-        display2.getFrame().addKeyListener(keyManager);
-        display2.getFrame().addMouseListener(mouseManager);
-        display2.getFrame().addMouseMotionListener(mouseManager);
-        display2.getCanvas().addMouseListener(mouseManager);
-        display2.getCanvas().addMouseMotionListener(mouseManager);
+        display2.getFrame().setLocation(display.getFrame().getX()+  display.getFrame().getWidth(), display.getFrame().getY());
+        
 
         Images img = new Images();
 
@@ -218,7 +218,7 @@ public class GameSetUp implements Runnable {
     }
 
     private void render(){
-        bs = display.getCanvas().getBufferStrategy();
+    	bs = display.getCanvas().getBufferStrategy();
 
         if(bs == null){
             display.getCanvas().createBufferStrategy(3);
@@ -227,16 +227,56 @@ public class GameSetUp implements Runnable {
         g = bs.getDrawGraphics();
         //Clear Screen
         g.clearRect(0, 0,  handler.width, handler.height);
+        
+        
+        //Second Screen
+        bs2 = display2.getCanvas().getBufferStrategy();
 
+        if(bs2 == null){
+            display2.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        g3 = bs2.getDrawGraphics();
+        //Clear Screen
+        g3.clearRect(0, 0,  handler.width, handler.height);
+        
+        g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		g3.setColor(Color.RED);
+        g3.drawString("Please Wait!", handler.width/2 - 80, handler.height/2);
+        
+        
         //Draw Here!
         Graphics2D g2 = (Graphics2D) g.create();
-
+        Graphics2D g4 = (Graphics2D) g3.create();
+        
+        
         if(State.getState() != null)
             State.getState().render(g);
+        	if(State.isMultiplayer() && State.getState() instanceof GameState) {
+        		
+        		handler.getMap().drawMap2(g4);
+        		
+        		g3.setColor(Color.GREEN);
+    			String luigicoins = String.valueOf(Player.luigicoins);
+    			g3.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+        	}
+        	else {
+        		g3.setFont(new Font("Segoe UI", Font.BOLD, 40));
+        		if(Player.mariowins) {
+            		g3.setColor(Color.RED);
+            		g3.drawString("Mario WINS", 56 + 100 + 100, 250);
+            	}
+            	else if(Player.luigiwins) {
+            		g3.setColor(Color.GREEN);
+            		g3.drawString("Luigi WINS", 56 + 100 + 100, 250);
+            	}
+        	}
 
         //End Drawing!
         bs.show();
         g.dispose();
+        bs2.show();
+        g3.dispose();
     }
     public Map getMap() {
     	Map map = new Map(this.handler);

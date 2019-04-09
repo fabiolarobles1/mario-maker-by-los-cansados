@@ -51,8 +51,8 @@ public class Map {
 			bottomBorder=handler.getHeight()+handler.getMario().y;
 		}else if(entity instanceof Luigi){
 			handler.setLuigi((Luigi) entity);
-			handler.getCamera().setX(handler.getLuigi().x- (MapBuilder.pixelMultiplier*6));
-			handler.getCamera().setY(handler.getLuigi().y - (MapBuilder.pixelMultiplier*10));
+			handler.getCamera2().setX(handler.getLuigi().x- (MapBuilder.pixelMultiplier*6));
+			handler.getCamera2().setY(handler.getLuigi().y - (MapBuilder.pixelMultiplier*10));
 			bottomBorder=handler.getHeight()+handler.getLuigi().y;
 
 		}else {
@@ -63,7 +63,62 @@ public class Map {
 	public void drawMap(Graphics2D g2) {
 		handler.setMarioInMap(true);
 		Point camLocation = new Point((int)handler.getCamera().getX(), (int)handler.getCamera().getY());
-		Point camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
+		g2.translate(-camLocation.x, -camLocation.y);
+		g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
+		for (BaseStaticEntity block:blocksOnMap) {
+			if(block instanceof RotatingMisteryBlock) {
+				block.tick();
+				g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);
+			}
+			else if(block instanceof MisteryBlock){
+				if (((MisteryBlock)block).hit) {
+					g2.drawImage(Images.surfaceBlock,block.x,block.y,block.width,block.height,null);
+				}
+				else {
+					g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+				}
+				
+			}
+			else {
+				g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+			}
+			
+		}
+		for (BaseDynamicEntity entity:enemiesOnMap) {
+			if(entity instanceof Item){
+				if (entity instanceof Coin) {
+					g2.drawImage(((Coin)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else if(!((Item)entity).used){
+					g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
+				}
+			}else if(entity instanceof Goomba && !entity.ded){
+				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+			}
+			else if(entity instanceof UIPointer ){
+				((UIPointer) entity).render(g2);
+			}else {
+				g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
+			}
+		}if(!State.isMultiplayer()) {
+			handler.getMario().drawMario(g2);
+		}else if (State.isMultiplayer()) {
+			handler.getMario().drawMario(g2);
+			handler.getLuigi().drawLuigi(g2);
+		}
+		
+		if(this.listener != null && MapBuilder.mapDone) {
+			this.listener.render(g2);
+			this.hand.render(g2);
+			this.walls.render(g2);
+		}
+		g2.translate(camLocation.x, camLocation.y);
+		
+	}
+	public void drawMap2(Graphics2D g2) {
+		handler.setMarioInMap(true);
+		handler.setLuigiInMap(true);
+		Point camLocation = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
 		g2.translate(-camLocation.x, -camLocation.y);
 		g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
 		for (BaseStaticEntity block:blocksOnMap) {
@@ -115,6 +170,7 @@ public class Map {
 		g2.translate(camLocation.x, camLocation.y);
 		
 	}
+	
 
 	public ArrayList<BaseStaticEntity> getBlocksOnMap() {
 		return blocksOnMap;
