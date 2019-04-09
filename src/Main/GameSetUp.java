@@ -259,6 +259,10 @@ public class GameSetUp implements Runnable {
         		g3.setColor(Color.GREEN);
     			String luigicoins = String.valueOf(Player.luigicoins);
     			g3.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+    			g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
+    			g3.setColor(Color.RED);
+    			String mariocoins = String.valueOf(Player.mariocoins);
+    			g3.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
         	}
         	else {
         		g3.setFont(new Font("Segoe UI", Font.BOLD, 40));
