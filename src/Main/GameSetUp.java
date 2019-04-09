@@ -91,7 +91,7 @@ public class GameSetUp implements Runnable {
         display2 = new DisplayMultiplayerScreen("Luigi", handler.width, handler.height);
         display2.getFrame().setLocation(display.getFrame().getX()+  display.getFrame().getWidth(), display.getFrame().getY());
         
-
+///
         Images img = new Images();
 
         musicHandler.restartBackground();
