@@ -259,6 +259,7 @@ public class GameSetUp implements Runnable {
         		g3.setColor(Color.GREEN);
     			String luigicoins = String.valueOf(Player.luigicoins);
     			g3.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+
     			if (!( handler.getLuigi().moving)) {
     				g3.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
     				g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -266,6 +267,12 @@ public class GameSetUp implements Runnable {
     				g3.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
 
     			}
+
+    			g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
+    			g3.setColor(Color.RED);
+    			String mariocoins = String.valueOf(Player.mariocoins);
+    			g3.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
+
         	}
         	else if(State.isMultiplayer() && State.getState() instanceof WinState){
         		State.getState().render(g3);
