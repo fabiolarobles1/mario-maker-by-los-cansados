@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 public class Luigi extends Player{
 
 	private boolean floating = false;
+	long time;
 
 
 
@@ -38,7 +39,15 @@ public class Luigi extends Player{
 					this.jump();
 				} if (jumping && handler.getKeyManager().keyJustPressed(KeyEvent.VK_K) && !handler.getKeyManager().up2 && !handler.getKeyManager().down2 && floating==false) {
 					this.floating();
-					
+
+				}
+				if(System.currentTimeMillis()>= time+1500 && floating) {
+					falling = true;
+					jumping = false;
+					floating = false;
+
+
+
 				}
 
 				if (handler.getKeyManager().right2 && !handler.getKeyManager().up2 && !handler.getKeyManager().down2) {
@@ -71,6 +80,10 @@ public class Luigi extends Player{
 					velX = 0;
 					moving = false;
 				}
+				if (floating) {
+					jumping = false;
+					falling= false;
+				}
 				if (jumping  && velY <= 0) {
 					jumping = false;
 					falling = true;
@@ -99,117 +112,132 @@ public class Luigi extends Player{
 
 	public void drawLuigi(Graphics2D g2) {
 		if(!grabbed) {
-			if (!isBig) {
-				if (handler.getKeyManager().up2) {
+			if(floating) {
+				if (!isBig) {
 					if (facing.equals("Left")) {
-						g2.drawImage(Images.luigiSmallJumpLeft[2], x, y, width, height, null);
+						g2.drawImage(Images.luigiSmallJumpLeft[0], x, y, width, height, null);
 					} else {
-						g2.drawImage(Images.luigiSmallJumpRight[2], x, y, width, height, null);
+						g2.drawImage(Images.luigiSmallJumpRight[0], x, y, width, height, null);
 					}
-				} else if (handler.getKeyManager().down2) {
+				}else {
 					if (facing.equals("Left")) {
-						g2.drawImage(Images.luigiSmallJumpLeft[3], x, y, width, height, null);
+						g2.drawImage(Images.luigiBigJumpLeft[0], x, y, width, height, null);
 					} else {
-						g2.drawImage(Images.luigiSmallJumpRight[3], x, y, width, height, null);
+						g2.drawImage(Images.luigiBigJumpRight[0], x, y, width, height, null);
 					}
-				} else if (!jumping && !falling) {
-					if (facing.equals("Left") && moving ) {
-						g2.drawImage(playerSmallLeftAnimation.getCurrentFrame(), x, y, width, height, null);
-					} else if (facing.equals("Right") && moving) {
-						g2.drawImage(playerSmallRightAnimation.getCurrentFrame(), x, y, width, height, null);
-					}
-					if (facing.equals("Left") && !moving) {
-						g2.drawImage(Images.luigiSmallWalkLeft[0], x, y, width, height, null);
-					} else if (facing.equals("Right") && !moving) {
-						g2.drawImage(Images.luigiSmallWalkRight[0], x, y, width, height, null);
-					}
-				} else {
-					if (jumping) {
-						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiSmallJumpLeft[0], x, y, width, height, null);
-						} else {
-							g2.drawImage(Images.luigiSmallJumpRight[0], x, y, width, height, null);
-						}
 
-					} else {
-						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiSmallJumpLeft[1], x, y, width, height, null);
-						} else {
-							g2.drawImage(Images.luigiSmallJumpRight[1], x, y, width, height, null);
-						}
-					}
 				}
-			} else {
-				if (!changeDirrection) {
+			}else {
+
+				if (!isBig) {
 					if (handler.getKeyManager().up2) {
 						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
+							g2.drawImage(Images.luigiSmallJumpLeft[2], x, y, width, height, null);
 						} else {
-							g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
+							g2.drawImage(Images.luigiSmallJumpRight[2], x, y, width, height, null);
 						}
 					} else if (handler.getKeyManager().down2) {
 						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiBigJumpLeft[3], x, y, width, height, null);
+							g2.drawImage(Images.luigiSmallJumpLeft[3], x, y, width, height, null);
 						} else {
-							g2.drawImage(Images.luigiBigJumpRight[3], x, y, width, height, null);
+							g2.drawImage(Images.luigiSmallJumpRight[3], x, y, width, height, null);
 						}
-					} else if (!jumping && !falling) {
-						if (facing.equals("Left") && moving && running) {
-							g2.drawImage(playerBigLeftRunAnimation.getCurrentFrame(), x, y, width, height, null);
-						} else if (facing.equals("Left") && moving && !running) {
-							g2.drawImage(playerBigLeftWalkAnimation.getCurrentFrame(), x, y, width, height, null);
-						} else if (facing.equals("Left") && !moving) {
-							g2.drawImage(Images.luigiBigWalkLeft[0], x, y, width, height, null);
-						} else if (facing.equals("Right") && moving && running) {
-							g2.drawImage(playerBigRightRunAnimation.getCurrentFrame(), x, y, width, height, null);
-						} else if (facing.equals("Right") && moving && !running) {
-							g2.drawImage(playerBigRightWalkAnimation.getCurrentFrame(), x, y, width, height, null);
+					} else if (!jumping && !falling ) {
+						if (facing.equals("Left") && moving ) {
+							g2.drawImage(playerSmallLeftAnimation.getCurrentFrame(), x, y, width, height, null);
+						} else if (facing.equals("Right") && moving) {
+							g2.drawImage(playerSmallRightAnimation.getCurrentFrame(), x, y, width, height, null);
+						}
+						if (facing.equals("Left") && !moving ) {
+							g2.drawImage(Images.luigiSmallWalkLeft[0], x, y, width, height, null);
 						} else if (facing.equals("Right") && !moving) {
-							g2.drawImage(Images.luigiBigWalkRight[0], x, y, width, height, null);
+							g2.drawImage(Images.luigiSmallWalkRight[0], x, y, width, height, null);
 						}
 					} else {
 						if (jumping) {
 							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiBigJumpLeft[0], x, y, width, height, null);
+								g2.drawImage(Images.luigiSmallJumpLeft[0], x, y, width, height, null);
 							} else {
-								g2.drawImage(Images.luigiBigJumpRight[0], x, y, width, height, null);
+								g2.drawImage(Images.luigiSmallJumpRight[0], x, y, width, height, null);
 							}
 
 						} else {
 							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiBigJumpLeft[1], x, y, width, height, null);
+								g2.drawImage(Images.luigiSmallJumpLeft[1], x, y, width, height, null);
 							} else {
-								g2.drawImage(Images.luigiBigJumpRight[1], x, y, width, height, null);
+								g2.drawImage(Images.luigiSmallJumpRight[1], x, y, width, height, null);
 							}
 						}
 					}
 				} else {
-					if (!running) {
-						changeDirrection = false;
-						changeDirectionCounter = 0;
-						drawLuigi(g2);
-					}
-					if (facing.equals("Right")) {
-						g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
+					if (!changeDirrection) {
+						if (handler.getKeyManager().up2) {
+							if (facing.equals("Left")) {
+								g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
+							} else {
+								g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
+							}
+						} else if (handler.getKeyManager().down2) {
+							if (facing.equals("Left")) {
+								g2.drawImage(Images.luigiBigJumpLeft[3], x, y, width, height, null);
+							} else {
+								g2.drawImage(Images.luigiBigJumpRight[3], x, y, width, height, null);
+							}
+						} else if (!jumping && !falling) {
+							if (facing.equals("Left") && moving && running ) {
+								g2.drawImage(playerBigLeftRunAnimation.getCurrentFrame(), x, y, width, height, null);
+							} else if (facing.equals("Left") && moving && !running) {
+								g2.drawImage(playerBigLeftWalkAnimation.getCurrentFrame(), x, y, width, height, null);
+							} else if (facing.equals("Left") && !moving) {
+								g2.drawImage(Images.luigiBigWalkLeft[0], x, y, width, height, null);
+							} else if (facing.equals("Right") && moving && running) {
+								g2.drawImage(playerBigRightRunAnimation.getCurrentFrame(), x, y, width, height, null);
+							} else if (facing.equals("Right") && moving && !running) {
+								g2.drawImage(playerBigRightWalkAnimation.getCurrentFrame(), x, y, width, height, null);
+							} else if (facing.equals("Right") && !moving) {
+								g2.drawImage(Images.luigiBigWalkRight[0], x, y, width, height, null);
+							}
+						} else {
+							if (jumping) {
+								if (facing.equals("Left")) {
+									g2.drawImage(Images.luigiBigJumpLeft[0], x, y, width, height, null);
+								} else {
+									g2.drawImage(Images.luigiBigJumpRight[0], x, y, width, height, null);
+								}
+
+							} else {
+								if (facing.equals("Left")) {
+									g2.drawImage(Images.luigiBigJumpLeft[1], x, y, width, height, null);
+								} else {
+									g2.drawImage(Images.luigiBigJumpRight[1], x, y, width, height, null);
+								}
+							}
+						}
 					} else {
-						g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
+						if (!running) {
+							changeDirrection = false;
+							changeDirectionCounter = 0;
+							drawLuigi(g2);
+						}
+						if (facing.equals("Right")) {
+							g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
+						} else {
+							g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
+						}
 					}
 				}
 			}
 		}
 	}
-	public void floating() {
+	public void floating( ) {
+
 		if(jumping && !falling ){
 			handler.getGame().getMusicHandler().playStomp();
 			floating = true;
+			falling = false;
+			jumping = false;
+			time = System.currentTimeMillis();
 
-			long time=System.currentTimeMillis();
-			while(System.currentTimeMillis()<= time+2000) {
-				falling = false;
-				jumping = false;
-				floating = true;
 
-			}
-		}
-	}
+		}}
 }
