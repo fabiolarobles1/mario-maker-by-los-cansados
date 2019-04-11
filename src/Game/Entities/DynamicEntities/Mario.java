@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 
 public class Mario extends Player{
 
-	
-	
+	private	boolean doubleJump = false;
+
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.marioSmallWalkRight[0]
@@ -25,65 +25,73 @@ public class Mario extends Player{
 			this.height+=8;
 			setDimension(new Dimension(width, this.height));
 		}
+
 	}
 
 	@Override
 	public void tick(){
-	    if(!grabbed) {
-            super.tick();
-            if (!this.getHit()) {
-                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-                    this.jump();
-                }
+		if(!grabbed) {
+			super.tick();
+			if (!this.getHit()) {
+				if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+					this.jump();
 
-                if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-                    if (handler.getKeyManager().runbutt) {
-                        velX = 6;
-                        running = true;
-                    } else {
-                        velX = 3;
-                        running = false;
-                    }
-                    if (facing.equals("Left")) {
-                        changeDirrection = true;
-                    }
-                    facing = "Right";
-                    moving = true;
-                } else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-                    if (handler.getKeyManager().runbutt) {
-                        velX = -6;
-                        running = true;
-                    } else {
-                        velX = -3;
-                        running = false;
-                    }
-                    if (facing.equals("Right")) {
-                        changeDirrection = true;
-                    }
-                    facing = "Left";
-                    moving = true;
-                } else {
-                    velX = 0;
-                    moving = false;
-                }
-                if (jumping && velY <= 0) {
-                    jumping = false;
-                    falling = true;
-                } else if (jumping) {
-                    velY = velY - gravityAcc;
-                    y = (int) (y - velY);
-                }
+				}if(jumping && handler.getKeyManager().keyJustPressed(KeyEvent.VK_B) && !handler.getKeyManager().up && !handler.getKeyManager().down && doubleJump==false) {
+					this.doubleJump();
+					doubleJump =true;
+				}
+			}
 
-                if (falling) {
-                    y = (int) (y + velY);
-                    velY = velY + gravityAcc;
-                }
-                x += velX;
-            } else {
-                this.setX(this.getX() - 30);
-                this.setY(this.getY() - 30);
-            }
-        }
+			if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+				if (handler.getKeyManager().runbutt) {
+					velX = 6;
+					running = true;
+				} else {
+					velX = 3;
+					running = false;
+				}
+				if (facing.equals("Left")) {
+					changeDirrection = true;
+				}
+				facing = "Right";
+				moving = true;
+			} else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+				if (handler.getKeyManager().runbutt) {
+					velX = -6;
+					running = true;
+				} else {
+					velX = -3;
+					running = false;
+				}
+				if (facing.equals("Right")) {
+					changeDirrection = true;
+				}
+				facing = "Left";
+				moving = true;
+			} else {
+				velX = 0;
+				moving = false;
+			}
+			if (jumping && velY <= 0) {
+				jumping = false;
+				falling = true;
+				doubleJump=false;
+			} else if (jumping) {
+				velY = velY - gravityAcc;
+				y = (int) (y - velY);
+
+			}
+
+			if (falling) {
+				y = (int) (y + velY);
+				velY = velY + gravityAcc;
+			}
+			x += velX;
+		} else {
+			this.setX(this.getX() - 30);
+			this.setY(this.getY() - 30);
+		}
+
 	}
 
 	public void drawMario(Graphics2D g2) {
@@ -187,5 +195,11 @@ public class Mario extends Player{
 			}
 		}
 	}
-	
+
+	public void doubleJump() {
+		if(jumping && !falling ){
+			velY=10;
+			handler.getGame().getMusicHandler().playJump();	
+		}
+	}
 }
