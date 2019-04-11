@@ -37,7 +37,7 @@ public class Luigi extends Player{
 			if (!this.getHit()) {
 				if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_CONTROL) && !handler.getKeyManager().up2 && !handler.getKeyManager().down2) {
 					this.jump();
-				} if (jumping && handler.getKeyManager().keyJustPressed(KeyEvent.VK_K) && !handler.getKeyManager().up2 && !handler.getKeyManager().down2 && floating==false) {
+				} if (jumping && handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD) && !handler.getKeyManager().up2 && !handler.getKeyManager().down2 && floating==false) {
 					this.floating();
 
 				}
