@@ -405,13 +405,13 @@ public class Images {
             
             finishBlock = interactableSpriteSheet.crop(72,73,16,16);
             
-            floatingBlock[0] = floatingblockSheet.crop(0, 34, 54, 26);
-            floatingBlock[1] = floatingblockSheet.crop(0, 4, 54, 26);
+            floatingBlock[0] = floatingblockSheet.crop(0, 4, 54, 26);
+            floatingBlock[1] = floatingblockSheet.crop(0, 34, 54, 26);
             
             rotatingmisteryBlock[0] = interactableSpriteSheet.crop(13, 172, 16, 16);
-            rotatingmisteryBlock[1] = interactableSpriteSheet.crop(32, 172, 16, 16);
+            rotatingmisteryBlock[1] = interactableSpriteSheet.crop(33, 172, 16, 16);
             rotatingmisteryBlock[2] = interactableSpriteSheet.crop(53, 172, 16, 16);
-            rotatingmisteryBlock[3] = interactableSpriteSheet.crop(73, 172, 16, 16);
+            rotatingmisteryBlock[3] = interactableSpriteSheet.crop(72, 172, 16, 16);
             
             
             //breakBlock = blockSpriteSheet.crop(272,112,16,16);

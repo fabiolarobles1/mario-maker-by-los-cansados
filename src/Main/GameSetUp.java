@@ -9,6 +9,7 @@ import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
 import Game.GameStates.GameOverState;
 import Game.GameStates.GameState;
+import Game.GameStates.InstructionsState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
@@ -62,6 +63,7 @@ public class GameSetUp implements Runnable {
     public State pauseState;
     public State gameoverState;
     public State winState;
+    public State instructionsState;
 
     //Res.music
     private MusicHandler musicHandler;
@@ -100,6 +102,7 @@ public class GameSetUp implements Runnable {
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
         gameoverState= new GameOverState(handler);
+        instructionsState = new InstructionsState(handler);
         winState = new WinState(handler);
 
         State.setState(menuState);
@@ -259,23 +262,36 @@ public class GameSetUp implements Runnable {
         		g3.setColor(Color.GREEN);
     			String luigicoins = String.valueOf(Player.luigicoins);
     			g3.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+
+    			if (!( handler.getLuigi().moving)) {
+    				g3.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
+    				g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
+    				g3.setColor(Color.WHITE);
+    				g3.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
+
+    			}
+
     			g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
     			g3.setColor(Color.RED);
     			String mariocoins = String.valueOf(Player.mariocoins);
     			g3.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
+
         	}
-        	else {
-        		g3.setFont(new Font("Segoe UI", Font.BOLD, 40));
-        		if(Player.mariowins) {
-            		g3.setColor(Color.RED);
-            		g3.drawString("Mario WINS", 56 + 100 + 100, 250);
-            	}
-            	else if(Player.luigiwins) {
-            		g3.setColor(Color.GREEN);
-            		g3.drawString("Luigi WINS", 56 + 100 + 100, 250);
-            	}
+        	else if(State.isMultiplayer() && State.getState() instanceof WinState){
+        		State.getState().render(g3);
+//        		g3.setFont(new Font("Segoe UI", Font.BOLD, 40));
+//        		if(Player.mariowins) {
+//            		g3.setColor(Color.RED);
+//            		g3.drawString("Mario WINS", 56 + 100 + 100, 250);
+//            	}
+//            	else if(Player.luigiwins) {
+//            		g3.setColor(Color.GREEN);
+//            		g3.drawString("Luigi WINS", 56 + 100 + 100, 250);
+//            	}
+        		
         	}
 
+        	
         //End Drawing!
         bs.show();
         g.dispose();

@@ -149,7 +149,7 @@ public class MenuState extends State {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
-						State.setState(handler.getGame().gameState);
+						State.setState(handler.getGame().instructionsState);
 					}
 				}, handler,Color.BLACK));
 

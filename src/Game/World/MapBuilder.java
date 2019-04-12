@@ -72,7 +72,7 @@ public class MapBuilder {
 				}else if(currentPixel == finishBlock){
 					BaseStaticEntity FinishBlock = new FinishBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(FinishBlock);
-				}else if(currentPixel == finishBlock){
+				}else if(currentPixel == floatingBlock){
 					BaseDynamicEntity FloatingBlock = new FloatingBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(FloatingBlock);
 				}else if(currentPixel == rotatingmisteryBlock){
