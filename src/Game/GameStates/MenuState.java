@@ -96,8 +96,7 @@ public class MenuState extends State {
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "1 Player", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
-						//handler.setMap(MapBuilder.createMap(Images.testMap, handler));
-						//State.setState(handler.getGame().gameState);
+						
 					}
 				}, handler,Color.BLACK));
 
@@ -138,7 +137,7 @@ public class MenuState extends State {
 						else {
 							handler.setMap(MapBuilder.createMap(Images.helloworldMap, handler));	
 						}
-						State.setState(handler.getGame().gameState);
+						State.setState(handler.getGame().instructionsState);
 					}
 				}, handler,Color.BLACK));
 				
@@ -158,7 +157,7 @@ public class MenuState extends State {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
-						State.setState(handler.getGame().gameState);
+						State.setState(handler.getGame().instructionsState);
 					}
 				}, handler,Color.BLACK));
 
@@ -175,7 +174,7 @@ public class MenuState extends State {
 							System.out.println("You chose to open this file: " + chooser.getSelectedFile().getAbsolutePath());
 							try {
 								handler.setMap(MapBuilder.createMap(ImageIO.read(chooser.getSelectedFile()), handler));
-								State.setState(handler.getGame().gameState);
+								State.setState(handler.getGame().instructionsState);
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -331,7 +330,7 @@ public class MenuState extends State {
 				for (int j = 0; j < GridHeightPixelCount; j++) {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))){
 						handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
-						State.setState(handler.getGame().gameState);
+						State.setState(handler.getGame().instructionsState);
 						creatingMap=false;
 						display.getFrame().setVisible(false);
 						display.getFrame().dispose();
