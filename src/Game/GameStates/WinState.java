@@ -89,6 +89,12 @@ public class WinState extends State {
         		g.setColor(Color.GREEN);
         		g.drawString("Luigi WINS", 56 + 100 + 100, 250);
         	}
+        }else {
+        	if(Player.mariowins) {
+        		g.setColor(Color.RED);
+        		g.drawString("Mario WINS", 56 + 100 + 100, 250);
+        	}
+        	
         }
         uiManager.Render(g);
     }

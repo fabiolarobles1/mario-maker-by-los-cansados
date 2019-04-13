@@ -75,6 +75,8 @@ public class Images {
     public static BufferedImage testMaptwoMultiplayer;
     public static BufferedImage helloworldMap;
     public static BufferedImage helloworld_mult_Map;
+    public static BufferedImage marioAndLuigiRace;
+    public static BufferedImage marioRaceSolo;
 
     public static BufferedImage breakBlock;
     public static BufferedImage misteryBlock;
@@ -403,6 +405,11 @@ public class Images {
             
             helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
             helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer).png"));
+            
+            marioAndLuigiRace =  ImageIO.read(getClass().getResourceAsStream("/maps/Mario&Luigi Race.png"));
+            marioRaceSolo = ImageIO.read(getClass().getResourceAsStream("/maps/MarioRaceSolo.png"));
+            
+            
 
             //blocks
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);

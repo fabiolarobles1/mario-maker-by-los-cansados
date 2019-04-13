@@ -281,6 +281,21 @@ public class GameSetUp implements Runnable {
 				}
 			}
 		}
+if(!State.isMultiplayer() && State.getState() instanceof InstructionsState) {
+			
+			
+			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
+				if(block instanceof FinishBlock) {
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("SansSerif", Font.PLAIN, 40));
+					g.drawString("RACE MODE:", handler.getWidth()/3+5, handler.getHeight()/10+300);
+					g.setFont(new Font("SansSerif", Font.PLAIN, 25));
+					g.drawImage(Images.finishBlock,handler.getWidth()/16, handler.getHeight()/10+350,75,75,null);
+					g.setFont(new Font("Segoe UI", Font.BOLD, 20));
+					g.drawString("Find this block to win!",handler.getWidth()/16+80,  handler.getHeight()/10+400);
+				}
+			}
+		}
 		if(State.isMultiplayer() && State.getState() instanceof GameState) {
 
 			handler.getMap().drawMap2(g4);
@@ -303,7 +318,7 @@ public class GameSetUp implements Runnable {
 			g3.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
 
 		}
-		else if(State.isMultiplayer() && State.getState() instanceof WinState){
+		else if(State.getState() instanceof WinState){
 			State.getState().render(g3);
 			
 

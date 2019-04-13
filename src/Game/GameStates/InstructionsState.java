@@ -42,7 +42,7 @@ public class InstructionsState extends State {
 		handler.getMouseManager().setUimanager(uiManager);
 
 if(!State.isMultiplayer()) {
-		uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /2), 128, 64, "OK", () -> {
+		uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "OK", () -> {
 		
 			State.setState(handler.getGame().gameState);
 
