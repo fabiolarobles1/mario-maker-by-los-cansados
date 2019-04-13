@@ -65,11 +65,14 @@ public class Images {
 
     public static BufferedImage title;
     public static BufferedImage Pause;
+    public static BufferedImage MenuBorder;
     public static BufferedImage[] Over;
     public static BufferedImage Cursor;
 
     public static BufferedImage testMap;
+    public static BufferedImage testMapMultiplayer;
     public static BufferedImage testMaptwo;
+    public static BufferedImage testMaptwoMultiplayer;
     public static BufferedImage helloworldMap;
     public static BufferedImage helloworld_mult_Map;
 
@@ -169,6 +172,7 @@ public class Images {
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
+            MenuBorder = ImageIO.read(getClass().getResourceAsStream("/Sheets/menuBorder.png"));
             Cursor = ImageIO.read(getClass().getResourceAsStream("/Sheets/cursor.png"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
@@ -392,7 +396,11 @@ public class Images {
 
             //maps
             testMap = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1.png"));
+            testMapMultiplayer = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1_multiplayer.png"));
+            
             testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
+            testMaptwoMultiplayer = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2_multiplayer.png"));
+            
             helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
             helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer).png"));
 

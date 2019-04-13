@@ -65,13 +65,13 @@ public class GameState extends State {
 			String luigicoins = String.valueOf(Player.luigicoins);
 			g.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
 			//Finish Block Message
-			if (!(handler.getMario().moving)) {
-				g.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
-				g.setFont(new Font("Segoe UI", Font.BOLD, 20));
-				g.setColor(Color.WHITE);
-				g.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
-
-			}
+//			if (!(handler.getMario().moving)) {
+//				g.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
+//				g.setFont(new Font("Segoe UI", Font.BOLD, 20));
+//				g.setColor(Color.WHITE);
+//				g.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
+//
+//			}
 			
 		}
 	}
