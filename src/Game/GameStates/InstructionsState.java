@@ -19,11 +19,6 @@ public class InstructionsState extends State {
 	public int DiplayHeight,DisplayWidth;
 
 
-	//Input
-	private KeyManager keyManager;
-	private MouseManager mouseManager;
-
-
 	public InstructionsState(Handler handler) {
 		super(handler);
 		uiManager = new UIManager(handler);
@@ -32,10 +27,6 @@ public class InstructionsState extends State {
 
 		DisplayWidth=(handler.getWidth())+(handler.getWidth()/2);
 		DiplayHeight = handler.getHeight();
-
-		keyManager = handler.getGame().keyManager;
-		mouseManager = new MouseManager();
-
 
 	}
 
