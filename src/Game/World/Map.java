@@ -68,8 +68,15 @@ public class Map {
 		for (BaseStaticEntity block:blocksOnMap) {
 			if(block instanceof RotatingMisteryBlock) {
 				block.tick();
-				g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);
+				if(!((RotatingMisteryBlock)block).hit) {
+					g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);	
+				}
+				else {
+					g2.drawImage(Images.surfaceBlock,block.x,block.y,block.width,block.height,null);
+				}
+
 			}
+
 			else if(block instanceof MisteryBlock){
 				if (((MisteryBlock)block).hit) {
 					g2.drawImage(Images.surfaceBlock,block.x,block.y,block.width,block.height,null);
@@ -77,12 +84,12 @@ public class Map {
 				else {
 					g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
 				}
-				
+
 			}
 			else {
 				g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
 			}
-			
+
 		}
 		for (BaseDynamicEntity entity:enemiesOnMap) {
 			if(entity instanceof Item){
@@ -109,14 +116,14 @@ public class Map {
 			handler.getMario().drawMario(g2);
 			handler.getLuigi().drawLuigi(g2);
 		}
-		
+
 		if(this.listener != null && MapBuilder.mapDone) {
 			this.listener.render(g2);
 			this.hand.render(g2);
 			this.walls.render(g2);
 		}
 		g2.translate(camLocation.x, camLocation.y);
-		
+
 	}
 	public void drawMap2(Graphics2D g2) {
 		handler.setMarioInMap(true);
@@ -126,7 +133,14 @@ public class Map {
 		g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
 		for (BaseStaticEntity block:blocksOnMap) {
 			if(block instanceof RotatingMisteryBlock) {
-				g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);
+				block.tick();
+				if(!((RotatingMisteryBlock)block).hit) {
+					g2.drawImage(((RotatingMisteryBlock)block).anim.getCurrentFrame(),block.x,block.y,block.width,block.height,null);	
+				}
+				else {
+					g2.drawImage(Images.surfaceBlock,block.x,block.y,block.width,block.height,null);
+				}
+
 			}
 			else if(block instanceof MisteryBlock){
 				if (((MisteryBlock)block).hit) {
@@ -135,12 +149,12 @@ public class Map {
 				else {
 					g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
 				}
-				
+
 			}
 			else {
 				g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
 			}
-			
+
 		}
 		for (BaseDynamicEntity entity:enemiesOnMap) {
 			if(entity instanceof Item){
@@ -153,6 +167,9 @@ public class Map {
 			}else if(entity instanceof Goomba && !entity.ded){
 				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
 			}
+			else if(entity instanceof FloatingBlock && !entity.ded){
+				g2.drawImage(((FloatingBlock)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+			}
 			else if(entity instanceof UIPointer ){
 				((UIPointer) entity).render(g2);
 			}else {
@@ -164,16 +181,16 @@ public class Map {
 			handler.getMario().drawMario(g2);
 			handler.getLuigi().drawLuigi(g2);
 		}
-		
+
 		if(this.listener != null && MapBuilder.mapDone) {
 			this.listener.render(g2);
 			this.hand.render(g2);
 			this.walls.render(g2);
 		}
 		g2.translate(camLocation.x, camLocation.y);
-		
+
 	}
-	
+
 
 	public ArrayList<BaseStaticEntity> getBlocksOnMap() {
 		return blocksOnMap;

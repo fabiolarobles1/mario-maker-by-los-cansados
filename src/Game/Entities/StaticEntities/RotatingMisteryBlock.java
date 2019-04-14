@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class RotatingMisteryBlock extends BaseStaticEntity {
 
+	public boolean hit = false;
 	public Animation anim;
     public RotatingMisteryBlock(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height,handler, Images.rotatingmisteryBlock[0]);

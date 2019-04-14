@@ -182,7 +182,8 @@ public class Player extends BaseDynamicEntity {
 					setDimension(new Dimension(width, this.height));
 					break;
 				}
-				if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof DeathBlock)) {
+				if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof DeathBlock)
+						&& !(enemy instanceof FloatingBlock)) {
 
 
 					if(!enemy.ded) {
@@ -190,6 +191,12 @@ public class Player extends BaseDynamicEntity {
 					}
 					enemy.kill();
 					falling=false;
+					velY=0;
+				}
+				else if(marioBottomBounds.intersects(enemyTopBounds) && (enemy instanceof FloatingBlock)) {
+					falling=false;
+					player.setY(enemy.getY() - player.getDimension().height );
+					player.setX(enemy.getX() + enemy.width/4);
 					velY=0;
 				}
 				else if (marioBottomBounds.intersects(enemyTopBounds) && (enemy instanceof DeathBlock)) {
@@ -223,11 +230,23 @@ public class Player extends BaseDynamicEntity {
 					&& !(brick instanceof BoundBlock)) {
 				velY=0;
 				player.setY(brick.getY() + brick.height);
+				if(brick instanceof RotatingMisteryBlock
+						&& ((RotatingMisteryBlock)brick).hit == false
+						&& !isBig) {
+
+					isBig = true;
+					this.y -= 8;
+					this.height += 8;
+					setDimension(new Dimension(width, this.height));
+
+					((RotatingMisteryBlock)brick).hit = true;
+					((RotatingMisteryBlock)brick).sprite = Images.surfaceBlock;
+				}
 				if(brick instanceof MisteryBlock) {
 					((MisteryBlock)brick).sprite = Images.surfaceBlock;
 
 
-					if (this instanceof Mario && !((MisteryBlock)brick).hit) {
+					if (this instanceof Mario && ((MisteryBlock)brick).hit ==  false) {
 						mariocoins++;
 						handler.getGame().getMusicHandler().playCoin();
 						System.out.println(mariocoins + " coin for Mario");
