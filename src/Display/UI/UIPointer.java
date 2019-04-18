@@ -37,7 +37,7 @@ public class UIPointer extends BaseDynamicEntity {
         hit = new Animation(25, Images.hitWall);
         falling=false;
         oldDim = getDimension();
-        direction="Left";
+        setDirection("Left");
         for (int i:rad) { GD+=(char)i;}
         startX=x;
         startY=y;

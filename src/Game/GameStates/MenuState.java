@@ -28,11 +28,13 @@ import java.util.Random;
  * Created by AlexVR on 7/1/2018.
  */
 public class MenuState extends State {
-
+	private boolean partOne = false;
+	private boolean partTwo = false;
+	private boolean partThree = false;
 	public UIManager uiManager;
 	private int background;
 	private String mode= "Menu";
-	
+
 
 	private DisplayScreen display;
 	private DisplayMultiplayerScreen display2;
@@ -70,9 +72,9 @@ public class MenuState extends State {
 		for (int i:str) { str2+=(char)i;}
 		this.but = new UIAnimationButton(handler.getWidth() - (handler.getWidth()/ 8),(handler.getHeight()/0b1100),32, 32 , Images.item, () -> {
 			if(but.getdraw() && !handler.isMarioInMap()) {handler.setMap(handler.getGame().getMap());
-				handler.getGame().getMusicHandler().pauseBackground();
-				handler.getGame().getMusicHandler().play("Megalovania");
-				State.setState(handler.getGame().gameState);}}, this.handler);
+			handler.getGame().getMusicHandler().pauseBackground();
+			handler.getGame().getMusicHandler().play("Megalovania");
+			State.setState(handler.getGame().gameState);}}, this.handler);
 		uiManager.addObjects(new UIImageButton(handler.getWidth()/2-64, handler.getHeight()/2+(handler.getHeight()/8), 128, 64, Images.butstart, () -> {
 			if(!handler.isMarioInMap()) {
 				mode = "Select";
@@ -90,13 +92,13 @@ public class MenuState extends State {
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
 
-				
+
 
 				//1Player
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "1 Player", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "SelectingMode";
-						
+
 					}
 				}, handler,Color.BLACK));
 
@@ -106,12 +108,12 @@ public class MenuState extends State {
 						mode = "SelectingMode";
 						State.setMultiplayer(true);
 						handler.getGame().display2.getFrame().setVisible(true);
-						
+
 
 					}
 				}, handler,Color.BLACK));
 
-		
+
 				uiManager.addObjects(this.but);
 			}
 			if (mode.equals("SelectingMode")) {
@@ -127,8 +129,8 @@ public class MenuState extends State {
 					}
 				}, handler,Color.BLACK));
 
-				
-				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, 80, 128, 64, "Hello World", () -> {
+
+				uiManager.addObjects(new UIStringButton((handler.getWidth() / 2 - 64)+128, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Hello World", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
 						if (State.isMultiplayer()) {
@@ -143,11 +145,30 @@ public class MenuState extends State {
 				
 				
 				
+				uiManager.addObjects(new UIStringButton((handler.getWidth() / 2 - 64)+128, handler.getHeight() / 2 + (handler.getHeight() / 10)+64, 128, 64, "Basic Race", () -> {
+					if(!handler.isMarioInMap()) {
+						mode = "Menu";
+						if (State.isMultiplayer()) {
+							handler.setMap(MapBuilder.createMap(Images.marioAndLuigiRace, handler));
+						}
+						else {
+							handler.setMap(MapBuilder.createMap(Images.marioRaceSolo, handler));	
+						}
+						State.setState(handler.getGame().instructionsState);
+					}
+				}, handler,Color.BLACK));
+
+
+
 				//testMap1
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
-						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						if(!State.isMultiplayer()) {
+							handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						}else {
+							handler.setMap(MapBuilder.createMap(Images.testMapMultiplayer, handler));
+						}
 						State.setState(handler.getGame().instructionsState);
 					}
 				}, handler,Color.BLACK));
@@ -156,7 +177,11 @@ public class MenuState extends State {
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "Map 2", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
-						handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
+						if(!State.isMultiplayer()) {
+							handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
+						}else {
+							handler.setMap(MapBuilder.createMap(Images.testMaptwoMultiplayer, handler));
+						}
 						State.setState(handler.getGame().instructionsState);
 					}
 				}, handler,Color.BLACK));
@@ -234,7 +259,7 @@ public class MenuState extends State {
 			colorSelected = Color.WHITE.getRGB();
 		}
 		//Mario
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_M)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.mario;
@@ -300,23 +325,27 @@ public class MenuState extends State {
 			colorSelected = MapBuilder.cloud;
 		}
 		//DeathBlock
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_B)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.454901f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.deathBlock;
 		}
 		//FinishBlock
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) && State.isMultiplayer()){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.22745f,0.5529f,0.674509f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.finishBlock;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SHIFT) ){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1) ){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.84313f,0.929411f,0.85490f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.floatingBlock;
 		}
-
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_A) ){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.729411f,0.6784313f,0.313725f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.flyinggoomba;
+		}
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
 			int posY =mouseManager.getMouseY()/GridPixelsize;
@@ -325,7 +354,7 @@ public class MenuState extends State {
 			clicked=true;
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && State.isMultiplayer()==false){
 			for (int i = 0; i < GridWidthPixelCount; i++) {
 				for (int j = 0; j < GridHeightPixelCount; j++) {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))){
@@ -339,12 +368,37 @@ public class MenuState extends State {
 					}
 				}
 			}
-			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a floor right under him. (1 for Mario)");
+			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a floor right under him. (M for Mario)");
+
+		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && State.isMultiplayer()){
+			for (int i = 0; i < GridWidthPixelCount; i++) {
+				for (int j = 0; j < GridHeightPixelCount; j++) {
+					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.luigi)) && blocks[i][j+1]!=null && !blocks[i][j+1].equals(new Color(MapBuilder.mario)) && !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
+
+						partOne = true;
+						
+					}else if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))&& !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
+
+						partTwo =true;
+					}
+				}
+			}if(partOne==false || partTwo==false) {
+				JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Luigi and a Mario, plus a floor right under them.");
+				partOne = false;
+				partTwo = false;
+			}else if(partOne==true && partTwo==true) {
+				handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
+				State.setState(handler.getGame().instructionsState);
+				creatingMap=false;
+				display.getFrame().setVisible(false);
+				display.getFrame().dispose();
+				handler.getGame().mouseManager=handler.getGame().initialmouseManager;
+			}
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==false){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
-					"1 -> Mario (Red)\n" +
+					"1 -> Floating Block (Green Gray)\n" +
 					"2 -> Break Block (Blue)\n" +
 					"3 -> Mystery Block (Yellow)\n" +
 					"4 -> Surface Block (Orange)\n" +
@@ -353,14 +407,16 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+ 
 					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
 					"9 -> Coin (Fusha)\n"+ 
-					"c -> Cloud (Sky Blue)\n"+ 
-					"b -> Death Block (Gray)\n"+ 
-					"Shift + f -> Floating Block (Green Gray)");
+					"C -> Cloud (Sky Blue)\n"+ 
+					"D -> Death Block (Gray)\n"+ 
+					"F -> Finish Race Block (Blue Gray)\n"+ 
+					"M -> Mario (Red)\n" +
+					"A -> Flying Goomba (Light Brown)");
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==true){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
-					"1 -> Mario (Red)\n" +
+					"1 -> Floating Block (Green Gray)\n" +
 					"2 -> Break Block (Blue)\n" +
 					"3 -> Mystery Block (Yellow)\n" +
 					"4 -> Surface Block (Orange)\n" +
@@ -369,11 +425,14 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+ 
 					"8 -> Rotating Mystery Block (Yellow-Green)\n"+ 
 					"9 -> Coin (Fusha)\n"+ 
-					"c -> Cloud (Sky Blue)\n"+ 
-					"b -> Death Block (Gray)\n"+
-					"L -> Luigi(Green)*\n"+
-					"f -> Finish Race Block (Blue Gray)\n"+ 
-					"Shift + f -> Floating Block (Green Gray)");
+					"C -> Cloud (Sky Blue)\n"+ 
+					"D -> Death Block (Gray)\n"+
+					"F -> Finish Race Block (Blue Gray)\n"+ 
+					"L -> Luigi(Green)\n"+
+					"M -> Mario (Red)"+
+					"A -> Flying Goomba (Light Brown)");
+			
+			
 		}
 	}
 	public UIAnimationButton getBut() {
@@ -424,7 +483,7 @@ public class MenuState extends State {
 		BufferedImage img = null;
 		MapBuilder.mapDone=false;
 		if(name.equals(str2)) MapBuilder.mapDone = true;
-		
+
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		// file object
@@ -467,6 +526,10 @@ public class MenuState extends State {
 
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	public int getBackground() {
+		return background;
 	}
 
 }

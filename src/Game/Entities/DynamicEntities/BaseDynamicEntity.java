@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class BaseDynamicEntity extends EntityBase {
 
-    protected String direction = "Right";
+    private String direction = "Right";
     public boolean falling = true,ded = false;
     protected int dedCounter=0;
     public double gravityAcc = 0.38;
@@ -22,7 +22,7 @@ public class BaseDynamicEntity extends EntityBase {
 
     }
     protected void checkHorizontal() {
-        boolean toRight = direction.equals("Right");
+        boolean toRight = getDirection().equals("Right");
 
         Rectangle mushroomBounds = toRight ? getRightBounds() : getLeftBounds();
 
@@ -30,11 +30,11 @@ public class BaseDynamicEntity extends EntityBase {
             Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
             if (mushroomBounds.intersects(brickBounds)) {
                 if(toRight) {
-                    direction = "Left";
+                    setDirection("Left");
                     setX(brick.getX() - getDimension().width);
                 }
                 else{
-                    direction = "Right";
+                    setDirection("Right");
                     setX(brick.getX() + brick.getDimension().width);
                 }
             }
@@ -44,11 +44,11 @@ public class BaseDynamicEntity extends EntityBase {
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (mushroomBounds.intersects(enemyBounds)) {
                 if(toRight) {
-                    direction = "Left";
+                    setDirection("Left");
                     setX(enemy.getX() - getDimension().width);
                 }
                 else{
-                    direction = "Right";
+                    setDirection("Right");
                     setX(enemy.getX() + enemy.getDimension().width);
                 }
             }
@@ -69,7 +69,7 @@ public class BaseDynamicEntity extends EntityBase {
 
     protected void move(){
 
-        if(direction.equals("Right")){
+        if(getDirection().equals("Right")){
             x+=velX;
         }else{
             x-=velX;
@@ -87,5 +87,11 @@ public class BaseDynamicEntity extends EntityBase {
     public void kill(){
 
     }
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
 
 }

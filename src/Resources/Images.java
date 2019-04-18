@@ -65,13 +65,18 @@ public class Images {
 
     public static BufferedImage title;
     public static BufferedImage Pause;
+    public static BufferedImage MenuBorder;
     public static BufferedImage[] Over;
     public static BufferedImage Cursor;
 
     public static BufferedImage testMap;
+    public static BufferedImage testMapMultiplayer;
     public static BufferedImage testMaptwo;
+    public static BufferedImage testMaptwoMultiplayer;
     public static BufferedImage helloworldMap;
     public static BufferedImage helloworld_mult_Map;
+    public static BufferedImage marioAndLuigiRace;
+    public static BufferedImage marioRaceSolo;
 
     public static BufferedImage breakBlock;
     public static BufferedImage misteryBlock;
@@ -84,6 +89,8 @@ public class Images {
     public static BufferedImage cloud;
     public static BufferedImage[] coin;
     public static BufferedImage goombaDies;
+    public static BufferedImage[] Lannoyingpest;
+    public static BufferedImage[] Rannoyingpest;
 
     private SpriteSheet mainmenuSpriteSheet;
     private SpriteSheet gameoverSpriteSheet;
@@ -97,6 +104,7 @@ public class Images {
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
     private SpriteSheet floatingblockSheet;
+    private SpriteSheet annoyingpestSheet;
 
     public Images() {
 
@@ -146,6 +154,9 @@ public class Images {
 
         rotatingmisteryBlock = new BufferedImage[4];
         
+        Lannoyingpest = new BufferedImage[4];
+        Rannoyingpest = new BufferedImage[4];
+        
         coin = new BufferedImage[4];
 
 
@@ -165,10 +176,12 @@ public class Images {
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
             enemySheet= new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
             floatingblockSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/floatingblock.png")));
-
+            annoyingpestSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/anoyingpest.png")));
+            
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
+            MenuBorder = ImageIO.read(getClass().getResourceAsStream("/Sheets/menuBorder.png"));
             Cursor = ImageIO.read(getClass().getResourceAsStream("/Sheets/cursor.png"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
@@ -392,9 +405,18 @@ public class Images {
 
             //maps
             testMap = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1.png"));
+            testMapMultiplayer = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1_multiplayer.png"));
+            
             testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
+            testMaptwoMultiplayer = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2_multiplayer.png"));
+            
             helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
             helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer).png"));
+            
+            marioAndLuigiRace =  ImageIO.read(getClass().getResourceAsStream("/maps/Mario&Luigi Race.png"));
+            marioRaceSolo = ImageIO.read(getClass().getResourceAsStream("/maps/MarioRaceSolo.png"));
+            
+            
 
             //blocks
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
@@ -404,9 +426,6 @@ public class Images {
             cloud = interactableSpriteSheet.crop(112,132,16,16);
             
             finishBlock = interactableSpriteSheet.crop(72,73,16,16);
-            
-            floatingBlock[0] = floatingblockSheet.crop(0, 4, 54, 26);
-            floatingBlock[1] = floatingblockSheet.crop(0, 34, 54, 26);
             
             rotatingmisteryBlock[0] = interactableSpriteSheet.crop(13, 172, 16, 16);
             rotatingmisteryBlock[1] = interactableSpriteSheet.crop(33, 172, 16, 16);
@@ -430,7 +449,19 @@ public class Images {
             goombaDies=goombaSpriteSheet.crop(539,100,162,81);
             
             deathBlock = enemySheet.crop(428, 253, 32, 32);
+            
+            floatingBlock[0] = floatingblockSheet.crop(0, 4, 54, 26);
+            floatingBlock[1] = floatingblockSheet.crop(0, 34, 54, 26);
 
+            Lannoyingpest[0] = annoyingpestSheet.crop(2, 9, 33, 25);
+            Lannoyingpest[1] = annoyingpestSheet.crop(50, 9, 32, 25);
+            Lannoyingpest[2] = annoyingpestSheet.crop(100, 9, 32, 25);
+            Lannoyingpest[3] = annoyingpestSheet.crop(147, 9, 32, 25);
+            
+            Rannoyingpest[0] = annoyingpestSheet.crop(4, 41, 32, 25);
+            Rannoyingpest[1] = annoyingpestSheet.crop(50, 41, 32, 25);
+            Rannoyingpest[2] = annoyingpestSheet.crop(100,41, 32, 25);
+            Rannoyingpest[3] = annoyingpestSheet.crop(147, 41, 33, 25);
 
         }catch (IOException e) {
         e.printStackTrace();

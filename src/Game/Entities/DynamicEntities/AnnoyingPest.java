@@ -10,33 +10,52 @@ import java.awt.*;
 import java.util.Random;
 
 
-public class FloatingBlock extends BaseDynamicEntity{
+public class AnnoyingPest extends BaseDynamicEntity{
 
 	public int movedx = 0;
 	public int movedy = 0;
 	public String prevXmov = "";
 	public String Ymov = "";
+	
 	Random rand = new Random();
 	public boolean movingcircle = rand.nextBoolean();
 	public boolean movingup = rand.nextBoolean();
+	public boolean movingright= rand.nextBoolean();
+	public boolean firstdirection = false;
 
-	public Animation anim;
+	public Animation leftflight;
+	public Animation rightflight;
 
-	public FloatingBlock(int x, int y, int width, int height, Handler handler) {
-		super(x, y, 108, 52, handler, Images.floatingBlock[0]);
-		anim = new Animation(100, Images.floatingBlock);
-
-
+	public AnnoyingPest(int x, int y, int width, int height, Handler handler, Animation LF, Animation RF) {
+		super(x, y, width, height, handler, Images.Rannoyingpest[0]);
+		//108,52
+		
+		leftflight = LF;
+		rightflight = RF;
 	}
 
 	@Override
 	public void tick() {
-		anim.tick();
+		//anim.tick();
+		if(getDirection().equals("Right")){
+			rightflight.tick();
+		}
+		else if(getDirection().equals("Left")){
+			leftflight.tick();
+		}
 		checkHorizontal();
 		move();
 	}
 
 	protected void move() {
+		if(movingright == true && firstdirection == false) {
+			setDirection("Right");
+			firstdirection = true;
+		}
+		else if(movingright == false && firstdirection == false){
+			setDirection("Left");
+			firstdirection = true;
+		}
 		if(!movingcircle) {
 			//Move in X
 			if(getDirection().equals("Right")){

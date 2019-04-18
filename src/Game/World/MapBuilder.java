@@ -3,10 +3,12 @@ package Game.World;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+import Game.Entities.DynamicEntities.AnnoyingPest;
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Coin;
 import Game.Entities.DynamicEntities.DeathBlock;
 import Game.Entities.DynamicEntities.FloatingBlock;
+import Game.Entities.DynamicEntities.FlyingGoomba;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
@@ -39,7 +41,8 @@ public class MapBuilder {
 	public static int deathBlock = new Color(116, 141, 172).getRGB();
 	public static int finishBlock = new Color(58, 141, 172).getRGB();
 	public static int floatingBlock = new Color(215, 237, 218).getRGB();
-	public static boolean mapDone = false;
+	public static int flyinggoomba = new Color(186, 173, 80).getRGB();
+	public static boolean mapDone = false; 
 //205, 255, 247
 	public static Map createMap(BufferedImage mapImage, Handler handler){
 		Map mapInCreation = new Map(handler);
@@ -75,6 +78,9 @@ public class MapBuilder {
 				}else if(currentPixel == floatingBlock){
 					BaseDynamicEntity FloatingBlock = new FloatingBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(FloatingBlock);
+				}else if(currentPixel == flyinggoomba){
+					BaseDynamicEntity FlyingGoomba = new FlyingGoomba(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(FlyingGoomba);
 				}else if(currentPixel == rotatingmisteryBlock){
 					BaseStaticEntity RotatingMisteryBlock = new RotatingMisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(RotatingMisteryBlock);

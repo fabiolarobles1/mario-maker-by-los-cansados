@@ -24,10 +24,10 @@ public class PauseState extends State {
             State.setState(handler.getGame().gameState);
         },handler,Color.WHITE));
 
-        uiManager.addObjects(new UIStringButton(56, 223+(64+16), 128, 64, "Options", () -> {
+        uiManager.addObjects(new UIStringButton(56, 223+(64+16), 128, 64, "Controls", () -> {
             handler.getMouseManager().setUimanager(null);
-            handler.setMarioInMap(false);
-            State.setState(handler.getGame().menuState);
+           // handler.setMarioInMap(false);
+            State.setState(handler.getGame().instructionsState);
         },handler,Color.WHITE));
 
         uiManager.addObjects(new UIStringButton(56, (223+(64+16))+(64+16), 128, 64, "Title", () -> {

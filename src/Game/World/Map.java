@@ -102,6 +102,24 @@ public class Map {
 			}else if(entity instanceof Goomba && !entity.ded){
 				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
 			}
+			else if(entity instanceof FlyingGoomba){
+				if (((FlyingGoomba)entity).getDirection().equals("Left")) {
+					g2.drawImage(((FlyingGoomba)entity).leftflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else if (((FlyingGoomba)entity).getDirection().equals("Right")) {
+					g2.drawImage(((FlyingGoomba)entity).rightflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else if (((FlyingGoomba)entity).getDirection().equals("Put")){
+					if (((FlyingGoomba)entity).prevXmov.equals("Left")) {
+						entity.tick();
+						g2.drawImage(((FlyingGoomba)entity).leftflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+					}
+					if (((FlyingGoomba)entity).prevXmov.equals("Right")) {
+						entity.tick();
+						g2.drawImage(((FlyingGoomba)entity).rightflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+					}
+				}
+			}
 			else if(entity instanceof FloatingBlock && !entity.ded){
 				g2.drawImage(((FloatingBlock)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
 			}
@@ -166,6 +184,22 @@ public class Map {
 				}
 			}else if(entity instanceof Goomba && !entity.ded){
 				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+			}
+			else if(entity instanceof FlyingGoomba){
+				if (((FlyingGoomba)entity).getDirection().equals("Left")) {
+					g2.drawImage(((FlyingGoomba)entity).leftflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else if (((FlyingGoomba)entity).getDirection().equals("Right")) {
+					g2.drawImage(((FlyingGoomba)entity).rightflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+				}
+				else {
+					if (((FlyingGoomba)entity).prevXmov.equals("Left")) {
+						g2.drawImage(((FlyingGoomba)entity).leftflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+					}
+					if (((FlyingGoomba)entity).prevXmov.equals("Right")) {
+						g2.drawImage(((FlyingGoomba)entity).rightflight.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+					}
+				}
 			}
 			else if(entity instanceof FloatingBlock && !entity.ded){
 				g2.drawImage(((FloatingBlock)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
