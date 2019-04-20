@@ -61,16 +61,28 @@ public class InstructionsState extends State {
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
 
-
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("SansSerif", Font.PLAIN, 40));
-		g.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
-		g.setFont(new Font("SansSerif", Font.PLAIN, 25));
-		g.setColor(Color.RED);
-		g.drawString("Mario: Press \"V\" while jumping to double jump.", handler.getWidth()/16, handler.getHeight()/10+50);
-		g.drawString("           W, A ,S ,D keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
-		g.drawString("           Shift key for running.", handler.getWidth()/16, handler.getHeight()/10+150);
-		g.drawString("           Space bar for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
+		if(State.isMario_enabledp1()==true || State.isWario_enabledp1() == true){
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("SansSerif", Font.PLAIN, 40));
+			g.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
+			g.setFont(new Font("SansSerif", Font.PLAIN, 25));
+			g.setColor(Color.RED);
+			g.drawString("Mario or Wario: Press \"V\" while jumping to double jump.", handler.getWidth()/16, handler.getHeight()/10+50);
+			g.drawString("           W, A ,S ,D keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
+			g.drawString("           Shift key for running.", handler.getWidth()/16, handler.getHeight()/10+150);
+			g.drawString("           Space bar for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
+		}
+		if(State.isLuigi_enabledp1()==true) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("SansSerif", Font.PLAIN, 40));
+			g.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
+			g.setFont(new Font("SansSerif", Font.PLAIN, 25));
+			g.setColor(Color.RED);
+			g.drawString("Luigi: Press \" V \" key while jumping to float.", handler.getWidth()/16, handler.getHeight()/10+50);
+			g.drawString("           W, A, S, D Keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
+			g.drawString("           Shift  for running.", handler.getWidth()/16, handler.getHeight()/10+150);
+			g.drawString("           Space bar for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
+		}
 		if(State.isMultiplayer()) {
 			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
 				if(block instanceof FinishBlock) {
