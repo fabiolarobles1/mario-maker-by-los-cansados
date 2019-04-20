@@ -38,6 +38,41 @@ public class Player extends BaseDynamicEntity {
 	public double gravityAcc = 0.38;
 	int changeDirectionCounter=0;
 
+
+	public static Animation p2swl, p2swr, p2sjl, p2sjr, p2bwl, p2bwr, p2brl, p2brr, p2bjl, p2bjr;
+	public static Animation mswl = new Animation(160, Images.marioSmallWalkLeft);
+	public static Animation mswr = new Animation(160, Images.marioSmallWalkRight);
+	public static Animation msjl = new Animation(160, Images.marioSmallJumpLeft);
+	public static Animation msjr = new Animation(160, Images.marioSmallJumpRight);
+	public static Animation mbwl = new Animation(160, Images.marioBigWalkLeft);
+	public static Animation mbwr = new Animation(160, Images.marioBigWalkRight);
+	public static Animation mbrl = new Animation(160, Images.marioBigRunLeft);
+	public static Animation mbrr = new Animation(160, Images.marioBigRunRight);
+	public static Animation mbjl = new Animation(160, Images.marioBigJumpLeft);
+	public static Animation mbjr = new Animation(160, Images.marioBigJumpRight);
+
+	public  static Animation lswl = new Animation(160, Images.luigiSmallWalkLeft);
+	public  static Animation lswr = new Animation(160, Images.luigiSmallWalkRight);
+	public  static Animation lsjl = new Animation(160, Images.luigiSmallJumpLeft);
+	public  static Animation lsjr = new Animation(160, Images.luigiSmallJumpRight);
+	public  static Animation lbwl = new Animation(160, Images.luigiBigWalkLeft);
+	public  static Animation lbwr = new Animation(160, Images.luigiBigWalkRight);
+	public  static Animation lbrl = new Animation(160, Images.luigiBigRunLeft);
+	public  static Animation lbrr = new Animation(160, Images.luigiBigRunRight);
+	public  static Animation lbjl = new Animation(160, Images.luigiBigJumpLeft);
+	public  static Animation lbjr = new Animation(160, Images.luigiBigJumpRight);
+
+	public  static Animation wswl = new Animation(160, Images.warioSmallWalkLeft);
+	public  static Animation wswr = new Animation(160, Images.warioSmallWalkRight);
+	public  static Animation wsjl = new Animation(160, Images.warioSmallJumpLeft);
+	public  static Animation wsjr = new Animation(160, Images.warioSmallJumpRight);
+	public  static Animation wbwl = new Animation(160, Images.warioBigWalkLeft);
+	public  static Animation wbwr = new Animation(160, Images.warioBigWalkRight);
+	public  static Animation wbrl = new Animation(160, Images.warioBigRunLeft);
+	public  static Animation wbrr = new Animation(160, Images.warioBigRunRight);
+	public  static Animation wbjl = new Animation(160, Images.warioBigJumpLeft);
+	public  static Animation wbjr = new Animation(160, Images.warioBigJumpRight);
+
 	public Player(int x, int y, int width, int height, Handler handler, BufferedImage sprite,Animation PSLA,Animation PSRA,Animation PBLWA,Animation PBRWA,Animation PBLRA,Animation PBRRA) {
 		super(x, y, width, height, handler, sprite);
 		playerBigLeftRunAnimation=PBLRA;
@@ -46,6 +81,7 @@ public class Player extends BaseDynamicEntity {
 		playerBigRightWalkAnimation=PBRWA;
 		playerSmallLeftAnimation=PSLA;
 		playerSmallRightAnimation=PSRA;
+
 	}
 
 	@Override
@@ -156,7 +192,7 @@ public class Player extends BaseDynamicEntity {
 				velY=0;
 			}
 
-			 if (playerBottomBounds.intersects(brickTopBounds)
+			if (playerBottomBounds.intersects(brickTopBounds)
 					&& (brick instanceof BoundBlock)) {
 				if(!State.isMultiplayer()) {
 					State.setState(handler.getGame().gameoverState);
@@ -173,7 +209,7 @@ public class Player extends BaseDynamicEntity {
 				}
 
 			}
-			
+
 		}
 
 		for (BaseDynamicEntity enemy : enemies) {
@@ -208,7 +244,7 @@ public class Player extends BaseDynamicEntity {
 					player.setX(enemy.getX() + enemy.width/4);
 					velY=0;
 				}
-		
+
 				else if (playerBottomBounds.intersects(enemyTopBounds) && (enemy instanceof DeathBlock)) {
 
 					if(!State.isMultiplayer()) {
@@ -287,7 +323,7 @@ public class Player extends BaseDynamicEntity {
 			}
 
 
-			 if (playerTopBounds.intersects(brickBottomBounds)
+			if (playerTopBounds.intersects(brickBottomBounds)
 					&& (brick instanceof BoundBlock)) {
 				if(!State.isMultiplayer()) {
 					State.setState(handler.getGame().gameoverState);
@@ -303,7 +339,7 @@ public class Player extends BaseDynamicEntity {
 					handler.getMap().reset();
 				}
 			}
-	
+
 		}
 
 		for (BaseDynamicEntity enemy : enemies) {
@@ -376,7 +412,7 @@ public class Player extends BaseDynamicEntity {
 
 			}
 
-			 if (playerBounds.intersects(brickBounds) && 
+			if (playerBounds.intersects(brickBounds) && 
 					brick instanceof BoundBlock) {
 				if(!State.isMultiplayer()) {
 					State.setState(handler.getGame().gameoverState);
@@ -392,7 +428,7 @@ public class Player extends BaseDynamicEntity {
 				}
 			}
 
-			
+
 		}
 
 		for(BaseDynamicEntity enemy : enemies){

@@ -31,6 +31,12 @@ public class GameOverState extends State {
         	Player.luigicoins = 0;
         	Player.mariowins =false;
         	Player.luigiwins =false;
+        	State.setMario_enabledp1(false);
+        	State.setMario_enabledp2(false);
+        	State.setLuigi_enabledp1(false);
+        	State.setLuigi_enabledp2(false);
+        	State.setWario_enabledp1(false);
+        	State.setWario_enabledp2(false);
         },handler,Color.GREEN));
 
     }

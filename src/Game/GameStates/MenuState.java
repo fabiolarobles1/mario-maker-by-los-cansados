@@ -361,7 +361,7 @@ public class MenuState extends State {
 				for (int j = 0; j < GridHeightPixelCount; j++) {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))){
 						handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
-						State.setState(handler.getGame().instructionsState);
+						State.setState(handler.getGame().CharChoosingP1);
 						creatingMap=false;
 						display.getFrame().setVisible(false);
 						display.getFrame().dispose();
@@ -390,7 +390,7 @@ public class MenuState extends State {
 				partTwo = false;
 			}else if(partOne==true && partTwo==true) {
 				handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
-				State.setState(handler.getGame().instructionsState);
+				State.setState(handler.getGame().CharChoosingP1);
 				creatingMap=false;
 				display.getFrame().setVisible(false);
 				display.getFrame().dispose();

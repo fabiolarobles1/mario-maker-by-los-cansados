@@ -14,39 +14,7 @@ public class Mario extends Player{
 	private	boolean doubleJump = false;
 	private boolean floating = false;
 	long time;
-	
-	public  Animation mswl = new Animation(160, Images.marioSmallWalkLeft);
-    public  Animation mswr = new Animation(160, Images.marioSmallWalkRight);
-    public  Animation msjl = new Animation(160, Images.marioSmallJumpLeft);
-    public  Animation msjr = new Animation(160, Images.marioSmallJumpRight);
-    public  Animation mbwl = new Animation(160, Images.marioBigWalkLeft);
-    public  Animation mbwr = new Animation(160, Images.marioBigWalkRight);
-    public  Animation mbrl = new Animation(160, Images.marioBigRunLeft);
-    public  Animation mbrr = new Animation(160, Images.marioBigRunRight);
-    public  Animation mbjl = new Animation(160, Images.marioBigJumpLeft);
-    public  Animation mbjr = new Animation(160, Images.marioBigJumpRight);
-    
-    public  Animation lswl = new Animation(160, Images.luigiSmallWalkLeft);
-    public  Animation lswr = new Animation(160, Images.luigiSmallWalkRight);
-    public  Animation lsjl = new Animation(160, Images.luigiSmallJumpLeft);
-    public  Animation lsjr = new Animation(160, Images.luigiSmallJumpRight);
-    public  Animation lbwl = new Animation(160, Images.luigiBigWalkLeft);
-    public  Animation lbwr = new Animation(160, Images.luigiBigWalkRight);
-    public  Animation lbrl = new Animation(160, Images.luigiBigRunLeft);
-    public  Animation lbrr = new Animation(160, Images.luigiBigRunRight);
-    public  Animation lbjl = new Animation(160, Images.luigiBigJumpLeft);
-    public  Animation lbjr = new Animation(160, Images.luigiBigJumpRight);
-    
-    public  Animation wswl = new Animation(160, Images.warioSmallWalkLeft);
-    public  Animation wswr = new Animation(160, Images.warioSmallWalkRight);
-    public  Animation wsjl = new Animation(160, Images.warioSmallJumpLeft);
-    public  Animation wsjr = new Animation(160, Images.warioSmallJumpRight);
-    public  Animation wbwl = new Animation(160, Images.warioBigWalkLeft);
-    public  Animation wbwr = new Animation(160, Images.warioBigWalkRight);
-    public  Animation wbrl = new Animation(160, Images.warioBigRunLeft);
-    public  Animation wbrr = new Animation(160, Images.warioBigRunRight);
-    public  Animation wbjl = new Animation(160, Images.warioBigJumpLeft);
-    public  Animation wbjr = new Animation(160, Images.warioBigJumpRight);
+
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.marioSmallWalkRight[0]
@@ -327,8 +295,10 @@ public class Mario extends Player{
 						}
 					} else if (!jumping && !falling) {
 						if (facing.equals("Left") && moving) {
+							lswl.tick();
 							g2.drawImage(lswl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Right") && moving) {
+							lswr.tick();
 							g2.drawImage(lswr.getCurrentFrame(), x, y, width, height, null);
 						}
 						if (facing.equals("Left") && !moving) {
@@ -368,14 +338,18 @@ public class Mario extends Player{
 							}
 						} else if (!jumping && !falling) {
 							if (facing.equals("Left") && moving && running) {
+								lbrl.tick();
 								g2.drawImage(lbrl.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Left") && moving && !running) {
+								lbwl.tick();
 								g2.drawImage(lbwl.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Left") && !moving) {
 								g2.drawImage(Images.luigiBigWalkLeft[0], x, y, width, height, null);
 							} else if (facing.equals("Right") && moving && running) {
+								lbrr.tick();
 								g2.drawImage(lbrr.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Right") && moving && !running) {
+								lbwr.tick();
 								g2.drawImage(lbwr.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Right") && !moving) {
 								g2.drawImage(Images.luigiBigWalkRight[0], x, y, width, height, null);
@@ -410,6 +384,7 @@ public class Mario extends Player{
 					}
 				}
 			}
+			//////////////////////////////////////wario
 			if(State.isWario_enabledp1() == true) {
 				if (!isBig) {
 					if (handler.getKeyManager().up) {
@@ -426,8 +401,10 @@ public class Mario extends Player{
 						}
 					} else if (!jumping && !falling) {
 						if (facing.equals("Left") && moving) {
+							wswl.tick();
 							g2.drawImage(wswl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Right") && moving) {
+							wswr.tick();
 							g2.drawImage(wswr.getCurrentFrame(), x, y, width, height, null);
 						}
 						if (facing.equals("Left") && !moving) {
@@ -467,14 +444,18 @@ public class Mario extends Player{
 							}
 						} else if (!jumping && !falling) {
 							if (facing.equals("Left") && moving && running) {
+								wbrl.tick();
 								g2.drawImage(wbrl.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Left") && moving && !running) {
+								wbwl.tick();
 								g2.drawImage(wbwl.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Left") && !moving) {
 								g2.drawImage(Images.warioBigWalkLeft[0], x, y, width, height, null);
 							} else if (facing.equals("Right") && moving && running) {
+								wbrr.tick();
 								g2.drawImage(wbrr.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Right") && moving && !running) {
+								wbwr.tick();
 								g2.drawImage(wbwr.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Right") && !moving) {
 								g2.drawImage(Images.warioBigWalkRight[0], x, y, width, height, null);

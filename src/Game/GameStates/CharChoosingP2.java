@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import Display.UI.UIManager;
 import Display.UI.UIStringButton;
+import Game.Entities.DynamicEntities.Player;
 import Input.MouseManager;
 import Main.Handler;
 import Resources.Images;
@@ -56,6 +57,7 @@ public class CharChoosingP2 extends State {
 					State.setState(handler.getGame().instructionsState);
 				}
 
+				
 			}, handler,Color.GREEN));
 			//Wario
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 + 100  , handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
@@ -67,6 +69,8 @@ public class CharChoosingP2 extends State {
 					State.setState(handler.getGame().instructionsState);
 				}
 
+				
+		    	
 			}, handler,Color.YELLOW));
 		}
 

@@ -3,7 +3,9 @@ package Resources;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
+import Game.GameStates.State;
 import Game.World.Map;
 import Game.World.MapBuilder;
 import Main.Handler;
@@ -126,6 +128,8 @@ public class Images {
     
     public Images() {
 
+    	
+    	
         butstart = new BufferedImage[3];
 
         Over = new BufferedImage[2];

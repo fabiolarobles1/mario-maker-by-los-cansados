@@ -309,7 +309,7 @@ public class GameSetUp implements Runnable {
 		if(State.isMultiplayer() && State.getState() instanceof GameState) {
 
 			handler.getMap().drawMap2(g4);
-
+			g4.setFont(new Font("Segoe UI", Font.BOLD, 20));
 			g4.setColor(Color.GREEN);
 			String luigicoins = String.valueOf(Player.luigicoins);
 			g4.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);

@@ -15,48 +15,20 @@ public class Luigi extends Player{
 	private boolean floating = false;
 	long time;
 
-	public  Animation mswl = new Animation(160, Images.marioSmallWalkLeft);
-	public  Animation mswr = new Animation(160, Images.marioSmallWalkRight);
-	public  Animation msjl = new Animation(160, Images.marioSmallJumpLeft);
-	public  Animation msjr = new Animation(160, Images.marioSmallJumpRight);
-	public  Animation mbwl = new Animation(160, Images.marioBigWalkLeft);
-	public  Animation mbwr = new Animation(160, Images.marioBigWalkRight);
-	public  Animation mbrl = new Animation(160, Images.marioBigRunLeft);
-	public  Animation mbrr = new Animation(160, Images.marioBigRunRight);
-	public  Animation mbjl = new Animation(160, Images.marioBigJumpLeft);
-	public  Animation mbjr = new Animation(160, Images.marioBigJumpRight);
+	//public static Animation p2swl, p2swr, p2sjl, p2sjr, p2bwl, p2bwr, p2brl, p2brr, p2bjl, p2bjr;
 
-	public  Animation lswl = new Animation(160, Images.luigiSmallWalkLeft);
-	public  Animation lswr = new Animation(160, Images.luigiSmallWalkRight);
-	public  Animation lsjl = new Animation(160, Images.luigiSmallJumpLeft);
-	public  Animation lsjr = new Animation(160, Images.luigiSmallJumpRight);
-	public  Animation lbwl = new Animation(160, Images.luigiBigWalkLeft);
-	public  Animation lbwr = new Animation(160, Images.luigiBigWalkRight);
-	public  Animation lbrl = new Animation(160, Images.luigiBigRunLeft);
-	public  Animation lbrr = new Animation(160, Images.luigiBigRunRight);
-	public  Animation lbjl = new Animation(160, Images.luigiBigJumpLeft);
-	public  Animation lbjr = new Animation(160, Images.luigiBigJumpRight);
 
-	public  Animation wswl = new Animation(160, Images.warioSmallWalkLeft);
-	public  Animation wswr = new Animation(160, Images.warioSmallWalkRight);
-	public  Animation wsjl = new Animation(160, Images.warioSmallJumpLeft);
-	public  Animation wsjr = new Animation(160, Images.warioSmallJumpRight);
-	public  Animation wbwl = new Animation(160, Images.warioBigWalkLeft);
-	public  Animation wbwr = new Animation(160, Images.warioBigWalkRight);
-	public  Animation wbrl = new Animation(160, Images.warioBigRunLeft);
-	public  Animation wbrr = new Animation(160, Images.warioBigRunRight);
-	public  Animation wbjl = new Animation(160, Images.warioBigJumpLeft);
-	public  Animation wbjr = new Animation(160, Images.warioBigJumpRight);
 
 
 	public Luigi(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.luigiSmallWalkRight[0]
-				,new Animation(175,Images.luigiSmallWalkLeft)
-				, new Animation(175,Images.luigiSmallWalkRight)
-				, new Animation(150,Images.luigiBigWalkLeft)
-				, new Animation(150,Images.luigiBigWalkRight)
-				, new Animation(115,Images.luigiBigRunLeft)
-				, new Animation(115,Images.luigiBigRunRight));
+				, lswl
+				, lswr
+				, lbwl
+				, lbwr
+				, lbrl
+				, lbrr);
+
 		if(isBig){
 			this.y-=8;
 			this.height+=8;
@@ -64,8 +36,10 @@ public class Luigi extends Player{
 		}
 	}
 
+
 	@Override
 	public void tick(){
+
 		if(State.isLuigi_enabledp2() == true) {
 			if(!grabbed) {
 				super.tick();
@@ -137,7 +111,7 @@ public class Luigi extends Player{
 					this.setY(this.getY() - 30);
 				}
 			}
-			
+
 		}
 		if(State.isMario_enabledp2() == true
 				|| State.isWario_enabledp2() == true) {
@@ -204,9 +178,25 @@ public class Luigi extends Player{
 				this.setY(this.getY() - 30);
 			}
 		}
+
 	}
 
 	public void drawLuigi(Graphics2D g2) {
+		if(State.isMario_enabledp2()== true) {
+			Player.lswl = Player.mswl;
+			Player.lswr = Player.mswr;
+			Player.lsjl = Player.msjl;
+			Player.lsjr = Player.msjr;	
+			Player.lbwl = Player.mbwl;
+			Player.lbwr = Player.mbwr;
+			Player.lbrl = Player.mbrl;
+			Player.lbrr = Player.mbrr;
+			Player.lbjl = Player.mbjl;
+			Player.lbjr = Player.mbjr;
+		}
+		if(State.isLuigi_enabledp2()== true) {
+
+		}
 		if(State.isLuigi_enabledp2() == true) {
 			if(!grabbed) {
 				if(floating) {
@@ -241,9 +231,9 @@ public class Luigi extends Player{
 							}
 						} else if (!jumping && !falling ) {
 							if (facing.equals("Left") && moving ) {
-								g2.drawImage(playerSmallLeftAnimation.getCurrentFrame(), x, y, width, height, null);
+								g2.drawImage(lswl.getCurrentFrame(), x, y, width, height, null);
 							} else if (facing.equals("Right") && moving) {
-								g2.drawImage(playerSmallRightAnimation.getCurrentFrame(), x, y, width, height, null);
+								g2.drawImage(lswr.getCurrentFrame(), x, y, width, height, null);
 							}
 							if (facing.equals("Left") && !moving ) {
 								g2.drawImage(Images.luigiSmallWalkLeft[0], x, y, width, height, null);
@@ -342,8 +332,10 @@ public class Luigi extends Player{
 					}
 				} else if (!jumping && !falling) {
 					if (facing.equals("Left") && moving) {
+						mswl.tick();
 						g2.drawImage(mswl.getCurrentFrame(), x, y, width, height, null);
 					} else if (facing.equals("Right") && moving) {
+						mswr.tick();
 						g2.drawImage(mswr.getCurrentFrame(), x, y, width, height, null);
 					}
 					if (facing.equals("Left") && !moving) {
@@ -383,14 +375,18 @@ public class Luigi extends Player{
 						}
 					} else if (!jumping && !falling) {
 						if (facing.equals("Left") && moving && running) {
+							mbrl.tick();
 							g2.drawImage(mbrl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Left") && moving && !running) {
+							mbwl.tick();
 							g2.drawImage(mbwl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Left") && !moving) {
 							g2.drawImage(Images.marioBigWalkLeft[0], x, y, width, height, null);
 						} else if (facing.equals("Right") && moving && running) {
 							g2.drawImage(mbrr.getCurrentFrame(), x, y, width, height, null);
+							mbrr.tick();
 						} else if (facing.equals("Right") && moving && !running) {
+							mbwr.tick();
 							g2.drawImage(mbwr.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Right") && !moving) {
 							g2.drawImage(Images.marioBigWalkRight[0], x, y, width, height, null);
@@ -441,8 +437,10 @@ public class Luigi extends Player{
 					}
 				} else if (!jumping && !falling) {
 					if (facing.equals("Left") && moving) {
+						wswl.tick();
 						g2.drawImage(wswl.getCurrentFrame(), x, y, width, height, null);
 					} else if (facing.equals("Right") && moving) {
+						wswr.tick();
 						g2.drawImage(wswr.getCurrentFrame(), x, y, width, height, null);
 					}
 					if (facing.equals("Left") && !moving) {
@@ -482,14 +480,18 @@ public class Luigi extends Player{
 						}
 					} else if (!jumping && !falling) {
 						if (facing.equals("Left") && moving && running) {
+							wbrl.tick();
 							g2.drawImage(wbrl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Left") && moving && !running) {
+							wbwl.tick();
 							g2.drawImage(wbwl.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Left") && !moving) {
 							g2.drawImage(Images.warioBigWalkLeft[0], x, y, width, height, null);
 						} else if (facing.equals("Right") && moving && running) {
+							wbrr.tick();
 							g2.drawImage(wbrr.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Right") && moving && !running) {
+							wbwr.tick();
 							g2.drawImage(wbwr.getCurrentFrame(), x, y, width, height, null);
 						} else if (facing.equals("Right") && !moving) {
 							g2.drawImage(Images.warioBigWalkRight[0], x, y, width, height, null);
@@ -524,7 +526,7 @@ public class Luigi extends Player{
 				}
 			}
 		}
-	
+
 	}
 	public void doubleJump() {
 		if(jumping && !falling ){
