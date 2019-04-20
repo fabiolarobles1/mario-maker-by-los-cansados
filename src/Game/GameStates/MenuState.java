@@ -38,6 +38,8 @@ public class MenuState extends State {
 
 	private DisplayScreen display;
 	private DisplayMultiplayerScreen display2;
+	
+	
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
 	private String str2="";
 
@@ -139,7 +141,7 @@ public class MenuState extends State {
 						else {
 							handler.setMap(MapBuilder.createMap(Images.helloworldMap, handler));	
 						}
-						State.setState(handler.getGame().instructionsState);
+						State.setState(handler.getGame().CharChoosingP1);
 					}
 				}, handler,Color.BLACK));
 				
@@ -154,7 +156,7 @@ public class MenuState extends State {
 						else {
 							handler.setMap(MapBuilder.createMap(Images.marioRaceSolo, handler));	
 						}
-						State.setState(handler.getGame().instructionsState);
+						State.setState(handler.getGame().CharChoosingP1);
 					}
 				}, handler,Color.BLACK));
 
@@ -169,7 +171,7 @@ public class MenuState extends State {
 						}else {
 							handler.setMap(MapBuilder.createMap(Images.testMapMultiplayer, handler));
 						}
-						State.setState(handler.getGame().instructionsState);
+						State.setState(handler.getGame().CharChoosingP1);
 					}
 				}, handler,Color.BLACK));
 
@@ -182,7 +184,7 @@ public class MenuState extends State {
 						}else {
 							handler.setMap(MapBuilder.createMap(Images.testMaptwoMultiplayer, handler));
 						}
-						State.setState(handler.getGame().instructionsState);
+						State.setState(handler.getGame().CharChoosingP1);
 					}
 				}, handler,Color.BLACK));
 
@@ -199,7 +201,7 @@ public class MenuState extends State {
 							System.out.println("You chose to open this file: " + chooser.getSelectedFile().getAbsolutePath());
 							try {
 								handler.setMap(MapBuilder.createMap(ImageIO.read(chooser.getSelectedFile()), handler));
-								State.setState(handler.getGame().instructionsState);
+								State.setState(handler.getGame().CharChoosingP1);
 							} catch (IOException e) {
 								e.printStackTrace();
 							}

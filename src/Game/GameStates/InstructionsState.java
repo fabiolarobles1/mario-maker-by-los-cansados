@@ -17,49 +17,50 @@ import java.awt.*;
 public class InstructionsState extends State {
 	public UIManager uiManager;
 	private MouseManager mouseManager;
-	
+
 
 	public int DiplayHeight,DisplayWidth;
-	
+
 
 
 	public InstructionsState(Handler handler) {
 		super(handler);
 		uiManager = new UIManager(handler);
-		
-		
+
+
 		handler.getMouseManager().setUimanager(uiManager);
-		
+
 
 		DisplayWidth=(handler.getWidth())+(handler.getWidth()/2);
 		DiplayHeight = handler.getHeight();
-		
+
 	}
 
 	@Override
 	public void tick() {
-		
+
 		handler.getMouseManager().setUimanager(uiManager);
 
-if(!State.isMultiplayer()) {
-		uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "OK", () -> {
-		
-			State.setState(handler.getGame().gameState);
+		if(!State.isMultiplayer()) {
+			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "OK", () -> {
 
-		}, handler,Color.RED));
-}if(State.isMultiplayer()) {
-	uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "OK", () -> {
-		
-		
-		State.setState(handler.getGame().gameState);
+				State.setState(handler.getGame().gameState);
 
-	}, handler,Color.RED));
-}
+			}, handler,Color.RED));
+		}
+		if(State.isMultiplayer()) {
+			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "OK", () -> {
+
+
+				State.setState(handler.getGame().gameState);
+
+			}, handler,Color.RED));
+		}
 	}
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
-		
+
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("SansSerif", Font.PLAIN, 40));

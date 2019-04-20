@@ -1,8 +1,13 @@
 package Main;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+
 import Display.DisplayMultiplayerScreen;
 import Display.DisplayScreen;
-import Display.UI.UIManager;
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
@@ -10,6 +15,8 @@ import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BreakBlock;
 import Game.Entities.StaticEntities.FinishBlock;
+import Game.GameStates.CharChoosingP1;
+import Game.GameStates.CharChoosingP2;
 import Game.GameStates.GameOverState;
 import Game.GameStates.GameState;
 import Game.GameStates.InstructionsState;
@@ -24,9 +31,6 @@ import Input.KeyManager;
 import Input.MouseManager;
 import Resources.Images;
 import Resources.MusicHandler;
-
-import java.awt.*;
-import java.awt.image.BufferStrategy;
 
 
 /**
@@ -67,6 +71,8 @@ public class GameSetUp implements Runnable {
 	public State gameoverState;
 	public State winState;
 	public State instructionsState;
+	public State CharChoosingP1;
+	public State CharChoosingP2;
 
 	//Res.music
 	private MusicHandler musicHandler;
@@ -107,7 +113,9 @@ public class GameSetUp implements Runnable {
 		gameoverState= new GameOverState(handler);
 		instructionsState = new InstructionsState(handler);
 		winState = new WinState(handler);
-
+		CharChoosingP1 = new CharChoosingP1(handler);
+		CharChoosingP2 = new CharChoosingP2(handler);
+		
 		State.setState(menuState);
 	}
 
@@ -196,7 +204,7 @@ public class GameSetUp implements Runnable {
 		if (marioVelocityY > 0 && mario.getY() - 2*(handler.getHeight()/3) > handler.getCamera().getY()) {
 			shiftAmountY = marioVelocityY;
 		}
-		if (marioVelocityX < 0 && mario.getY() +  2*(handler.getHeight()/3) < handler.getCamera().getY()+handler.height) {
+		if (marioVelocityY > 0 && mario.getY() +  2*(handler.getHeight()/3) < handler.getCamera().getY()+handler.height) {
 			shiftAmountY = -marioVelocityY;
 		}
 		handler.getCamera().moveCam(shiftAmount,shiftAmountY);
@@ -217,7 +225,7 @@ public class GameSetUp implements Runnable {
 		if (luigiVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCamera2().getY()) {
 			shiftAmountY = luigiVelocityY;
 		}
-		if (luigiVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera2().getY()+handler.height) {
+		if (luigiVelocityY > 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera2().getY()+handler.height) {
 			shiftAmountY = -luigiVelocityY;
 		}
 		handler.getCamera2().moveCam(shiftAmount,shiftAmountY);
@@ -234,7 +242,7 @@ public class GameSetUp implements Runnable {
 		//Clear Screen
 		g.clearRect(0, 0,  handler.width, handler.height);
 
-
+        /////////////////////////////////////////////////
 		//Second Screen
 		bs2 = display2.getCanvas().getBufferStrategy();
 
@@ -245,11 +253,7 @@ public class GameSetUp implements Runnable {
 		g3 = bs2.getDrawGraphics();
 		//Clear Screen
 		g3.clearRect(0, 0,  handler.width, handler.height);
-		if (State.getState() instanceof MenuState) {
-		g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		g3.setColor(Color.RED);
-		g3.drawString("Please Wait!", handler.width/2 - 80, handler.height/2);
-		}
+		
 
 		//Draw Here!
 		Graphics2D g2 = (Graphics2D) g.create();
@@ -257,9 +261,15 @@ public class GameSetUp implements Runnable {
 
 
 		if(State.getState() != null)
-			State.getState().render(g);
+			State.getState().render(g2);
+		//////////////////////////////////////////////////////////////////////////
+		if (State.getState() instanceof MenuState) {
+			g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
+			g3.setColor(Color.RED);
+			g3.drawString("Please Wait!", handler.width/2 - 80, handler.height/2);
+		}
+		////////////////////////////////////////////////////////////////////////////
 		if(State.isMultiplayer() && State.getState() instanceof InstructionsState) {
-			
 			g4.setColor(Color.WHITE);
 			g4.setFont(new Font("SansSerif", Font.PLAIN, 40));
 			g4.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
@@ -281,47 +291,36 @@ public class GameSetUp implements Runnable {
 				}
 			}
 		}
-if(!State.isMultiplayer() && State.getState() instanceof InstructionsState) {
-			
-			
+		////////////////////////////////////////////////////////////////////////
+		if(!State.isMultiplayer() && State.getState() instanceof InstructionsState) {
 			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
 				if(block instanceof FinishBlock) {
-					g.setColor(Color.WHITE);
-					g.setFont(new Font("SansSerif", Font.PLAIN, 40));
-					g.drawString("RACE MODE:", handler.getWidth()/3+5, handler.getHeight()/10+300);
-					g.setFont(new Font("SansSerif", Font.PLAIN, 25));
-					g.drawImage(Images.finishBlock,handler.getWidth()/16, handler.getHeight()/10+350,75,75,null);
-					g.setFont(new Font("Segoe UI", Font.BOLD, 20));
-					g.drawString("Find this block to win!",handler.getWidth()/16+80,  handler.getHeight()/10+400);
+					g2.setColor(Color.WHITE);
+					g2.setFont(new Font("SansSerif", Font.PLAIN, 40));
+					g2.drawString("RACE MODE:", handler.getWidth()/3+5, handler.getHeight()/10+300);
+					g2.setFont(new Font("SansSerif", Font.PLAIN, 25));
+					g2.drawImage(Images.finishBlock,handler.getWidth()/16, handler.getHeight()/10+350,75,75,null);
+					g2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+					g2.drawString("Find this block to win!",handler.getWidth()/16+80,  handler.getHeight()/10+400);
 				}
 			}
 		}
+		///////////////////////////////////////////////////////////////////////////
 		if(State.isMultiplayer() && State.getState() instanceof GameState) {
 
 			handler.getMap().drawMap2(g4);
 
-			g3.setColor(Color.GREEN);
+			g4.setColor(Color.GREEN);
 			String luigicoins = String.valueOf(Player.luigicoins);
-			g3.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
-
-//			if (!( handler.getLuigi().moving)) {
-//				g3.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
-//				g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
-//				g3.setColor(Color.WHITE);
-//				g3.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
-//
-//			}
-
-			g3.setFont(new Font("Segoe UI", Font.BOLD, 20));
-			g3.setColor(Color.RED);
+			g4.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+			g4.setFont(new Font("Segoe UI", Font.BOLD, 20));
+			g4.setColor(Color.RED);
 			String mariocoins = String.valueOf(Player.mariocoins);
-			g3.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
-
+			g4.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
 		}
+		////////////////////////////////////////////////////////////////////////////
 		else if(State.getState() instanceof WinState){
-			State.getState().render(g3);
-			
-
+			State.getState().render(g4);
 		}
 
 

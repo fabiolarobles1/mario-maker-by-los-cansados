@@ -99,17 +99,17 @@ public class Player extends BaseDynamicEntity {
 					if (this instanceof Mario) {
 						mariocoins++;
 						if(mariocoins<=1) {
-							System.out.println(mariocoins + " coin for Mario");
+							//System.out.println(mariocoins + " coin for Mario");
 						}else {
-							System.out.println(mariocoins + " coins for Mario");
+							//System.out.println(mariocoins + " coins for Mario");
 						}
 					}
 					else if(this instanceof Luigi) {
 						luigicoins++;
 						if(luigicoins<=1) {
-							System.out.println(luigicoins + " coin for Luigi");
+							//System.out.println(luigicoins + " coin for Luigi");
 						}else {
-							System.out.println(luigicoins + " coins for Luigi");
+							//System.out.println(luigicoins + " coins for Luigi");
 						}
 					}
 				}        	 
@@ -275,12 +275,12 @@ public class Player extends BaseDynamicEntity {
 					if (this instanceof Mario && ((MisteryBlock)brick).hit ==  false) {
 						mariocoins++;
 						handler.getGame().getMusicHandler().playCoin();
-						System.out.println(mariocoins + " coin for Mario");
+						//System.out.println(mariocoins + " coin for Mario");
 					}
 					else if(this instanceof Luigi && !((MisteryBlock)brick).hit) {
 						luigicoins++;
 						handler.getGame().getMusicHandler().playCoin();
-						System.out.println(luigicoins + " coin for Luigi");
+						//System.out.println(luigicoins + " coin for Luigi");
 					}
 					((MisteryBlock)brick).hit = true;
 				}
