@@ -44,15 +44,15 @@ public class CharChoosingP1 extends State {
 				State.setState(handler.getGame().instructionsState);
 
 			}, handler,Color.RED));
-			//Luigi
-			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
-				
-				State.setMario_enabledp1(false);
-				State.setLuigi_enabledp1(true);
-				State.setWario_enabledp1(false);
-				State.setState(handler.getGame().instructionsState);
-
-			}, handler,Color.GREEN));
+//			//Luigi
+//			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
+//				
+//				State.setMario_enabledp1(false);
+//				State.setLuigi_enabledp1(true);
+//				State.setWario_enabledp1(false);
+//				State.setState(handler.getGame().instructionsState);
+//
+//			}, handler,Color.GREEN));
 			//Wario
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 +100, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
 
@@ -72,15 +72,15 @@ public class CharChoosingP1 extends State {
 				State.setState(handler.getGame().CharChoosingP2);
 
 			}, handler,Color.RED));
-			//Luigi
-			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
-				
-				State.setMario_enabledp1(false);
-				State.setLuigi_enabledp1(true);
-				State.setWario_enabledp1(false);
-				State.setState(handler.getGame().CharChoosingP2);
-
-			}, handler,Color.GREEN));
+//			//Luigi
+//			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
+//				
+//				State.setMario_enabledp1(false);
+//				State.setLuigi_enabledp1(true);
+//				State.setWario_enabledp1(false);
+//				State.setState(handler.getGame().CharChoosingP2);
+//
+//			}, handler,Color.GREEN));
 			//Wario
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 + 100, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
 
@@ -98,10 +98,10 @@ public class CharChoosingP1 extends State {
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("SansSerif", Font.PLAIN, 10));
-		g.drawString("PLAYER 1 CHARACTER", handler.getWidth() / 2 - 50, 100);
+		g.setFont(new Font("SansSerif", Font.PLAIN, 30));
+		g.drawString("PLAYER 1 CHARACTER SELECT", handler.getWidth() / 2 - 230, 100);
 		g.drawImage(Images.marioSmallWalkLeft[0],handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
-		g.drawImage(Images.luigiSmallWalkLeft[0],handler.getWidth() / 2 - 40, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
+		//g.drawImage(Images.luigiSmallWalkLeft[0],handler.getWidth() / 2 - 40, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
 		g.drawImage(Images.warioSmallWalkLeft[0],handler.getWidth() / 2 + 100, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
 		uiManager.Render(g);
 

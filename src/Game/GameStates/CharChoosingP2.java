@@ -36,19 +36,9 @@ public class CharChoosingP2 extends State {
 	public void tick() {
 		handler.getMouseManager().setUimanager(uiManager);
 		if(State.isMultiplayer()) {
-			//Mario
-			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Mario", () -> {	
-				if(State.isMario_enabledp1()==false) {
-					State.setMario_enabledp2(true);
-					State.setLuigi_enabledp2(false);
-					State.setWario_enabledp2(false);
-					State.setState(handler.getGame().instructionsState);
-				}
-				
-
-			}, handler,Color.RED));
+			
 			//Luigi
-			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
+			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
 				
 				if(State.isLuigi_enabledp1()==false) {
 					State.setMario_enabledp2(false);
@@ -59,19 +49,7 @@ public class CharChoosingP2 extends State {
 
 				
 			}, handler,Color.GREEN));
-			//Wario
-			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 + 100  , handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
-
-				if(State.isWario_enabledp1()==false) {
-					State.setMario_enabledp2(false);
-					State.setLuigi_enabledp2(false);
-					State.setWario_enabledp2(true);
-					State.setState(handler.getGame().instructionsState);
-				}
-
-				
-		    	
-			}, handler,Color.YELLOW));
+			
 		}
 
 	}
@@ -79,23 +57,23 @@ public class CharChoosingP2 extends State {
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("SansSerif", Font.PLAIN, 10));
-		g.drawString("PLAYER 2 CHARACTER", handler.getWidth() / 2 - 50, 100);
-		g.drawImage(Images.marioSmallWalkLeft[0],handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
-		g.drawImage(Images.luigiSmallWalkLeft[0],handler.getWidth() / 2 - 40, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
-		g.drawImage(Images.warioSmallWalkLeft[0],handler.getWidth() / 2 + 100, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
-		if(State.isMario_enabledp1()==true) {
-			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
-			g.drawString("Taken!!", handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
-		}
-		if(State.isLuigi_enabledp1()==true) {
-			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
-			g.drawString("Taken!!", handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
-		}
-		if(State.isWario_enabledp1()==true) {
-			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
-			g.drawString("Taken!!", handler.getWidth() / 2 - 32 +135, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
-		}
+		g.setFont(new Font("SansSerif", Font.PLAIN, 30));
+		g.drawString("PLAYER 2 CHARACTER SELECT", handler.getWidth() / 2 - 230, 100);
+		
+		g.drawImage(Images.luigiSmallWalkLeft[0],handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
+		
+//		if(State.isMario_enabledp1()==true) {
+//			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
+//			g.drawString("Taken!!", handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
+//		}
+//		if(State.isLuigi_enabledp1()==true) {
+//			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
+//			g.drawString("Taken!!", handler.getWidth() / 2 - 32, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
+//		}
+//		if(State.isWario_enabledp1()==true) {
+//			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
+//			g.drawString("Taken!!", handler.getWidth() / 2 - 32 +135, handler.getHeight() - (handler.getHeight() /4) -70 - 25);
+//		}
 		uiManager.Render(g);
 
 	}

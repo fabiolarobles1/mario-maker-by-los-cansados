@@ -358,8 +358,8 @@ public class Images {
             warioBigRunLeft[0] = player2SpriteSheet2.crop(203,146,16,27);
             warioBigRunLeft[1] = player2SpriteSheet2.crop(142,146,18,27);
 
-            warioBigWalkRight[0] = player2SpriteSheet2.crop(233,146,16,27);
-            warioBigWalkRight[1] = player2SpriteSheet2.crop(292,146,18,27);
+            warioBigRunRight[0] = player2SpriteSheet2.crop(233,146,16,27);
+            warioBigRunRight[1] = player2SpriteSheet2.crop(292,146,18,27);
             
             warioBigJumpLeft[0] = player2SpriteSheet2.crop(201,183,19,29);
             warioBigJumpLeft[1] = player2SpriteSheet2.crop(172,185,19,28);

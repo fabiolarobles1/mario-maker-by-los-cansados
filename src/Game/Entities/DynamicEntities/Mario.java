@@ -12,8 +12,6 @@ import Game.GameStates.State;
 public class Mario extends Player{
 
 	private	boolean doubleJump = false;
-	private boolean floating = false;
-	long time;
 
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
@@ -99,81 +97,7 @@ public class Mario extends Player{
 				this.setY(this.getY() - 30);
 			}
 		}
-		if(State.isLuigi_enabledp1() == true) {
-			if(!grabbed) {
-				super.tick();
-				if (!this.getHit()) {
-					if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-						this.jump();
-					} if (jumping && handler.getKeyManager().keyJustPressed(KeyEvent.VK_V) && !handler.getKeyManager().up && !handler.getKeyManager().down && floating==false) {
-						this.floating();
 
-					}
-					if(System.currentTimeMillis()>= time+1500 && floating) {
-						falling = true;
-						jumping = false;
-						floating = false;
-					}
-
-					if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-						if (handler.getKeyManager().runbutt) {
-							velX = 6;
-							running = true;
-						} else {
-							velX = 3;
-							running = false;
-						}
-						if (facing.equals("Left")) {
-							changeDirrection = true;
-						}
-						facing = "Right";
-						moving = true;
-					} else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-						if (handler.getKeyManager().runbutt) {
-							velX = -6;
-							running = true;
-						} else {
-							velX = -3;
-							running = false;
-						}
-						if (facing.equals("Right")) {
-							changeDirrection = true;
-						}
-						facing = "Left";
-						moving = true;
-					} else {
-						velX = 0;
-						moving = false;
-					}
-					if (floating) {
-						jumping = false;
-						falling= false;
-					}
-					if (jumping  && velY <= 0) {
-						jumping = false;
-						falling = true;
-
-
-
-					} else if (jumping) {
-						velY = velY - gravityAcc;
-						y = (int) (y - velY);
-					}
-
-					if (falling) {
-						y = (int) (y + velY);
-						velY = velY + gravityAcc;
-						floating=false;
-
-
-					}
-					x += velX;
-				} else {
-					this.setX(this.getX() - 30);
-					this.setY(this.getY() - 30);
-				}
-			}
-		}
 	}
 
 	public void drawMario(Graphics2D g2) {
@@ -278,112 +202,8 @@ public class Mario extends Player{
 					}
 				}
 			}
-			////////////////////Luigi
-			if(State.isLuigi_enabledp1() == true) {
-				if (!isBig) {
-					if (handler.getKeyManager().up) {
-						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiSmallJumpLeft[2], x, y, width, height, null);
-						} else {
-							g2.drawImage(Images.luigiSmallJumpRight[2], x, y, width, height, null);
-						}
-					} else if (handler.getKeyManager().down) {
-						if (facing.equals("Left")) {
-							g2.drawImage(Images.luigiSmallJumpLeft[3], x, y, width, height, null);
-						} else {
-							g2.drawImage(Images.luigiSmallJumpRight[3], x, y, width, height, null);
-						}
-					} else if (!jumping && !falling) {
-						if (facing.equals("Left") && moving) {
-							lswl.tick();
-							g2.drawImage(lswl.getCurrentFrame(), x, y, width, height, null);
-						} else if (facing.equals("Right") && moving) {
-							lswr.tick();
-							g2.drawImage(lswr.getCurrentFrame(), x, y, width, height, null);
-						}
-						if (facing.equals("Left") && !moving) {
-							g2.drawImage(Images.luigiSmallWalkLeft[0], x, y, width, height, null);
-						} else if (facing.equals("Right") && !moving) {
-							g2.drawImage(Images.luigiSmallWalkRight[0], x, y, width, height, null);
-						}
-					} else {
-						if (jumping) {
-							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiSmallJumpLeft[0], x, y, width, height, null);
-							} else {
-								g2.drawImage(Images.luigiSmallJumpRight[0], x, y, width, height, null);
-							}
 
-						} else {
-							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiSmallJumpLeft[1], x, y, width, height, null);
-							} else {
-								g2.drawImage(Images.luigiSmallJumpRight[1], x, y, width, height, null);
-							}
-						}
-					}
-				} else {
-					if (!changeDirrection) {
-						if (handler.getKeyManager().up) {
-							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
-							} else {
-								g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
-							}
-						} else if (handler.getKeyManager().down) {
-							if (facing.equals("Left")) {
-								g2.drawImage(Images.luigiBigJumpLeft[3], x, y, width, height, null);
-							} else {
-								g2.drawImage(Images.luigiBigJumpRight[3], x, y, width, height, null);
-							}
-						} else if (!jumping && !falling) {
-							if (facing.equals("Left") && moving && running) {
-								lbrl.tick();
-								g2.drawImage(lbrl.getCurrentFrame(), x, y, width, height, null);
-							} else if (facing.equals("Left") && moving && !running) {
-								lbwl.tick();
-								g2.drawImage(lbwl.getCurrentFrame(), x, y, width, height, null);
-							} else if (facing.equals("Left") && !moving) {
-								g2.drawImage(Images.luigiBigWalkLeft[0], x, y, width, height, null);
-							} else if (facing.equals("Right") && moving && running) {
-								lbrr.tick();
-								g2.drawImage(lbrr.getCurrentFrame(), x, y, width, height, null);
-							} else if (facing.equals("Right") && moving && !running) {
-								lbwr.tick();
-								g2.drawImage(lbwr.getCurrentFrame(), x, y, width, height, null);
-							} else if (facing.equals("Right") && !moving) {
-								g2.drawImage(Images.luigiBigWalkRight[0], x, y, width, height, null);
-							}
-						} else {
-							if (jumping) {
-								if (facing.equals("Left")) {
-									g2.drawImage(Images.luigiBigJumpLeft[0], x, y, width, height, null);
-								} else {
-									g2.drawImage(Images.luigiBigJumpRight[0], x, y, width, height, null);
-								}
 
-							} else {
-								if (facing.equals("Left")) {
-									g2.drawImage(Images.luigiBigJumpLeft[1], x, y, width, height, null);
-								} else {
-									g2.drawImage(Images.luigiBigJumpRight[1], x, y, width, height, null);
-								}
-							}
-						}
-					} else {
-						if (!running) {
-							changeDirrection = false;
-							changeDirectionCounter = 0;
-							drawMario(g2);
-						}
-						if (facing.equals("Right")) {
-							g2.drawImage(Images.luigiBigJumpRight[4], x, y, width, height, null);
-						} else {
-							g2.drawImage(Images.luigiBigJumpLeft[4], x, y, width, height, null);
-						}
-					}
-				}
-			}
 			//////////////////////////////////////wario
 			if(State.isWario_enabledp1() == true) {
 				if (!isBig) {
@@ -499,15 +319,4 @@ public class Mario extends Player{
 			handler.getGame().getMusicHandler().playJump();	
 		}
 	}
-	public void floating( ) {
-
-		if(jumping && !falling ){
-			handler.getGame().getMusicHandler().playStomp();
-			floating = true;
-			falling = false;
-			jumping = false;
-			time = System.currentTimeMillis();
-
-
-		}}
 }
