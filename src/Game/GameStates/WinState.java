@@ -78,14 +78,14 @@ public class WinState extends State {
 			}
 			else if(Player.luigiwins) {
 
+				if(State.isLuigi_enabledp2() ==true) {
+					g.setColor(Color.GREEN);
+				}
+				if(State.isYoshi_enabledp2() ==true) {
+					g.setColor(Color.LIGHT_GRAY);
+				}	
+				g.drawString("Player 2 WINS", handler.getWidth()/3-10, 250);
 			}
-			if(State.isLuigi_enabledp2() ==true) {
-				g.setColor(Color.GREEN);
-			}
-			if(State.isYoshi_enabledp2() ==true) {
-				g.setColor(Color.LIGHT_GRAY);
-			}	
-			g.drawString("Player 2 WINS", handler.getWidth()/3-10, 250);
 		}
 		else {
 			if(Player.mariowins) {
