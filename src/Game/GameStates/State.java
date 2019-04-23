@@ -13,13 +13,10 @@ public abstract class State {
 	private static boolean multiplayer = false;
 	//Player 1 Character
 	private static boolean mario_enabledp1 = false;
-	private static boolean luigi_enabledp1 = false;
 	private static boolean wario_enabledp1 = false;
 	//Player 2 Character
-	private static boolean mario_enabledp2 = false;
 	private static boolean luigi_enabledp2 = false;
-	private static boolean wario_enabledp2 = false;
-
+	private static boolean yoshi_enabledp2 = false;
 
 
 	/////////////////////////////////////////////////////////////
@@ -30,25 +27,17 @@ public abstract class State {
 	public static boolean isMario_enabledp1() {return mario_enabledp1;}
 	public static void setMario_enabledp1(boolean mario_enabledp1) {State.mario_enabledp1 = mario_enabledp1;}
 	//##---->//|\\<----##\\
-	//##---->Luigi<----## P1\\
-	public static boolean isLuigi_enabledp1() {return luigi_enabledp1;}
-	public static void setLuigi_enabledp1(boolean luigi_enabledp1) {State.luigi_enabledp1 = luigi_enabledp1;}
-	//##---->//|\\<----##\\
 	//##---->Wario<----## P1\\
 	public static boolean isWario_enabledp1() {return wario_enabledp1;}
 	public static void setWario_enabledp1(boolean wario_enabledp1) {State.wario_enabledp1 = wario_enabledp1;}
-	//##---->//|\\<----##\\
-	//##---->Mario<----## P2\\
-	public static boolean isMario_enabledp2() {return mario_enabledp2;}
-	public static void setMario_enabledp2(boolean mario_enabledp2) {State.mario_enabledp2 = mario_enabledp2;}
 	//##---->//|\\<----##\\
 	//##---->Luigi<----## P2\\
 	public static boolean isLuigi_enabledp2() {return luigi_enabledp2;}
 	public static void setLuigi_enabledp2(boolean luigi_enabledp2) {State.luigi_enabledp2 = luigi_enabledp2;}
 	//##---->//|\\<----##\\
-	//##---->Wario<----## P2\\
-	public static boolean isWario_enabledp2() {return wario_enabledp2;}
-	public static void setWario_enabledp2(boolean wario_enabledp2) {State.wario_enabledp2 = wario_enabledp2;}
+	//##---->Yoshi<----## P2\\
+	public static boolean isYoshi_enabledp2() {return yoshi_enabledp2;}
+	public static void setYoshi_enabledp2(boolean yoshi_enabledp2) {State.yoshi_enabledp2 = yoshi_enabledp2;}
 	//##---->//|\\<----##\\
 	/////////////////////////////////////////////////////////////
 

@@ -24,7 +24,6 @@ public class GameOverState extends State {
         uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 32, (223+(64+16) +(64+16) + (64+16)), 128, 64, "Back to Title", () -> {
             handler.getMouseManager().setUimanager(null);
             handler.setMarioInMap(false);
-           // handler.setIsInMap(false);
             State.setState(handler.getGame().menuState);
             handler.getGame().getMusicHandler().resumeBackground();
             Player.mariocoins = 0;
@@ -32,11 +31,10 @@ public class GameOverState extends State {
         	Player.mariowins =false;
         	Player.luigiwins =false;
         	State.setMario_enabledp1(false);
-        	State.setMario_enabledp2(false);
-        	State.setLuigi_enabledp1(false);
         	State.setLuigi_enabledp2(false);
         	State.setWario_enabledp1(false);
-        	State.setWario_enabledp2(false);
+        	State.setYoshi_enabledp2(false);
+        	
         },handler,Color.GREEN));
 
     }

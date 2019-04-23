@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 import Display.DisplayMultiplayerScreen;
 import Display.DisplayScreen;
@@ -74,7 +75,9 @@ public class GameSetUp implements Runnable {
 
 	//Res.music
 	private MusicHandler musicHandler;
-
+	
+	private Random lol = new Random();
+	
 	public GameSetUp(String title,Handler handler) {
 		this.handler = handler;
 		this.title = title;
@@ -270,36 +273,27 @@ public class GameSetUp implements Runnable {
 		}
 		////////////////////////////////////////////////////////////////////////////
 		if(State.isMultiplayer() && State.getState() instanceof InstructionsState) {
-			//////////////Instruction set if you choose Mario or Wario
-			if(State.isMario_enabledp2()==true || State.isWario_enabledp2() == true){
+			int supsec = lol.nextInt(10);
+			if(State.isLuigi_enabledp2()==true || State.isYoshi_enabledp2()==true) {
 				g4.setColor(Color.WHITE);
 				g4.setFont(new Font("SansSerif", Font.PLAIN, 40));
 				g4.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
 				g4.setFont(new Font("SansSerif", Font.PLAIN, 25));
-				if(State.isMario_enabledp2()==true) {
-					g4.setColor(Color.RED);
-					g4.drawString("Mario: Press \"period\" while jumping to double jump.", handler.getWidth()/16 -10, handler.getHeight()/10+50);
+
+				if(State.isLuigi_enabledp2()==true) {
+					g4.setColor(Color.GREEN);
+					g4.drawString("Luigi: Press \"period\" while jumping to float.", handler.getWidth()/16 -10, handler.getHeight()/10+50);
 				}
-				if(State.isWario_enabledp2()==true) {
-					g4.setColor(Color.YELLOW);
-					g4.drawString("Wario: Press \"period\" while jumping to double jump.", handler.getWidth()/16 -10, handler.getHeight()/10+50);
+				if(State.isYoshi_enabledp2()==true) {
+					g4.setColor(Color.LIGHT_GRAY);
+					g4.drawString("Yoshi: Press \"period\" while jumping to float.", handler.getWidth()/16 -10, handler.getHeight()/10+50);
 				}
 				g4.drawString("           UP, DOWN, LEFT, RIGHT Keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
 				g4.drawString("           \" / \" (forward slash) for running.", handler.getWidth()/16, handler.getHeight()/10+150);
 				g4.drawString("           \" control \" key for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
+				if(supsec == 0) {g4.setFont(new Font("SansSerif", Font.PLAIN, 13));g4.drawString("E is the KeY", handler.getWidth()/16, handler.getHeight()/10+200);}
 			}
-			//////////////Instruction set if you choose Luigi
-			if(State.isLuigi_enabledp2()==true) {
-				g4.setColor(Color.WHITE);
-				g4.setFont(new Font("SansSerif", Font.PLAIN, 40));
-				g4.drawString("Controls:", handler.getWidth()/3+5, handler.getHeight()/10);
-				g4.setFont(new Font("SansSerif", Font.PLAIN, 25));
-				g4.setColor(Color.GREEN);
-				g4.drawString("Luigi: Press \" period \" key while jumping to float.", handler.getWidth()/16, handler.getHeight()/10+50);
-				g4.drawString("           UP, DOWN, LEFT, RIGHT Keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
-				g4.drawString("           \" / \" (forward slash) for running.", handler.getWidth()/16, handler.getHeight()/10+150);
-				g4.drawString("           \" control \" key for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
-			}
+			
 			//////////////If finish block exists on the map race mode is activated.
 			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
 				if(block instanceof FinishBlock) {
@@ -312,33 +306,6 @@ public class GameSetUp implements Runnable {
 					g4.drawString("First to touch this block wins!",handler.getWidth()/16+80,  handler.getHeight()/10+400);
 				}
 			}
-		}
-		////////////////////////////////////////////////////////////////////////
-		if(!State.isMultiplayer() && State.getState() instanceof InstructionsState) {
-			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
-				if(block instanceof FinishBlock) {
-					g2.setColor(Color.WHITE);
-					g2.setFont(new Font("SansSerif", Font.PLAIN, 40));
-					g2.drawString("RACE MODE:", handler.getWidth()/3+5, handler.getHeight()/10+300);
-					g2.setFont(new Font("SansSerif", Font.PLAIN, 25));
-					g2.drawImage(Images.finishBlock,handler.getWidth()/16, handler.getHeight()/10+350,75,75,null);
-					g2.setFont(new Font("Segoe UI", Font.BOLD, 20));
-					g2.drawString("Find this block to win!",handler.getWidth()/16+80,  handler.getHeight()/10+400);
-				}
-			}
-		}
-		///////////////////////////////////////////////////////////////////////////
-		if(State.isMultiplayer() && (State.getState() instanceof CharChoosingP1 || State.getState() instanceof CharChoosingP2)) {
-			g2.setColor(Color.WHITE);
-			g2.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			g2.drawString("MARIO OR WARIO HIGHLY RECOMMENDED", handler.getWidth()/3 - 30, handler.getHeight()/10+300);
-			//\\
-			g4.setColor(Color.WHITE);
-			g4.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			g4.drawString("LUIGI HIGHLY RECOMMENDED", handler.getWidth()/3+5, handler.getHeight()/10+300 +  15);
-			g4.setFont(new Font("Segoe UI", Font.BOLD, 20));
-			g4.setColor(Color.RED);
-			g4.drawString("Please Wait!", handler.width/2 - 80, handler.height/2);
 		}
 		///////////////////////////////////////////////////////////////////////////
 		if(State.isMultiplayer() && State.getState() instanceof GameState) {
@@ -355,6 +322,7 @@ public class GameSetUp implements Runnable {
 		////////////////////////////////////////////////////////////////////////////
 		else if(State.getState() instanceof WinState){
 			State.getState().render(g4);
+			
 		}
 
 

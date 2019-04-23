@@ -38,8 +38,8 @@ public class MenuState extends State {
 
 	private DisplayScreen display;
 	private DisplayMultiplayerScreen display2;
-	
-	
+
+
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
 	private String str2="";
 
@@ -144,9 +144,9 @@ public class MenuState extends State {
 						State.setState(handler.getGame().CharChoosingP1);
 					}
 				}, handler,Color.BLACK));
-				
-				
-				
+
+
+
 				uiManager.addObjects(new UIStringButton((handler.getWidth() / 2 - 64)+128, handler.getHeight() / 2 + (handler.getHeight() / 10)+64, 128, 64, "Basic Race", () -> {
 					if(!handler.isMarioInMap()) {
 						mode = "Menu";
@@ -284,6 +284,7 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.surfaceBlock;
 		}
+
 		//BoundBlock
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_5)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0,0), new Point(0, 0), "cursor1");
@@ -348,6 +349,12 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.flyinggoomba;
 		}
+		//AlternateSUrfaceBlock
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.81960784f, 0.85490196f, 0.32156863f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.alternateSurfaceBlock;
+		}
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
 			int posY =mouseManager.getMouseY()/GridPixelsize;
@@ -378,7 +385,7 @@ public class MenuState extends State {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.luigi)) && blocks[i][j+1]!=null && !blocks[i][j+1].equals(new Color(MapBuilder.mario)) && !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
 
 						partOne = true;
-						
+
 					}else if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))&& !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
 
 						partTwo =true;
@@ -413,7 +420,8 @@ public class MenuState extends State {
 					"D -> Death Block (Gray)\n"+ 
 					"F -> Finish Race Block (Blue Gray)\n"+ 
 					"M -> Mario (Red)\n" +
-					"A -> Flying Goomba (Light Brown)");
+					"A -> Flying Goomba (Light Brown)\n"+
+					"G -> Alternate Surface Block (Gold)");
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && State.isMultiplayer()==true){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
@@ -431,10 +439,11 @@ public class MenuState extends State {
 					"D -> Death Block (Gray)\n"+
 					"F -> Finish Race Block (Blue Gray)\n"+ 
 					"L -> Luigi(Green)\n"+
-					"M -> Mario (Red)"+
-					"A -> Flying Goomba (Light Brown)");
-			
-			
+					"M -> Mario (Red)\n"+
+					"A -> Flying Goomba (Light Brown)\n"+
+					"G -> Alternate Surface Block (Gold)");
+
+
 		}
 	}
 	public UIAnimationButton getBut() {

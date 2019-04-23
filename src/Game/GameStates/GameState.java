@@ -21,9 +21,7 @@ public class GameState extends State {
 	public GameState(Handler handler){
 		super(handler);
 		handler.getGame().pointer = new UIPointer(28 * MapBuilder.pixelMultiplier,197 * MapBuilder.pixelMultiplier,128,128,handler);
-
 	}
-
 	@Override
 	public void tick() {
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
@@ -63,16 +61,7 @@ public class GameState extends State {
 			//Luigi Coin 
 			g.setColor(Color.GREEN);
 			String luigicoins = String.valueOf(Player.luigicoins);
-			g.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
-			//Finish Block Message
-//			if (!(handler.getMario().moving)) {
-//				g.drawImage(Images.finishBlock,handler.getWidth()/16,handler.getHeight()/16,75,75,null);
-//				g.setFont(new Font("Segoe UI", Font.BOLD, 20));
-//				g.setColor(Color.WHITE);
-//				g.drawString("First to touch this wins!",handler.getWidth()/16, (handler.getHeight()/16) -10);
-//
-//			}
-			
+			g.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);		
 		}
 	}
 
