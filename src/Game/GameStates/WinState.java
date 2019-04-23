@@ -88,16 +88,40 @@ public class WinState extends State {
         		}
         	}
         	if(Player.mariowins) {
-        		g.setColor(Color.RED);
+        		if(State.isMario_enabledp1() ==true) {
+        			g.setColor(Color.RED);
+        		}
+        		if(State.isLuigi_enabledp1() ==true) {
+        			g.setColor(Color.GREEN);
+        		}
+        		if(State.isWario_enabledp1() ==true) {
+        			g.setColor(Color.YELLOW);
+        		}
         		g.drawString("Player 1 WINS", 56 + 100 + 100, 250);
         	}
         	else if(Player.luigiwins) {
-        		g.setColor(Color.GREEN);
+        		if(State.isMario_enabledp2() ==true) {
+        			g.setColor(Color.RED);
+        		}
+        		if(State.isLuigi_enabledp2() ==true) {
+        			g.setColor(Color.GREEN);
+        		}
+        		if(State.isWario_enabledp2() ==true) {
+        			g.setColor(Color.YELLOW);
+        		}
         		g.drawString("Player 2 WINS", 56 + 100 + 100, 250);
         	}
         }else {
         	if(Player.mariowins) {
-        		g.setColor(Color.RED);
+        		if(State.isMario_enabledp1() ==true) {
+        			g.setColor(Color.RED);
+        		}
+        		if(State.isLuigi_enabledp1() ==true) {
+        			g.setColor(Color.GREEN);
+        		}
+        		if(State.isWario_enabledp1() ==true) {
+        			g.setColor(Color.YELLOW);
+        		}
         		g.drawString("Player 1 WINS", 56 + 100 + 100, 250);
         	}
         	
