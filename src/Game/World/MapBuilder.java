@@ -13,6 +13,7 @@ import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
+import Game.Entities.StaticEntities.AlternateSurfaceBlock;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BoundBlock;
 import Game.Entities.StaticEntities.BreakBlock;
@@ -30,6 +31,7 @@ public class MapBuilder {
 	public static int boundBlock = new Color(0,0,0).getRGB();
 	public static int mario = new Color(255,0,0).getRGB();
 	public static int surfaceBlock = new Color(255,106,0).getRGB();
+	public static int alternateSurfaceBlock = new Color(209,218,82).getRGB();
 	public static int breakBlock = new Color(0,38,255).getRGB();
 	public static int coin = new Color(255, 154, 244).getRGB();
 	public static int misteryBlock = new Color(255,216,0).getRGB();
@@ -60,6 +62,9 @@ public class MapBuilder {
 				}else if(currentPixel == surfaceBlock){
 					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(SurfaceBlock);
+				}else if(currentPixel == alternateSurfaceBlock){
+					BaseStaticEntity AlternateSurfaceBlock = new AlternateSurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(AlternateSurfaceBlock);
 				}else if(currentPixel == breakBlock){
 					BaseStaticEntity BreakBlock = new BreakBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(BreakBlock);

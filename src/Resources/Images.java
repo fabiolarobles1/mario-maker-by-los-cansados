@@ -108,6 +108,7 @@ public class Images {
     public static BufferedImage misteryBlock;
     public static BufferedImage[] rotatingmisteryBlock;
     public static BufferedImage surfaceBlock;
+    public static BufferedImage alternateSurfaceBlock;
     public static BufferedImage boundBlock;
     public static BufferedImage finishBlock;
     public static BufferedImage mushroom;
@@ -562,8 +563,8 @@ public class Images {
             testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
             testMaptwoMultiplayer = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2_multiplayer.png"));
             
-            helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
-            helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer).png"));
+            helloworldMap =  ImageIO.read(getClass().getResourceAsStream("/maps/Hello World2.png"));
+            helloworld_mult_Map = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World(multiplayer)2.png"));
             
             marioAndLuigiRace =  ImageIO.read(getClass().getResourceAsStream("/maps/Mario&Luigi Race.png"));
             marioRaceSolo = ImageIO.read(getClass().getResourceAsStream("/maps/MarioRaceSolo.png"));
@@ -574,6 +575,7 @@ public class Images {
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
             misteryBlock = interactableSpriteSheet.crop(32,93,16,16);
             surfaceBlock = interactableSpriteSheet.crop(112,93,16,16);
+            alternateSurfaceBlock = interactableSpriteSheet.crop(132,133,16,16);
             
             cloud = interactableSpriteSheet.crop(112,132,16,16);
             
