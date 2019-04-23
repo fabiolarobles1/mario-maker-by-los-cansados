@@ -40,15 +40,21 @@ public class CharChoosingP2 extends State {
 			//Luigi
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Luigi", () -> {
 				
-				if(State.isLuigi_enabledp1()==false) {
-					State.setMario_enabledp2(false);
-					State.setLuigi_enabledp2(true);
-					State.setWario_enabledp2(false);
-					State.setState(handler.getGame().instructionsState);
-				}
-
 				
+					State.setLuigi_enabledp2(true);
+					State.setYoshi_enabledp2(false);
+					State.setState(handler.getGame().instructionsState);
+				
+
 			}, handler,Color.GREEN));
+			
+			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 +100, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Yoshi", () -> {
+
+				State.setLuigi_enabledp2(false);
+				State.setYoshi_enabledp2(true);
+				State.setState(handler.getGame().instructionsState);
+
+			}, handler,Color.YELLOW));
 			
 		}
 
@@ -61,7 +67,7 @@ public class CharChoosingP2 extends State {
 		g.drawString("PLAYER 2 CHARACTER SELECT", handler.getWidth() / 2 - 230, 100);
 		
 		g.drawImage(Images.luigiSmallWalkLeft[0],handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
-		
+		g.drawImage(Images.yoshiSmallWalkLeft[0],handler.getWidth() / 2 + 100, handler.getHeight() - (handler.getHeight() /4) -70,75,75,null);
 //		if(State.isMario_enabledp1()==true) {
 //			g.setFont(new Font("SansSerif", Font.PLAIN, 15));
 //			g.drawString("Taken!!", handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4) -70 - 25);

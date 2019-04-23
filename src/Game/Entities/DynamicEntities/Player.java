@@ -39,7 +39,6 @@ public class Player extends BaseDynamicEntity {
 	int changeDirectionCounter=0;
 
 
-	public static Animation p2swl, p2swr, p2sjl, p2sjr, p2bwl, p2bwr, p2brl, p2brr, p2bjl, p2bjr;
 	public static Animation mswl = new Animation(160, Images.marioSmallWalkLeft);
 	public static Animation mswr = new Animation(160, Images.marioSmallWalkRight);
 	public static Animation msjl = new Animation(160, Images.marioSmallJumpLeft);
@@ -72,6 +71,17 @@ public class Player extends BaseDynamicEntity {
 	public  static Animation wbrr = new Animation(160, Images.warioBigRunRight);
 	public  static Animation wbjl = new Animation(160, Images.warioBigJumpLeft);
 	public  static Animation wbjr = new Animation(160, Images.warioBigJumpRight);
+	
+	public  static Animation yswl = new Animation(160, Images.yoshiSmallWalkLeft);
+	public  static Animation yswr = new Animation(160, Images.yoshiSmallWalkRight);
+	public  static Animation ysjl = new Animation(160, Images.yoshiSmallJumpLeft);
+	public  static Animation ysjr = new Animation(160, Images.yoshiSmallJumpRight);
+	public  static Animation ybwl = new Animation(160, Images.yoshiBigWalkLeft);
+	public  static Animation ybwr = new Animation(160, Images.yoshiBigWalkRight);
+	public  static Animation ybrl = new Animation(160, Images.yoshiBigRunLeft);
+	public  static Animation ybrr = new Animation(160, Images.yoshiBigRunRight);
+	public  static Animation ybjl = new Animation(160, Images.yoshiBigJumpLeft);
+	public  static Animation ybjr = new Animation(160, Images.yoshiBigJumpRight);
 
 	public Player(int x, int y, int width, int height, Handler handler, BufferedImage sprite,Animation PSLA,Animation PSRA,Animation PBLWA,Animation PBRWA,Animation PBLRA,Animation PBRRA) {
 		super(x, y, width, height, handler, sprite);

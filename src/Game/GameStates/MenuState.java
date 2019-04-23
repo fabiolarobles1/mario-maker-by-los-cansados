@@ -431,7 +431,7 @@ public class MenuState extends State {
 					"D -> Death Block (Gray)\n"+
 					"F -> Finish Race Block (Blue Gray)\n"+ 
 					"L -> Luigi(Green)\n"+
-					"M -> Mario (Red)"+
+					"M -> Mario (Red)\n"+
 					"A -> Flying Goomba (Light Brown)");
 			
 			

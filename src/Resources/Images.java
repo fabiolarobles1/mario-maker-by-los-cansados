@@ -38,6 +38,11 @@ public class Images {
     public static BufferedImage[] warioSmallWalkRight;
     public static BufferedImage[] warioSmallJumpLeft;//also store ide sprites like looking up or down
     public static BufferedImage[] warioSmallJumpRight;
+    
+    public static BufferedImage[] yoshiSmallWalkLeft;
+    public static BufferedImage[] yoshiSmallWalkRight;
+    public static BufferedImage[] yoshiSmallJumpLeft;//also store ide sprites like looking up or down
+    public static BufferedImage[] yoshiSmallJumpRight;
 
     public static BufferedImage[] marioBigWalkLeft;
     public static BufferedImage[] marioBigWalkRight;
@@ -59,6 +64,13 @@ public class Images {
     public static BufferedImage[] warioBigRunRight;
     public static BufferedImage[] warioBigJumpLeft;//also store ide sprites like looking up or down and left<->right transition
     public static BufferedImage[] warioBigJumpRight;
+    
+    public static BufferedImage[] yoshiBigWalkLeft;
+    public static BufferedImage[] yoshiBigWalkRight;
+    public static BufferedImage[] yoshiBigRunLeft;
+    public static BufferedImage[] yoshiBigRunRight;
+    public static BufferedImage[] yoshiBigJumpLeft;//also store ide sprites like looking up or down and left<->right transition
+    public static BufferedImage[] yoshiBigJumpRight;
     
     public static BufferedImage[] item;
     public static BufferedImage[] enemy;
@@ -112,7 +124,10 @@ public class Images {
     private SpriteSheet interactableSpriteSheet;
     private SpriteSheet player1SpriteSheet;
     private SpriteSheet player2SpriteSheet;
-    private SpriteSheet player2SpriteSheet2;
+    private SpriteSheet player1SpriteSheet2;
+    private SpriteSheet player2SpriteSheet2Small;
+    private SpriteSheet player2SpriteSheet2Big;
+    
     private SpriteSheet blockSpriteSheet;
     private SpriteSheet goombaSpriteSheet;
     private SpriteSheet enemySheet;
@@ -152,6 +167,11 @@ public class Images {
         warioSmallJumpLeft = new BufferedImage[4];
         warioSmallJumpRight = new BufferedImage[4];
         
+        yoshiSmallWalkLeft = new BufferedImage[2];
+        yoshiSmallWalkRight = new BufferedImage[2];
+        yoshiSmallJumpLeft = new BufferedImage[4];
+        yoshiSmallJumpRight = new BufferedImage[4];
+        
         item = new BufferedImage[19];
         enemy = new BufferedImage[9];
         hitWall = new BufferedImage[44];
@@ -182,6 +202,20 @@ public class Images {
         warioBigJumpLeft = new BufferedImage[5];
         warioBigJumpRight = new BufferedImage[5];
         
+        warioBigWalkLeft = new BufferedImage[2];
+        warioBigWalkRight = new BufferedImage[2];
+        warioBigRunLeft = new BufferedImage[2];
+        warioBigRunRight = new BufferedImage[2];
+        warioBigJumpLeft = new BufferedImage[5];
+        warioBigJumpRight = new BufferedImage[5];
+        
+        yoshiBigWalkLeft = new BufferedImage[2];
+        yoshiBigWalkRight = new BufferedImage[2];
+        yoshiBigRunLeft = new BufferedImage[2];
+        yoshiBigRunRight = new BufferedImage[2];
+        yoshiBigJumpLeft = new BufferedImage[5];
+        yoshiBigJumpRight = new BufferedImage[5];
+        
         goomba = new BufferedImage[2];
         
         floatingBlock = new BufferedImage[2];
@@ -204,7 +238,9 @@ public class Images {
             interactableSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/interactablesSheet.png")));
             player1SpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/marioSNESSheet.png")));
             player2SpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/luigiSNESSheet.png")));
-            player2SpriteSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/wario.png")));
+            player1SpriteSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/wario.png")));
+            player2SpriteSheet2Small = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/yoshiSmallSprite.png")));
+            player2SpriteSheet2Big = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/yoshiBigSprite.png")));
             blockSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/blocksSheet.png")));
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
@@ -332,46 +368,89 @@ public class Images {
             
             //wario sprites
             //small
-            warioSmallWalkLeft[0] = player2SpriteSheet2.crop(203,59,14,20);
-            warioSmallWalkLeft[1] = player2SpriteSheet2.crop(177,59,15,19);
+            warioSmallWalkLeft[0] = player1SpriteSheet2.crop(203,59,14,20);
+            warioSmallWalkLeft[1] = player1SpriteSheet2.crop(177,59,15,19);
             
-            warioSmallWalkRight[0] = player2SpriteSheet2.crop(235,59,14,20);
-            warioSmallWalkRight[1] = player2SpriteSheet2.crop(260,59,15,19);
+            warioSmallWalkRight[0] = player1SpriteSheet2.crop(235,59,14,20);
+            warioSmallWalkRight[1] = player1SpriteSheet2.crop(260,59,15,19);
             
-            warioSmallJumpLeft[0] = player2SpriteSheet2.crop(203,85,16,22);
-            warioSmallJumpLeft[1] = player2SpriteSheet2.crop(175,88,16,20);
-            warioSmallJumpLeft[2] = player2SpriteSheet2.crop(98,88,14,21);//up
-            warioSmallJumpLeft[3] = player2SpriteSheet2.crop(123,92,15,14);//down
+            warioSmallJumpLeft[0] = player1SpriteSheet2.crop(203,85,16,22);
+            warioSmallJumpLeft[1] = player1SpriteSheet2.crop(175,88,16,20);
+            warioSmallJumpLeft[2] = player1SpriteSheet2.crop(98,88,14,21);//up
+            warioSmallJumpLeft[3] = player1SpriteSheet2.crop(123,92,15,14);//down
             
-            warioSmallJumpRight[0] = player2SpriteSheet2.crop(233,85,16,22);
-            warioSmallJumpRight[1] = player2SpriteSheet2.crop(261,88,16,20);
-            warioSmallJumpRight[2] = player2SpriteSheet2.crop(340,88,14,21);//up
-            warioSmallJumpRight[3] = player2SpriteSheet2.crop(314,92,15,14);//down
+            warioSmallJumpRight[0] = player1SpriteSheet2.crop(233,85,16,22);
+            warioSmallJumpRight[1] = player1SpriteSheet2.crop(261,88,16,20);
+            warioSmallJumpRight[2] = player1SpriteSheet2.crop(340,88,14,21);//up
+            warioSmallJumpRight[3] = player1SpriteSheet2.crop(314,92,15,14);//down
             
             //big
-            warioBigWalkLeft[0] = player2SpriteSheet2.crop(203,146,16,27);
-            warioBigWalkLeft[1] = player2SpriteSheet2.crop(173,146,17,27);
+            warioBigWalkLeft[0] = player1SpriteSheet2.crop(203,146,16,27);
+            warioBigWalkLeft[1] = player1SpriteSheet2.crop(173,146,17,27);
             
-            warioBigWalkRight[0] = player2SpriteSheet2.crop(233,146,16,27);
-            warioBigWalkRight[1] = player2SpriteSheet2.crop(262,146,17,27);
+            warioBigWalkRight[0] = player1SpriteSheet2.crop(233,146,16,27);
+            warioBigWalkRight[1] = player1SpriteSheet2.crop(262,146,17,27);
             
-            warioBigRunLeft[0] = player2SpriteSheet2.crop(203,146,16,27);
-            warioBigRunLeft[1] = player2SpriteSheet2.crop(142,146,18,27);
+            warioBigRunLeft[0] = player1SpriteSheet2.crop(203,146,16,27);
+            warioBigRunLeft[1] = player1SpriteSheet2.crop(142,146,18,27);
 
-            warioBigRunRight[0] = player2SpriteSheet2.crop(233,146,16,27);
-            warioBigRunRight[1] = player2SpriteSheet2.crop(292,146,18,27);
+            warioBigRunRight[0] = player1SpriteSheet2.crop(233,146,16,27);
+            warioBigRunRight[1] = player1SpriteSheet2.crop(292,146,18,27);
             
-            warioBigJumpLeft[0] = player2SpriteSheet2.crop(201,183,19,29);
-            warioBigJumpLeft[1] = player2SpriteSheet2.crop(172,185,19,28);
-            warioBigJumpLeft[2] = player2SpriteSheet2.crop(91,185,16,26);//up
-            warioBigJumpLeft[3] = player2SpriteSheet2.crop(116,191,18,15);//down
-            warioBigJumpLeft[4] = player2SpriteSheet2.crop(64,185,18,27);//change
+            warioBigJumpLeft[0] = player1SpriteSheet2.crop(201,183,19,29);
+            warioBigJumpLeft[1] = player1SpriteSheet2.crop(172,185,19,28);
+            warioBigJumpLeft[2] = player1SpriteSheet2.crop(91,185,16,26);//up
+            warioBigJumpLeft[3] = player1SpriteSheet2.crop(116,191,18,15);//down
+            warioBigJumpLeft[4] = player1SpriteSheet2.crop(64,185,18,27);//change
             
-            warioBigJumpRight[0] = player2SpriteSheet2.crop(232,183,19,29);
-            warioBigJumpRight[1] = player2SpriteSheet2.crop(261,185,19,28);
-            warioBigJumpRight[2] = player2SpriteSheet2.crop(345,185,16,26);//up
-            warioBigJumpRight[3] = player2SpriteSheet2.crop(318,191,18,15);//down
-            warioBigJumpRight[4] = player2SpriteSheet2.crop(370,185,18,27);//change
+            warioBigJumpRight[0] = player1SpriteSheet2.crop(232,183,19,29);
+            warioBigJumpRight[1] = player1SpriteSheet2.crop(261,185,19,28);
+            warioBigJumpRight[2] = player1SpriteSheet2.crop(345,185,16,26);//up
+            warioBigJumpRight[3] = player1SpriteSheet2.crop(318,191,18,15);//down
+            warioBigJumpRight[4] = player1SpriteSheet2.crop(370,185,18,27);//change
+            
+            //yoshi sprites
+            //small
+            yoshiSmallWalkLeft[0] = player2SpriteSheet2Small.crop(1001,152,26,30);
+            yoshiSmallWalkLeft[1] = player2SpriteSheet2Small.crop(809,153,26,29);
+            
+            yoshiSmallWalkRight[0] = player2SpriteSheet2Small.crop(100,152,26,30);
+            yoshiSmallWalkRight[1] = player2SpriteSheet2Small.crop(292,153,26,29);
+            
+            yoshiSmallJumpLeft[0] = player2SpriteSheet2Small.crop(1097,51,25,33);
+            yoshiSmallJumpLeft[1] = player2SpriteSheet2Small.crop(1038,51,23,27);
+            yoshiSmallJumpLeft[2] = player2SpriteSheet2Small.crop(568,8,26,30);//up
+            yoshiSmallJumpLeft[3] = player2SpriteSheet2Small.crop(612,22,24,16);//down
+            
+            yoshiSmallJumpRight[0] = player2SpriteSheet2Small.crop(5,51,25,33);
+            yoshiSmallJumpRight[1] = player2SpriteSheet2Small.crop(66,51,23,27);
+            yoshiSmallJumpRight[2] = player2SpriteSheet2Small.crop(533,8,26,30);//up
+            yoshiSmallJumpRight[3] = player2SpriteSheet2Small.crop(491,22,24,16);//down
+            
+            //big
+            yoshiBigWalkLeft[0] = player2SpriteSheet2Big.crop(941,125,26,32);
+            yoshiBigWalkLeft[1] = player2SpriteSheet2Big.crop(912,126,25,31);
+            
+            yoshiBigWalkRight[0] = player2SpriteSheet2Big.crop(39,125,26,32);
+            yoshiBigWalkRight[1] = player2SpriteSheet2Big.crop(69,126,25,31);
+            
+            yoshiBigRunLeft[0] = player2SpriteSheet2Big.crop(941,125,26,32);
+            yoshiBigRunLeft[1] = player2SpriteSheet2Big.crop(883,126,26,31);
+
+            yoshiBigRunRight[0] = player2SpriteSheet2Big.crop(39,125,26,32);
+            yoshiBigRunRight[1] = player2SpriteSheet2Big.crop(97,126,26,31);
+            
+            yoshiBigJumpLeft[0] = player2SpriteSheet2Big.crop(854,127,26,30);
+            yoshiBigJumpLeft[1] = player2SpriteSheet2Big.crop(830,167,26,26);
+            yoshiBigJumpLeft[2] = player2SpriteSheet2Big.crop(943,198,25,32);//up
+            yoshiBigJumpLeft[3] = player2SpriteSheet2Big.crop(868,305,30,24);//down
+            yoshiBigJumpLeft[4] = player2SpriteSheet2Big.crop(923,298,23,31);//change
+            
+            yoshiBigJumpRight[0] = player2SpriteSheet2Big.crop(126,127,26,31);
+            yoshiBigJumpRight[1] = player2SpriteSheet2Big.crop(150,167,26,26);
+            yoshiBigJumpRight[2] = player2SpriteSheet2Big.crop(38,198,25,32);//up
+            yoshiBigJumpRight[3] = player2SpriteSheet2Big.crop(108,305,30,24);//down
+            yoshiBigJumpRight[4] = player2SpriteSheet2Big.crop(60,298,23,31);//change
             
             item[0] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/item/SL1.png"));
             item[1] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/item/SL2.png"));

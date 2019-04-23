@@ -39,7 +39,6 @@ public class CharChoosingP1 extends State {
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Mario", () -> {
 				
 				State.setMario_enabledp1(true);
-				State.setLuigi_enabledp1(false);
 				State.setWario_enabledp1(false);
 				State.setState(handler.getGame().instructionsState);
 
@@ -57,7 +56,7 @@ public class CharChoosingP1 extends State {
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 +100, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
 
 				State.setMario_enabledp1(false);
-				State.setLuigi_enabledp1(false);
+				
 				State.setWario_enabledp1(true);
 				State.setState(handler.getGame().instructionsState);
 
@@ -67,7 +66,7 @@ public class CharChoosingP1 extends State {
 			//Mario
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 32 - 150, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Mario", () -> {	
 				State.setMario_enabledp1(true);
-				State.setLuigi_enabledp1(false);
+				
 				State.setWario_enabledp1(false);
 				State.setState(handler.getGame().CharChoosingP2);
 
@@ -85,7 +84,6 @@ public class CharChoosingP1 extends State {
 			uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 + 100, handler.getHeight() - (handler.getHeight() /4), 128, 64, "Wario", () -> {
 
 				State.setMario_enabledp1(false);
-				State.setLuigi_enabledp1(false);
 				State.setWario_enabledp1(true);
 				State.setState(handler.getGame().CharChoosingP2);
 

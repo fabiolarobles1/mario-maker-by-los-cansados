@@ -31,31 +31,11 @@ public class WinState extends State {
         	Player.mariowins =false;
         	Player.luigiwins =false;
         	State.setMario_enabledp1(false);
-        	State.setMario_enabledp2(false);
-        	State.setLuigi_enabledp1(false);
+
         	State.setLuigi_enabledp2(false);
         	State.setWario_enabledp1(false);
-        	State.setWario_enabledp2(false);
             State.setState(handler.getGame().menuState);
         },handler,Color.BLUE));
-
-        
-//        uiManager.addObjects(new UIStringButton(56 + 100 + 100 + 35, (223+(64+16) +(64+16) + (64+16) + (32)), 128, 64, "Restart?", () -> {
-//           // handler.setIsInMap(false);
-//            Player.mariocoins = 0;
-//        	Player.luigicoins = 0;
-//        	Player.mariowins =false;
-//        	Player.luigiwins =false;
-//        	
-//        	if (State.isMultiplayer()) {
-//        		//handler.setMap(handler.getMap());
-//				handler.setMap(MapBuilder.createMap(Images.helloworld_mult_Map, handler));
-//			}
-//			else {
-//				handler.setMap(MapBuilder.createMap(Images.helloworldMap, handler));	
-//			}
-//			State.setState(handler.getGame().gameState);
-//        },handler,Color.CYAN));
 
     }
 
@@ -89,16 +69,16 @@ public class WinState extends State {
         	}
         	if(Player.mariowins) {
         		g.setColor(Color.RED);
-        		g.drawString("Player 1 WINS", 56 + 100 + 100, 250);
+        		g.drawString("Player 1 WINS", handler.getWidth()/3-10, 250);
         	}
         	else if(Player.luigiwins) {
         		g.setColor(Color.GREEN);
-        		g.drawString("Player 2 WINS", 56 + 100 + 100, 250);
+        		g.drawString("Player 2 WINS", handler.getWidth()/3-10, 250);
         	}
         }else {
         	if(Player.mariowins) {
         		g.setColor(Color.RED);
-        		g.drawString("Player 1 WINS", 56 + 100 + 100, 250);
+        		g.drawString("Player 1 WINS", handler.getWidth()/3-10, 250);
         	}
         	
         }
