@@ -75,9 +75,9 @@ public class GameSetUp implements Runnable {
 
 	//Res.music
 	private MusicHandler musicHandler;
-	
+
 	private Random lol = new Random();
-	
+
 	public GameSetUp(String title,Handler handler) {
 		this.handler = handler;
 		this.title = title;
@@ -100,7 +100,7 @@ public class GameSetUp implements Runnable {
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 
-		display2 = new DisplayMultiplayerScreen("Luigi", handler.width, handler.height);
+		display2 = new DisplayMultiplayerScreen("Second Player", handler.width, handler.height);
 		display2.getFrame().setLocation(display.getFrame().getX()+  display.getFrame().getWidth(), display.getFrame().getY());
 
 		///
@@ -262,7 +262,7 @@ public class GameSetUp implements Runnable {
 		Graphics2D g2 = (Graphics2D) g.create();
 		Graphics2D g4 = (Graphics2D) g3.create();
 
-		
+
 		if(State.getState() != null)
 			State.getState().render(g2);
 		//////////////////////////////////////////////////////////////////////////
@@ -291,9 +291,11 @@ public class GameSetUp implements Runnable {
 				g4.drawString("           UP, DOWN, LEFT, RIGHT Keys for moving.", handler.getWidth()/16, handler.getHeight()/10+100);
 				g4.drawString("           \" / \" (forward slash) for running.", handler.getWidth()/16, handler.getHeight()/10+150);
 				g4.drawString("           \" control \" key for jumping.", handler.getWidth()/16, handler.getHeight()/10+200);
-				if(supsec == 0) {g4.setFont(new Font("SansSerif", Font.PLAIN, 13));g4.drawString("E is the KeY", handler.getWidth()/16, handler.getHeight()/10+200);}
+				if(State.isYoshi_enabledp2()) {
+					if(supsec == 0) {g4.setFont(new Font("SansSerif", Font.PLAIN, 13));g4.drawString("E is the KeY", handler.getWidth()/16, handler.getHeight()/10+200);}
+				}
 			}
-			
+
 			//////////////If finish block exists on the map race mode is activated.
 			for(BaseStaticEntity block : handler.getMap().getBlocksOnMap() ) {
 				if(block instanceof FinishBlock) {
@@ -313,16 +315,19 @@ public class GameSetUp implements Runnable {
 			g4.setFont(new Font("Segoe UI", Font.BOLD, 20));
 			g4.setColor(Color.GREEN);
 			String luigicoins = String.valueOf(Player.luigicoins);
-			g4.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);
+			g4.drawString("P2Coins = " + luigicoins,handler.getWidth() - 120, 40);
 			g4.setFont(new Font("Segoe UI", Font.BOLD, 20));
 			g4.setColor(Color.RED);
 			String mariocoins = String.valueOf(Player.mariocoins);
-			g4.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
+			g4.drawString("P1Coins = " + mariocoins, handler.getWidth() - 120, 20);
 		}
 		////////////////////////////////////////////////////////////////////////////
-		else if(State.getState() instanceof WinState){
+		else if(State.getState() instanceof WinState ){
 			State.getState().render(g4);
-			
+
+		}else if(State.getState() instanceof PauseState ){
+			 g4.drawImage(Images.Pause,0,0,handler.getWidth(),handler.getHeight(),null);
+
 		}
 
 

@@ -56,12 +56,12 @@ public class GameState extends State {
 		g.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		g.setColor(Color.RED);
 		String mariocoins = String.valueOf(Player.mariocoins);
-		g.drawString("MCoins = " + mariocoins, handler.getWidth() - 120, 20);
+		g.drawString("P1Coins = " + mariocoins, handler.getWidth() - 120, 20);
 		if (State.isMultiplayer()) {
 			//Luigi Coin 
 			g.setColor(Color.GREEN);
 			String luigicoins = String.valueOf(Player.luigicoins);
-			g.drawString("LCoins = " + luigicoins,handler.getWidth() - 120, 40);		
+			g.drawString("P2Coins = " + luigicoins,handler.getWidth() - 120, 40);		
 		}
 	}
 
